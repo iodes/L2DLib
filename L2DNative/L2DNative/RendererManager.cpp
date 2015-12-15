@@ -665,7 +665,7 @@ CRendererManager::EndRender()
 //      CRendererManager::Dispose
 //
 //  Synopsis:
-//     Live2D가 확보한 모든 자원을 해제합니다.
+//     Live2D에서 확보한 모든 자원을 해제합니다.
 //
 //------------------------------------------------------------------------------
 void

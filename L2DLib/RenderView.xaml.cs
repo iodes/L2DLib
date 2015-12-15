@@ -98,17 +98,17 @@ namespace L2DLib
         #region 렌더링 이벤트
         private void Live2D_Rendering()
         {
-            HRESULT.Check(NativeMethods.BeginRender());
+            NativeMethods.BeginRender();
 
             double angleX = (ActualWidth / 2 + Mouse.GetPosition(this).X) - ActualWidth;
             double angleY = ActualWidth / 2 - Mouse.GetPosition(this).Y;
 
-            HRESULT.Check(NativeMethods.SetParamFloat("PARAM_ANGLE_X", (float)(angleX / (ActualWidth / 2) * 30)));
-            HRESULT.Check(NativeMethods.SetParamFloat("PARAM_ANGLE_Y", (float)(angleY / (ActualHeight / 2) * 30)));
-            HRESULT.Check(NativeMethods.SetParamFloat("PARAM_EYE_BALL_X", (float)(angleX / (ActualWidth / 2))));
-            HRESULT.Check(NativeMethods.SetParamFloat("PARAM_EYE_BALL_Y", (float)(angleY / (ActualHeight / 2))));
+            NativeMethods.SetParamFloat("PARAM_ANGLE_X", (float)(angleX / (ActualWidth / 2) * 30));
+            NativeMethods.SetParamFloat("PARAM_ANGLE_Y", (float)(angleY / (ActualHeight / 2) * 30));
+            NativeMethods.SetParamFloat("PARAM_EYE_BALL_X", (float)(angleX / (ActualWidth / 2)));
+            NativeMethods.SetParamFloat("PARAM_EYE_BALL_Y", (float)(angleY / (ActualHeight / 2)));
 
-            HRESULT.Check(NativeMethods.EndRender());
+            NativeMethods.EndRender();
         }
 
         private void CompositionTarget_Rendering(object sender, EventArgs e)

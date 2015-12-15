@@ -21,54 +21,60 @@ namespace L2DLib.Core
         /// BeginRender() 함수와 EndRender() 함수 사이에서 호출되어야 합니다.
         /// </summary>
         [DllImport("L2DNative.dll")]
-        public static extern int SetParamFloat(string key, float value);
+        public static extern void SetParamFloat(string key, float value);
 
         /// <summary>
         /// 키에 해당하는 매개변수에 값을 더합니다.
         /// BeginRender() 함수와 EndRender() 함수 사이에서 호출되어야 합니다.
         /// </summary>
         [DllImport("L2DNative.dll")]
-        public static extern int AddToParamFloat(string key, float value);
+        public static extern void AddToParamFloat(string key, float value);
 
         /// <summary>
         /// 키에 해당하는 매개변수에 값을 곱합니다.
         /// BeginRender() 함수와 EndRender() 함수 사이에서 호출되어야 합니다.
         /// </summary>
         [DllImport("L2DNative.dll")]
-        public static extern int MultParamFloat(string key, float value);
+        public static extern void MultParamFloat(string key, float value);
 
         /// <summary>
         /// 키에 해당하는 부분의 투명도를 설정합니다.
         /// BeginRender() 함수와 EndRender() 함수 사이에서 호출되어야 합니다.
         /// </summary>
         [DllImport("L2DNative.dll")]
-        public static extern int SetPartsOpacity(string key, float value);
+        public static extern void SetPartsOpacity(string key, float value);
 
         /// <summary>
         /// 매개변수를 저장합니다.
         /// BeginRender() 함수와 EndRender() 함수 사이에서 호출되어야 합니다.
         /// </summary>
         [DllImport("L2DNative.dll")]
-        public static extern int SaveParam();
+        public static extern void SaveParam();
 
         /// <summary>
         /// 메개변수를 불러옵니다.
         /// BeginRender() 함수와 EndRender() 함수 사이에서 호출되어야 합니다.
         /// </summary>
         [DllImport("L2DNative.dll")]
-        public static extern int LoadParam();
+        public static extern void LoadParam();
 
         /// <summary>
         /// Live2D 렌더링을 시작합니다.
         /// </summary>
         [DllImport("L2DNative.dll")]
-        public static extern int BeginRender();
+        public static extern void BeginRender();
 
         /// <summary>
         /// Live2D 렌더링을 끝냅니다.
         /// </summary>
         [DllImport("L2DNative.dll")]
-        public static extern int EndRender();
+        public static extern void EndRender();
+
+        /// <summary>
+        /// Live2D에서 확보한 모든 자원을 해제합니다.
+        /// </summary>
+        [DllImport("L2DNative.dll")]
+        public static extern void Dispose();
         #endregion
 
         #region DirectX

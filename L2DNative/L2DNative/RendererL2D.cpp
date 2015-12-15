@@ -332,7 +332,7 @@ void CRendererL2D::LoadParam()
 //      CRendererL2D::Dispose
 //
 //  Synopsis:
-//      매개변수를 불러옵니다.
+//      Live2D에서 확보한 모든 자원을 해제합니다.
 //
 //------------------------------------------------------------------------------
 void CRendererL2D::Dispose()
