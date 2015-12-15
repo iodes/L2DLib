@@ -1,0 +1,379 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug multi debug DLL|Win32">
+      <Configuration>Debug multi debug DLL</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release multi DLL|Win32">
+      <Configuration>Release multi DLL</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>live2d_directX</ProjectName>
+    <ProjectGuid>{D3D09001-96D0-4629-88B8-122C0256058C}</ProjectGuid>
+    <RootNamespace>live2d_lib_directX</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release multi DLL|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v90</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug multi debug DLL|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v90</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v90</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v90</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release multi DLL|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug multi debug DLL|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>11.0.61030.0</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(ProjectDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(ProjectDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug multi debug DLL|Win32'">
+    <OutDir>$(ProjectDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release multi DLL|Win32'">
+    <OutDir>$(ProjectDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <PreBuildEvent>
+      <Command />
+    </PreBuildEvent>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>DXUT\Core;DXUT\Optional;$(DXSDK_DIR)Include;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;DEBUG;PROFILE;_WINDOWS;L2D_TARGET_D3D;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <ForceConformanceInForLoopScope>true</ForceConformanceInForLoopScope>
+      <OpenMPSupport>false</OpenMPSupport>
+      <PrecompiledHeader />
+      <PrecompiledHeaderFile>DXUT.h</PrecompiledHeaderFile>
+      <WarningLevel>Level4</WarningLevel>
+      <DebugInformationFormat />
+      <DisableSpecificWarnings>4819</DisableSpecificWarnings>
+    </ClCompile>
+    <Lib>
+      <AdditionalOptions>/MACHINE:X86 %(AdditionalOptions)</AdditionalOptions>
+      <OutputFile>$(OutDir)..\$(ProjectName)_mtd.lib</OutputFile>
+    </Lib>
+    <PostBuildEvent>
+      <Command />
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <PreBuildEvent>
+      <Command />
+    </PreBuildEvent>
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>DXUT\Core;DXUT\Optional;$(DXSDK_DIR)Include;../../include_utf8;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;L2D_TARGET_D3D;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <ForceConformanceInForLoopScope>true</ForceConformanceInForLoopScope>
+      <OpenMPSupport>false</OpenMPSupport>
+      <PrecompiledHeader />
+      <PrecompiledHeaderFile>DXUT.h</PrecompiledHeaderFile>
+      <WarningLevel>Level4</WarningLevel>
+      <DebugInformationFormat />
+      <DisableSpecificWarnings>4819</DisableSpecificWarnings>
+    </ClCompile>
+    <Lib>
+      <AdditionalOptions>/MACHINE:X86 %(AdditionalOptions)</AdditionalOptions>
+      <OutputFile>$(OutDir)..\$(ProjectName)_mt.lib</OutputFile>
+    </Lib>
+    <PostBuildEvent>
+      <Command />
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug multi debug DLL|Win32'">
+    <PreBuildEvent>
+      <Command />
+    </PreBuildEvent>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>DXUT\Core;DXUT\Optional;$(DXSDK_DIR)Include;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;DEBUG;PROFILE;_WINDOWS;L2D_TARGET_D3D;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <ForceConformanceInForLoopScope>true</ForceConformanceInForLoopScope>
+      <OpenMPSupport>false</OpenMPSupport>
+      <PrecompiledHeader />
+      <PrecompiledHeaderFile>DXUT.h</PrecompiledHeaderFile>
+      <WarningLevel>Level4</WarningLevel>
+      <DebugInformationFormat />
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <DisableSpecificWarnings>4819</DisableSpecificWarnings>
+    </ClCompile>
+    <Lib>
+      <AdditionalOptions>/MACHINE:X86 %(AdditionalOptions)</AdditionalOptions>
+      <OutputFile>$(OutDir)..\$(ProjectName)_mdd.lib</OutputFile>
+    </Lib>
+    <PostBuildEvent>
+      <Command />
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release multi DLL|Win32'">
+    <PreBuildEvent>
+      <Command />
+    </PreBuildEvent>
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>DXUT\Core;DXUT\Optional;$(DXSDK_DIR)Include;../../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;L2D_TARGET_D3D;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <ForceConformanceInForLoopScope>true</ForceConformanceInForLoopScope>
+      <OpenMPSupport>false</OpenMPSupport>
+      <PrecompiledHeader />
+      <PrecompiledHeaderFile>DXUT.h</PrecompiledHeaderFile>
+      <WarningLevel>Level4</WarningLevel>
+      <DebugInformationFormat />
+      <DisableSpecificWarnings>4819</DisableSpecificWarnings>
+    </ClCompile>
+    <Lib>
+      <AdditionalOptions>/MACHINE:X86 %(AdditionalOptions)</AdditionalOptions>
+      <OutputFile>$(OutDir)..\$(ProjectName)_md.lib</OutputFile>
+    </Lib>
+    <PostBuildEvent>
+      <Command />
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Image Include="DXUT\Optional\directx.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="DXUT\Core\dpiaware.manifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="live2d_lib_directX.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\include_utf8\graphics\DrawParam_D3D.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="..\..\include_utf8\base\private\AffineEnt.h" />
+    <ClInclude Include="..\..\include_utf8\ALive2DModel.h" />
+    <ClInclude Include="..\..\include_utf8\memory\AMemoryHolder.h" />
+    <ClInclude Include="..\..\include_utf8\motion\AMotion.h" />
+    <ClInclude Include="..\..\include_utf8\memory\APageHeader.h" />
+    <ClInclude Include="..\..\include_utf8\io\data\Arrays2D.h" />
+    <ClInclude Include="..\..\include_utf8\avatar\AvatarPartsItem.h" />
+    <ClInclude Include="..\..\include_utf8\id\BaseDataID.h" />
+    <ClInclude Include="..\..\include_utf8\base\BDAffine.h" />
+    <ClInclude Include="..\..\include_utf8\base\BDBoxGrid.h" />
+    <ClInclude Include="..\..\include_utf8\io\BReader.h" />
+    <ClInclude Include="..\..\include_utf8\io\ByteBuffer.h" />
+    <ClInclude Include="..\..\include_utf8\draw\DDTexture.h" />
+    <ClInclude Include="..\..\include_utf8\DEF.h" />
+    <ClInclude Include="..\..\include_utf8\id\DrawDataID.h" />
+    <ClInclude Include="..\..\include_utf8\graphics\DrawParam.h" />
+    <ClInclude Include="..\..\include_utf8\graphics\DrawParam_D3D11.h" />
+    <ClInclude Include="..\..\include_utf8\motion\EyeBlinkMotion.h" />
+    <ClInclude Include="..\..\include_utf8\io\FileFormat2.h" />
+    <ClInclude Include="..\..\include_utf8\base\IBaseContext.h" />
+    <ClInclude Include="..\..\include_utf8\base\IBaseData.h" />
+    <ClInclude Include="..\..\include_utf8\id\ID.h" />
+    <ClInclude Include="..\..\include_utf8\draw\IDrawContext.h" />
+    <ClInclude Include="..\..\include_utf8\draw\IDrawData.h" />
+    <ClInclude Include="..\..\include_utf8\io\ISerializableV2.h" />
+    <ClInclude Include="..\..\include_utf8\util\Json.h" />
+    <ClInclude Include="..\..\include_utf8\type\LDAffineTransform.h" />
+    <ClInclude Include="..\..\include_utf8\memory\LDAllocator.h" />
+    <ClInclude Include="..\..\include_utf8\type\LDColor.h" />
+    <ClInclude Include="..\..\include_utf8\type\LDMap.h" />
+    <ClInclude Include="..\..\include_utf8\memory\LDObject.h" />
+    <ClInclude Include="..\..\include_utf8\type\LDPoint.h" />
+    <ClInclude Include="..\..\include_utf8\type\LDPointF.h" />
+    <ClInclude Include="..\..\include_utf8\type\LDRect.h" />
+    <ClInclude Include="..\..\include_utf8\type\LDRectF.h" />
+    <ClInclude Include="..\..\include_utf8\type\LDString.h" />
+    <ClInclude Include="..\..\include_utf8\memory\LDUnmanagedObject.h" />
+    <ClInclude Include="..\..\include_utf8\type\LDVector.h" />
+    <ClInclude Include="..\..\include_utf8\Live2D.h" />
+    <ClInclude Include="..\..\include_utf8\Live2DModelD3D.h" />
+    <ClInclude Include="..\..\include_utf8\Live2DModelD3D11.h" />
+    <ClInclude Include="..\..\include_utf8\motion\Live2DMotion.h" />
+    <ClInclude Include="..\..\include_utf8\motion\Live2DMotionBin.h" />
+    <ClInclude Include="..\..\include_utf8\memory\fixed\MemoryHolderFixed.h" />
+    <ClInclude Include="..\..\include_utf8\memory\tmp\MemoryHolderTmp.h" />
+    <ClInclude Include="..\..\include_utf8\memory\debug\MemoryInfo.h" />
+    <ClInclude Include="..\..\include_utf8\memory\debug\MemoryInfoSet.h" />
+    <ClInclude Include="..\..\include_utf8\memory\MemoryParam.h" />
+    <ClInclude Include="..\..\include_utf8\memory\tmp\MHBin.h" />
+    <ClInclude Include="..\..\include_utf8\memory\fixed\MHPageHeaderFixed.h" />
+    <ClInclude Include="..\..\include_utf8\memory\tmp\MHPageHeaderTmp.h" />
+    <ClInclude Include="..\..\include_utf8\ModelContext.h" />
+    <ClInclude Include="..\..\include_utf8\model\ModelImpl.h" />
+    <ClInclude Include="..\..\include_utf8\motion\MotionQueueEnt.h" />
+    <ClInclude Include="..\..\include_utf8\motion\MotionQueueManager.h" />
+    <ClInclude Include="..\..\include_utf8\param\ParamDefFloat.h" />
+    <ClInclude Include="..\..\include_utf8\param\ParamDefSet.h" />
+    <ClInclude Include="..\..\include_utf8\id\ParamID.h" />
+    <ClInclude Include="..\..\include_utf8\param\ParamPivots.h" />
+    <ClInclude Include="..\..\include_utf8\model\PartsData.h" />
+    <ClInclude Include="..\..\include_utf8\id\PartsDataID.h" />
+    <ClInclude Include="..\..\include_utf8\physics\PhysicsHair.h" />
+    <ClInclude Include="..\..\include_utf8\physics\PhysicsParams.h" />
+    <ClInclude Include="..\..\include_utf8\param\PivotManager.h" />
+    <ClInclude Include="..\..\include_utf8\io\RefString.h" />
+    <ClInclude Include="..\..\include_utf8\util\UtArray.h" />
+    <ClInclude Include="..\..\include_utf8\util\UtDebug.h" />
+    <ClInclude Include="..\..\include_utf8\util\UtFile.h" />
+    <ClInclude Include="..\..\include_utf8\util\UtInterpolate.h" />
+    <ClInclude Include="..\..\include_utf8\util\UtMath.h" />
+    <ClInclude Include="..\..\include_utf8\memory\UtMemory.h" />
+    <ClInclude Include="..\..\include_utf8\model\UtModel.h" />
+    <ClInclude Include="..\..\include_utf8\util\UtMotion.h" />
+    <ClInclude Include="..\..\include_utf8\graphics\UtOpenGLDebug.h" />
+    <ClInclude Include="..\..\include_utf8\util\UtOS_iPhone.h" />
+    <ClInclude Include="..\..\include_utf8\util\UtString.h" />
+    <ClInclude Include="..\..\include_utf8\util\UtSystem.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\include_utf8\base\private\AffineEnt.cpp" />
+    <ClCompile Include="..\..\include_utf8\ALive2DModel.cpp" />
+    <ClCompile Include="..\..\include_utf8\graphics\DrawParam_D3D.cpp" />
+    <ClCompile Include="..\..\include_utf8\memory\AMemoryHolder.cpp" />
+    <ClCompile Include="..\..\include_utf8\motion\AMotion.cpp" />
+    <ClCompile Include="..\..\include_utf8\memory\APageHeader.cpp" />
+    <ClCompile Include="..\..\include_utf8\io\data\Arrays2D.cpp" />
+    <ClCompile Include="..\..\include_utf8\avatar\AvatarPartsItem.cpp" />
+    <ClCompile Include="..\..\include_utf8\id\BaseDataID.cpp" />
+    <ClCompile Include="..\..\include_utf8\base\BDAffine.cpp" />
+    <ClCompile Include="..\..\include_utf8\base\BDBoxGrid.cpp" />
+    <ClCompile Include="..\..\include_utf8\io\BReader.cpp" />
+    <ClCompile Include="..\..\include_utf8\io\ByteBuffer.cpp" />
+    <ClCompile Include="..\..\include_utf8\draw\DDTexture.cpp" />
+    <ClCompile Include="..\..\include_utf8\DEF.cpp" />
+    <ClCompile Include="..\..\include_utf8\id\DrawDataID.cpp" />
+    <ClCompile Include="..\..\include_utf8\graphics\DrawParam.cpp" />
+    <ClCompile Include="..\..\include_utf8\graphics\DrawParam_D3D11.cpp" />
+    <ClCompile Include="..\..\include_utf8\motion\EyeBlinkMotion.cpp" />
+    <ClCompile Include="..\..\include_utf8\io\FileFormat2.cpp" />
+    <ClCompile Include="..\..\include_utf8\base\IBaseContext.cpp" />
+    <ClCompile Include="..\..\include_utf8\base\IBaseData.cpp" />
+    <ClCompile Include="..\..\include_utf8\id\ID.cpp" />
+    <ClCompile Include="..\..\include_utf8\draw\IDrawContext.cpp" />
+    <ClCompile Include="..\..\include_utf8\draw\IDrawData.cpp" />
+    <ClCompile Include="..\..\include_utf8\io\ISerializableV2.cpp" />
+    <ClCompile Include="..\..\include_utf8\util\Json.cpp" />
+    <ClCompile Include="..\..\include_utf8\type\LDAffineTransform.cpp" />
+    <ClCompile Include="..\..\include_utf8\memory\LDAllocator.cpp" />
+    <ClCompile Include="..\..\include_utf8\type\LDColor.cpp" />
+    <ClCompile Include="..\..\include_utf8\memory\LDObject.cpp" />
+    <ClCompile Include="..\..\include_utf8\type\LDPoint.cpp" />
+    <ClCompile Include="..\..\include_utf8\type\LDPointF.cpp" />
+    <ClCompile Include="..\..\include_utf8\type\LDRect.cpp" />
+    <ClCompile Include="..\..\include_utf8\type\LDRectF.cpp" />
+    <ClCompile Include="..\..\include_utf8\type\LDString.cpp" />
+    <ClCompile Include="..\..\include_utf8\memory\LDUnmanagedObject.cpp" />
+    <ClCompile Include="..\..\include_utf8\Live2D.cpp" />
+    <ClCompile Include="live2d_lib_directX.cpp" />
+    <ClCompile Include="..\..\include_utf8\Live2DModelD3D.cpp" />
+    <ClCompile Include="..\..\include_utf8\Live2DModelD3D11.cpp" />
+    <ClCompile Include="..\..\include_utf8\motion\Live2DMotion.cpp" />
+    <ClCompile Include="..\..\include_utf8\motion\Live2DMotionBin.cpp" />
+    <ClCompile Include="..\..\include_utf8\memory\fixed\MemoryHolderFixed.cpp" />
+    <ClCompile Include="..\..\include_utf8\memory\tmp\MemoryHolderTmp.cpp" />
+    <ClCompile Include="..\..\include_utf8\memory\debug\MemoryInfo.cpp" />
+    <ClCompile Include="..\..\include_utf8\memory\debug\MemoryInfoSet.cpp" />
+    <ClCompile Include="..\..\include_utf8\memory\MemoryParam.cpp" />
+    <ClCompile Include="..\..\include_utf8\memory\tmp\MHBin.cpp" />
+    <ClCompile Include="..\..\include_utf8\memory\fixed\MHPageHeaderFixed.cpp" />
+    <ClCompile Include="..\..\include_utf8\memory\tmp\MHPageHeaderTmp.cpp" />
+    <ClCompile Include="..\..\include_utf8\ModelContext.cpp" />
+    <ClCompile Include="..\..\include_utf8\model\ModelImpl.cpp" />
+    <ClCompile Include="..\..\include_utf8\motion\MotionQueueEnt.cpp" />
+    <ClCompile Include="..\..\include_utf8\motion\MotionQueueManager.cpp" />
+    <ClCompile Include="..\..\include_utf8\param\ParamDefFloat.cpp" />
+    <ClCompile Include="..\..\include_utf8\param\ParamDefSet.cpp" />
+    <ClCompile Include="..\..\include_utf8\id\ParamID.cpp" />
+    <ClCompile Include="..\..\include_utf8\param\ParamPivots.cpp" />
+    <ClCompile Include="..\..\include_utf8\model\PartsData.cpp" />
+    <ClCompile Include="..\..\include_utf8\id\PartsDataID.cpp" />
+    <ClCompile Include="..\..\include_utf8\physics\PhysicsHair.cpp" />
+    <ClCompile Include="..\..\include_utf8\physics\PhysicsParams.cpp" />
+    <ClCompile Include="..\..\include_utf8\param\PivotManager.cpp" />
+    <ClCompile Include="..\..\include_utf8\io\RefString.cpp" />
+    <ClCompile Include="..\..\include_utf8\util\UtArray.cpp" />
+    <ClCompile Include="..\..\include_utf8\util\UtDebug.cpp" />
+    <ClCompile Include="..\..\include_utf8\util\UtFile.cpp" />
+    <ClCompile Include="..\..\include_utf8\util\UtInterpolate.cpp" />
+    <ClCompile Include="..\..\include_utf8\util\UtMath.cpp" />
+    <ClCompile Include="..\..\include_utf8\memory\UtMemory.cpp" />
+    <ClCompile Include="..\..\include_utf8\model\UtModel.cpp" />
+    <ClCompile Include="..\..\include_utf8\util\UtMotion.cpp" />
+    <ClCompile Include="..\..\include_utf8\graphics\UtOpenGLDebug.cpp" />
+    <ClCompile Include="..\..\include_utf8\util\UtString.cpp" />
+    <ClCompile Include="..\..\include_utf8\util\UtSystem.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

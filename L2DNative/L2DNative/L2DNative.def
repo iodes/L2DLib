@@ -1,0 +1,24 @@
+LIBRARY "L2DNative"
+
+EXPORTS
+
+SetSize
+SetAlpha
+SetNumDesiredSamples
+SetAdapter
+SetArgument
+
+GetBackBufferNoRef
+
+SetParamFloat
+AddToParamFloat
+MultParamFloat
+GetParamFloat
+SetPartsOpacity
+GetPartsOpacity
+SaveParam
+LoadParam
+
+BeginRender
+EndRender
+Destroy

@@ -1,0 +1,17 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:L2DSample"
+        xmlns:L2DLib="clr-namespace:L2DLib;assembly=L2DLib" x:Class="L2DSample.MainWindow"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="650" Width="450" WindowStartupLocation="CenterScreen">
+
+    <Grid>
+        <L2DLib:RenderView x:Name="L2DRenderView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,120"/>
+        <GroupBox Header="제어판" HorizontalAlignment="Stretch" Margin="10" VerticalAlignment="Bottom" Height="80">
+            <Button x:Name="BtnLoad" Click="BtnLoad_Click" Content="모델 및 텍스처 불러오기" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Height="30" Margin="15,0,0,0"/>
+        </GroupBox>
+    </Grid>
+</Window>
