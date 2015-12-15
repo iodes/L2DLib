@@ -148,6 +148,10 @@ extern "C" HRESULT WINAPI EndRender()
 	return pManager->EndRender();
 }
 
+extern "C" void WINAPI Dispose()
+{
+	pManager->Dispose();
+}
 extern "C" void WINAPI Destroy()
 {
 	delete pManager;

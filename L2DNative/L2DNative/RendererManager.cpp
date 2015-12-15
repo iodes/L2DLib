@@ -658,3 +658,18 @@ CRendererManager::EndRender()
 {
 	return m_pCurrentRenderer ? m_pCurrentRenderer->EndRender() : S_OK;
 }
+
+//+-----------------------------------------------------------------------------
+//
+//  Member:
+//      CRendererManager::Dispose
+//
+//  Synopsis:
+//     Live2D가 확보한 모든 자원을 해제합니다.
+//
+//------------------------------------------------------------------------------
+void
+CRendererManager::Dispose()
+{
+	if(m_pCurrentRenderer) m_pCurrentRenderer->Dispose();
+}

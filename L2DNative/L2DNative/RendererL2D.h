@@ -19,6 +19,8 @@ public:
 	HRESULT BeginRender();
 	HRESULT EndRender();
 
+	void Dispose();
+
 protected:
 	HRESULT Init(IDirect3D9 *pD3D, HWND hwnd, UINT uAdapter, Argument argument);
 
