@@ -1,6 +1,6 @@
 #L2DLib
 Live2D 라이브러리를 .NET Framework 에서 사용할 수 있도록 개발하는 프로젝트.  
-간편하게 Live2D를 제어할 수 있는 사용자 지정 컨트롤을 포함하고 있습니다.
+본 프로젝트에는 간편하게 Live2D를 제어할 수 있는 사용자 지정 컨트롤을 포함하고 있습니다.
 
 ###다운로드
 * [기본 리소스](https://bitbucket.org/iodesme/l2dlib/downloads/Resources.zip)
