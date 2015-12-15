@@ -35,9 +35,16 @@ namespace L2DSample
                 {
                     @"Resources\haru\haru.1024\texture_00.png",
                     @"Resources\haru\haru.1024\texture_01.png",
-                    @"Resources\haru\haru.1024\texture_02.png"
+                    @"Resources\haru\haru.1024\texture_02.png",
+                    null
                 }
             );
+        }
+
+        private void BtnReset_Click(object sender, RoutedEventArgs e)
+        {
+            // Live2D 리소스 해제
+            L2DRenderView.Dispose();
         }
     }
 }

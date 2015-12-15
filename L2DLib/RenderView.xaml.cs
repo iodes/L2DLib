@@ -52,6 +52,15 @@ namespace L2DLib
             }
         }
         private uint _DesiredSamples = 4;
+
+        /// <summary>
+        /// Dispose 여부를 나타내는 값을 가져옵니다.
+        /// </summary>
+        public bool IsDisposed
+        {
+            get { return _IsDisposed; }
+        }
+        private bool _IsDisposed = false;
         #endregion
 
         #region 객체
@@ -83,19 +92,57 @@ namespace L2DLib
             HRESULT.Check(NativeMethods.SetArgument(argument));
 
             CompositionTarget.Rendering += CompositionTarget_Rendering;
-            AdapterTimer = new DispatcherTimer();
-            AdapterTimer.Tick += AdapterTimer_Tick;
-            AdapterTimer.Interval = new TimeSpan(0, 0, 0, 0, 500);
-            AdapterTimer.Start();
 
             SizeTimer = new DispatcherTimer(DispatcherPriority.Render);
             SizeTimer.Tick += SizeTimer_Tick;
             SizeTimer.Interval = new TimeSpan(0, 0, 0, 0, 200);
             SizeTimer.Start();
+
+            AdapterTimer = new DispatcherTimer();
+            AdapterTimer.Tick += AdapterTimer_Tick;
+            AdapterTimer.Interval = new TimeSpan(0, 0, 0, 0, 500);
+            AdapterTimer.Start();
+        }
+
+        public void Dispose()
+        {
+            _IsDisposed = true;
+
+            SizeTimer.Stop();
+            AdapterTimer.Stop();
+
+            NativeMethods.Dispose();
+            NativeMethods.Destroy();
         }
         #endregion
 
         #region 렌더링 이벤트
+        private void CompositionTarget_Rendering(object sender, EventArgs e)
+        {
+            if (!IsDisposed)
+            {
+                RenderingEventArgs args = (RenderingEventArgs)e;
+
+                if (RenderScene.IsFrontBufferAvailable && LastRender != args.RenderingTime)
+                {
+                    IntPtr pSurface = IntPtr.Zero;
+                    HRESULT.Check(NativeMethods.GetBackBufferNoRef(out pSurface));
+                    if (pSurface != IntPtr.Zero)
+                    {
+                        RenderScene.Lock();
+                        RenderScene.SetBackBuffer(D3DResourceType.IDirect3DSurface9, pSurface);
+
+                        Live2D_Rendering();
+
+                        RenderScene.AddDirtyRect(new Int32Rect(0, 0, RenderScene.PixelWidth, RenderScene.PixelHeight));
+                        RenderScene.Unlock();
+
+                        LastRender = args.RenderingTime;
+                    }
+                }
+            }
+        }
+
         private void Live2D_Rendering()
         {
             NativeMethods.BeginRender();
@@ -110,45 +157,28 @@ namespace L2DLib
 
             NativeMethods.EndRender();
         }
-
-        private void CompositionTarget_Rendering(object sender, EventArgs e)
-        {
-            RenderingEventArgs args = (RenderingEventArgs)e;
-
-            if (RenderScene.IsFrontBufferAvailable && LastRender != args.RenderingTime)
-            {
-                IntPtr pSurface = IntPtr.Zero;
-                HRESULT.Check(NativeMethods.GetBackBufferNoRef(out pSurface));
-                if (pSurface != IntPtr.Zero)
-                {
-                    RenderScene.Lock();
-                    RenderScene.SetBackBuffer(D3DResourceType.IDirect3DSurface9, pSurface);
-
-                    Live2D_Rendering();
-
-                    RenderScene.AddDirtyRect(new Int32Rect(0, 0, RenderScene.PixelWidth, RenderScene.PixelHeight));
-                    RenderScene.Unlock();
-
-                    LastRender = args.RenderingTime;
-                }
-            }
-        }
         #endregion
 
         #region 크기 변경 이벤트
-        private void AdapterTimer_Tick(object sender, EventArgs e)
-        {
-            NativeStructure.POINT p = new NativeStructure.POINT(RenderHolder.PointToScreen(new Point(0, 0)));
-            HRESULT.Check(NativeMethods.SetAdapter(p));
-        }
-
         private void SizeTimer_Tick(object sender, EventArgs e)
         {
-            uint actualWidth = (uint)RenderHolder.ActualWidth;
-            uint actualHeight = (uint)RenderHolder.ActualHeight;
-            if ((actualWidth > 0 && actualHeight > 0) && (actualWidth != (uint)RenderScene.Width || actualHeight != (uint)RenderScene.Height))
+            if (!IsDisposed)
             {
-                HRESULT.Check(NativeMethods.SetSize(actualWidth, actualHeight));
+                uint actualWidth = (uint)RenderHolder.ActualWidth;
+                uint actualHeight = (uint)RenderHolder.ActualHeight;
+                if ((actualWidth > 0 && actualHeight > 0) && (actualWidth != (uint)RenderScene.Width || actualHeight != (uint)RenderScene.Height))
+                {
+                    HRESULT.Check(NativeMethods.SetSize(actualWidth, actualHeight));
+                }
+            }
+        }
+
+        private void AdapterTimer_Tick(object sender, EventArgs e)
+        {
+            if (!IsDisposed)
+            {
+                NativeStructure.POINT p = new NativeStructure.POINT(RenderHolder.PointToScreen(new Point(0, 0)));
+                HRESULT.Check(NativeMethods.SetAdapter(p));
             }
         }
         #endregion

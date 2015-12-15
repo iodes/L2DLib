@@ -11,7 +11,10 @@
     <Grid>
         <L2DLib:RenderView x:Name="L2DRenderView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,120"/>
         <GroupBox Header="제어판" HorizontalAlignment="Stretch" Margin="10" VerticalAlignment="Bottom" Height="80">
-            <Button x:Name="BtnLoad" Click="BtnLoad_Click" Content="모델 및 텍스처 불러오기" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Height="30" Margin="15,0,0,0"/>
+            <Grid>
+                <Button x:Name="BtnLoad" Click="BtnLoad_Click" Content="모델 불러오기" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" Height="30" Margin="15,0,0,0"/>
+                <Button x:Name="BtnReset" Click="BtnReset_Click" Content="모든 리소스 해제" HorizontalAlignment="Left" VerticalAlignment="Center" Width="120" Height="30" Margin="120,0,0,0"/>
+            </Grid>
         </GroupBox>
     </Grid>
 </Window>
