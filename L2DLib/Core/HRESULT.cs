@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Security.Permissions;
 using System.Runtime.InteropServices;
-using System.Security.Permissions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace L2DLib.Core
 {
+    /// <summary>
+    /// L2DNative 라이브러리와 상호 운용시 반환값 처리를 제공합니다.
+    /// </summary>
     public static class HRESULT
     {
         [SecurityPermission(SecurityAction.Demand, Flags = SecurityPermissionFlag.UnmanagedCode)]

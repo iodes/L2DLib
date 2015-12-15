@@ -19,7 +19,6 @@
 #include "RendererManager.h"
 #include "Renderer.h"
 #include "RendererL2D.h"
-#include "Argument.h"
 
 #define IFC(x) { hr = (x); if (FAILED(hr)) goto Cleanup; }
 #define IFCOOM(x) { if ((x) == NULL) { hr = E_OUTOFMEMORY; IFC(hr); } }

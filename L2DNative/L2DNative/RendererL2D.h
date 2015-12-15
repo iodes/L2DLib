@@ -1,5 +1,4 @@
 #pragma once
-#include "Argument.h"
 #include "Live2D.h"
 #include "Live2DModelD3D.h"
 #include "motion\Live2DMotion.h"
