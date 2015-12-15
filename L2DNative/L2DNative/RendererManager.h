@@ -13,22 +13,23 @@ public:
 	void SetAlpha(bool fUseAlpha);
 	void SetNumDesiredSamples(UINT uNumSamples);
 	void SetAdapter(POINT screenSpacePoint);
-	void SetArgument(Argument argument);
-
-	void SetParamFloat(char* key, float value);
-	void AddToParamFloat(char* key, float value);
-	void MultParamFloat(char* key, float value);
-	float GetParamFloat(char* key);
-	void SetPartsOpacity(char* key, float value);
-	float GetPartsOpacity(char* key);
-	void SaveParam();
-	void LoadParam();
-
 	HRESULT GetBackBufferNoRef(IDirect3DSurface9 **ppSurface);
 
-	HRESULT BeginRender();
-	HRESULT EndRender();
+	long LoadModel(char* modelPath);
+	void RemoveModel(long model);
+	void SetParamFloat(long model, char* key, float value);
+	void AddToParamFloat(long model, char* key, float value);
+	void MultParamFloat(long model, char* key, float value);
+	float GetParamFloat(long model, char* key);
+	void SetPartsOpacity(long model, char* key, float value);
+	float GetPartsOpacity(long model, char* key);
+	void SaveParam(long model);
+	void LoadParam(long model);
 
+	HRESULT SetTexture(long model, LPCWSTR texturePath);
+
+	HRESULT BeginRender(long model);
+	HRESULT EndRender(long model);
 	void Dispose();
 
 private:
@@ -55,5 +56,4 @@ private:
 	UINT m_uNumSamples;
 	bool m_fUseAlpha;
 	bool m_fSurfaceSettingsChanged;
-	Argument m_Argument;
 };

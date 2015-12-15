@@ -6,20 +6,23 @@ SetSize
 SetAlpha
 SetNumDesiredSamples
 SetAdapter
-SetArgument
-
 GetBackBufferNoRef
+Destroy
 
+LoadModel
+RemoveModel
 SetParamFloat
-AddToParamFloat
-MultParamFloat
 GetParamFloat
+MultParamFloat
+AddToParamFloat
 SetPartsOpacity
 GetPartsOpacity
 SaveParam
 LoadParam
-Dispose
+SetTexture
+
+LoadMotion
 
 BeginRender
 EndRender
-Destroy
+Dispose

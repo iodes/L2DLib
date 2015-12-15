@@ -98,7 +98,7 @@ Cleanup:
 //
 //------------------------------------------------------------------------------
 HRESULT
-CRenderer::Init(IDirect3D9 *pD3D, HWND hwnd, UINT uAdapter, Argument argument)
+CRenderer::Init(IDirect3D9 *pD3D, HWND hwnd, UINT uAdapter)
 {
 	HRESULT hr = S_OK;
 

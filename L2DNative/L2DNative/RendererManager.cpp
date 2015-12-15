@@ -9,6 +9,7 @@
 
 #include "stdafx.h"
 
+#pragma region [   DirectX   ]
 const static TCHAR szAppName[] = TEXT("L2DNative");
 typedef HRESULT(WINAPI *DIRECT3DCREATE9EXFUNCTION)(UINT SDKVersion, IDirect3D9Ex**);
 
@@ -30,8 +31,7 @@ CRendererManager::CRendererManager()
 	m_uHeight(1024),
 	m_uNumSamples(0),
 	m_fUseAlpha(false),
-	m_fSurfaceSettingsChanged(true),
-	m_Argument()
+	m_fSurfaceSettingsChanged(true)
 {
 
 }
@@ -99,7 +99,7 @@ CRendererManager::EnsureRenderers()
 
 		for (UINT i = 0; i < m_cAdapters; ++i)
 		{
-			IFC(CRendererL2D::Create(m_pD3D, m_hwnd, i, m_Argument, &m_rgRenderers[i]));
+			IFC(CRendererL2D::Create(m_pD3D, m_hwnd, i, &m_rgRenderers[i]));
 		}
 
 		// Default to the default adapter 
@@ -481,28 +481,38 @@ CRendererManager::SetAdapter(POINT screenSpacePoint)
 		}
 	}
 }
+#pragma endregion
+
+#pragma region [   Model   ]
+//+-----------------------------------------------------------------------------
+//
+//  Member:
+//      CRendererManager::LoadModel
+//
+//  Synopsis:
+//     Live2D 모델을 불러옵니다.
+//
+//------------------------------------------------------------------------------
+long
+CRendererManager::LoadModel(char* modelPath)
+{
+	return m_pCurrentRenderer ? m_pCurrentRenderer->LoadModel(modelPath) : 0;
+}
 
 //+-----------------------------------------------------------------------------
 //
 //  Member:
-//      CRendererManager::SetArgument
+//      CRendererManager::RemoveModel
 //
 //  Synopsis:
-//      렌더링 시작시 사용할 명령줄 인수를 설정합니다.
+//     관리중인 Live2D 모델을 삭제합니다.
 //
 //------------------------------------------------------------------------------
 void
-CRendererManager::SetArgument(Argument argument)
+CRendererManager::RemoveModel(long model)
 {
-	if (
-		argument.model != m_Argument.model ||
-		argument.motions != m_Argument.motions ||
-		argument.textures != m_Argument.textures
-		)
-	{
-		m_Argument = argument;
-		m_fSurfaceSettingsChanged = true;
-	}
+	if (m_pCurrentRenderer)
+		m_pCurrentRenderer->RemoveModel(model);
 }
 
 //+-----------------------------------------------------------------------------
@@ -514,10 +524,10 @@ CRendererManager::SetArgument(Argument argument)
 //     키에 해당하는 매개변수에 값을 설정합니다.
 //
 //------------------------------------------------------------------------------
-void CRendererManager::SetParamFloat(char* key, float value)
+void CRendererManager::SetParamFloat(long model, char* key, float value)
 {
 	if (m_pCurrentRenderer)
-		m_pCurrentRenderer->SetParamFloat(key, value);
+		m_pCurrentRenderer->SetParamFloat(model, key, value);
 }
 
 //+-----------------------------------------------------------------------------
@@ -529,10 +539,10 @@ void CRendererManager::SetParamFloat(char* key, float value)
 //      키에 해당하는 매개변수에 값을 더합니다.
 //
 //------------------------------------------------------------------------------
-void CRendererManager::AddToParamFloat(char* key, float value)
+void CRendererManager::AddToParamFloat(long model, char* key, float value)
 {
 	if (m_pCurrentRenderer)
-		m_pCurrentRenderer->AddToParamFloat(key, value);
+		m_pCurrentRenderer->AddToParamFloat(model, key, value);
 }
 
 //+-----------------------------------------------------------------------------
@@ -544,10 +554,10 @@ void CRendererManager::AddToParamFloat(char* key, float value)
 //      키에 해당하는 매개변수에 값을 곱합니다.
 //
 //------------------------------------------------------------------------------
-void CRendererManager::MultParamFloat(char* key, float value)
+void CRendererManager::MultParamFloat(long model, char* key, float value)
 {
 	if (m_pCurrentRenderer)
-		m_pCurrentRenderer->MultParamFloat(key, value);
+		m_pCurrentRenderer->MultParamFloat(model, key, value);
 }
 
 //+-----------------------------------------------------------------------------
@@ -559,10 +569,10 @@ void CRendererManager::MultParamFloat(char* key, float value)
 //      키에 해당하는 매개변수의 값을 가져옵니다.
 //
 //------------------------------------------------------------------------------
-float CRendererManager::GetParamFloat(char* key)
+float CRendererManager::GetParamFloat(long model, char* key)
 {
 	if (m_pCurrentRenderer)
-		return m_pCurrentRenderer->GetParamFloat(key);
+		return m_pCurrentRenderer->GetParamFloat(model, key);
 
 	return NULL;
 }
@@ -576,10 +586,10 @@ float CRendererManager::GetParamFloat(char* key)
 //      키에 해당하는 부분의 투명도를 설정합니다.
 //
 //------------------------------------------------------------------------------
-void CRendererManager::SetPartsOpacity(char* key, float value)
+void CRendererManager::SetPartsOpacity(long model, char* key, float value)
 {
 	if (m_pCurrentRenderer)
-		m_pCurrentRenderer->SetPartsOpacity(key, value);
+		m_pCurrentRenderer->SetPartsOpacity(model, key, value);
 }
 
 //+-----------------------------------------------------------------------------
@@ -591,10 +601,10 @@ void CRendererManager::SetPartsOpacity(char* key, float value)
 //      키에 해당하는 부분의 투명도를 가져옵니다.
 //
 //------------------------------------------------------------------------------
-float CRendererManager::GetPartsOpacity(char* key)
+float CRendererManager::GetPartsOpacity(long model, char* key)
 {
 	if (m_pCurrentRenderer)
-		return m_pCurrentRenderer->GetPartsOpacity(key);
+		return m_pCurrentRenderer->GetPartsOpacity(model, key);
 
 	return NULL;
 }
@@ -608,10 +618,10 @@ float CRendererManager::GetPartsOpacity(char* key)
 //      매개변수를 저장합니다.
 //
 //------------------------------------------------------------------------------
-void CRendererManager::SaveParam()
+void CRendererManager::SaveParam(long model)
 {
 	if (m_pCurrentRenderer)
-		m_pCurrentRenderer->SaveParam();
+		m_pCurrentRenderer->SaveParam(model);
 }
 
 //+-----------------------------------------------------------------------------
@@ -623,12 +633,20 @@ void CRendererManager::SaveParam()
 //      매개변수를 불러옵니다.
 //
 //------------------------------------------------------------------------------
-void CRendererManager::LoadParam()
+void CRendererManager::LoadParam(long model)
 {
 	if (m_pCurrentRenderer)
-		m_pCurrentRenderer->LoadParam();
+		m_pCurrentRenderer->LoadParam(model);
 }
 
+HRESULT CRendererManager::SetTexture(long model, LPCWSTR texturePath)
+{
+	return m_pCurrentRenderer ? m_pCurrentRenderer->SetTexture(model, texturePath) : S_OK;
+}
+
+#pragma endregion
+
+#pragma region [   Live2D   ]
 //+-----------------------------------------------------------------------------
 //
 //  Member:
@@ -639,9 +657,9 @@ void CRendererManager::LoadParam()
 //
 //------------------------------------------------------------------------------
 HRESULT
-CRendererManager::BeginRender()
+CRendererManager::BeginRender(long model)
 {
-	return m_pCurrentRenderer ? m_pCurrentRenderer->BeginRender() : S_OK;
+	return m_pCurrentRenderer ? m_pCurrentRenderer->BeginRender(model) : S_OK;
 }
 
 //+-----------------------------------------------------------------------------
@@ -654,9 +672,9 @@ CRendererManager::BeginRender()
 //
 //------------------------------------------------------------------------------
 HRESULT
-CRendererManager::EndRender()
+CRendererManager::EndRender(long model)
 {
-	return m_pCurrentRenderer ? m_pCurrentRenderer->EndRender() : S_OK;
+	return m_pCurrentRenderer ? m_pCurrentRenderer->EndRender(model) : S_OK;
 }
 
 //+-----------------------------------------------------------------------------
@@ -673,3 +691,4 @@ CRendererManager::Dispose()
 {
 	if(m_pCurrentRenderer) m_pCurrentRenderer->Dispose();
 }
+#pragma endregion
