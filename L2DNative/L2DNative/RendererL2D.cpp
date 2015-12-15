@@ -125,6 +125,7 @@ Cleanup:
 long CRendererL2D::LoadModel(char* modelPath)
 {
 	m_models.push_back(live2d::Live2DModelD3D::loadModel(modelPath));
+	m_modelsTexCnt.push_back(0);
 
 	return m_models.size();
 }
@@ -280,7 +281,7 @@ HRESULT CRendererL2D::SetTexture(long model, LPCWSTR texturePath)
 	}
 	else
 	{
-		m_models[model]->setTexture(m_modelsTexCnt[model], tex);
+		m_models[model]->setTexture(m_modelsTexCnt[model]++, tex);
 	}
 
 Cleanup:
