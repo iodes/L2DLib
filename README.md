@@ -12,3 +12,4 @@ Live2D 라이브러리를 .NET Framework 에서 사용할 수 있도록 개발�
 * [Live2D 라이브러리 해설](http://sites.cybernoids.jp/cubism2/sdk_tutorial/live2d_library)
 * [Live2D 프레임워크 해설](http://sites.cybernoids.jp/cubism2/sdk_tutorial/framework)
 * [Live2D DirectX SDK 프로젝트 생성 방법](http://sites.cybernoids.jp/cubism2/sdk_tutorial/platform-setting/directx/createproject)
+* [ Live2D C++ API 2.0 레퍼런스 문서](http://doc.live2d.com/api/core/cpp2.0e/index.html)
