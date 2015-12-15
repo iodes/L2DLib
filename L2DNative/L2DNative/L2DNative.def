@@ -18,6 +18,7 @@ SetPartsOpacity
 GetPartsOpacity
 SaveParam
 LoadParam
+Dispose
 
 BeginRender
 EndRender
