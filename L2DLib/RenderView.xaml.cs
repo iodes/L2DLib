@@ -65,7 +65,6 @@ namespace L2DLib
 
         #region 객체
         TimeSpan LastRender;
-        DispatcherTimer SizeTimer;
         DispatcherTimer AdapterTimer;
         #endregion
 
@@ -91,12 +90,8 @@ namespace L2DLib
             };
             HRESULT.Check(NativeMethods.SetArgument(argument));
 
+            SizeChanged += RenderView_SizeChanged;
             CompositionTarget.Rendering += CompositionTarget_Rendering;
-
-            SizeTimer = new DispatcherTimer(DispatcherPriority.Render);
-            SizeTimer.Tick += SizeTimer_Tick;
-            SizeTimer.Interval = new TimeSpan(0, 0, 0, 0, 200);
-            SizeTimer.Start();
 
             AdapterTimer = new DispatcherTimer();
             AdapterTimer.Tick += AdapterTimer_Tick;
@@ -107,16 +102,27 @@ namespace L2DLib
         public void Dispose()
         {
             _IsDisposed = true;
-
-            SizeTimer.Stop();
             AdapterTimer.Stop();
-
             NativeMethods.Dispose();
             NativeMethods.Destroy();
         }
         #endregion
 
         #region 렌더링 이벤트
+        private void RenderView_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (!IsDisposed)
+            {
+                HRESULT.Check
+                    (NativeMethods.SetSize
+                        (
+                            (uint)RenderHolder.ActualWidth,
+                            (uint)RenderHolder.ActualHeight
+                        )
+                    );
+            }
+        }
+
         private void CompositionTarget_Rendering(object sender, EventArgs e)
         {
             if (!IsDisposed)
@@ -159,26 +165,13 @@ namespace L2DLib
         }
         #endregion
 
-        #region 크기 변경 이벤트
-        private void SizeTimer_Tick(object sender, EventArgs e)
-        {
-            if (!IsDisposed)
-            {
-                uint actualWidth = (uint)RenderHolder.ActualWidth;
-                uint actualHeight = (uint)RenderHolder.ActualHeight;
-                if ((actualWidth > 0 && actualHeight > 0) && (actualWidth != (uint)RenderScene.Width || actualHeight != (uint)RenderScene.Height))
-                {
-                    HRESULT.Check(NativeMethods.SetSize(actualWidth, actualHeight));
-                }
-            }
-        }
-
+        #region 어댑터 설정 이벤트
         private void AdapterTimer_Tick(object sender, EventArgs e)
         {
             if (!IsDisposed)
             {
-                NativeStructure.POINT p = new NativeStructure.POINT(RenderHolder.PointToScreen(new Point(0, 0)));
-                HRESULT.Check(NativeMethods.SetAdapter(p));
+                NativeStructure.POINT point = new NativeStructure.POINT(RenderHolder.PointToScreen(new Point(0, 0)));
+                HRESULT.Check(NativeMethods.SetAdapter(point));
             }
         }
         #endregion
