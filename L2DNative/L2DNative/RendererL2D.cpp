@@ -108,9 +108,7 @@ CRendererL2D::Init(IDirect3D9 *pD3D, HWND hwnd, UINT uAdapter, Argument argument
 	live2DModel = live2d::Live2DModelD3D::loadModel(strChar);
 
 	// 텍스처 불러오기 수행
-	// TODO : 배열 카운트 계산 필요
-	int length = 3;
-	for (int i = 0; i < length; i++) {
+	for (int i = 0; i < 1000; i++) {
 		if (!argument.textures[i]) break;
 
 		LPDIRECT3DTEXTURE9 tex;

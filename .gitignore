@@ -1,6 +1,7 @@
 *.dll
 *.sdf
 *.opensdf
+*.ipch
 /Debug
 L2DLib/bin
 L2DLib/obj
