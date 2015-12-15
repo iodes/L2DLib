@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using L2DLib.Core;
 using System.Windows.Interop;
+using System.Windows.Threading;
 
 namespace L2DLib
 {
@@ -55,6 +56,8 @@ namespace L2DLib
 
         #region 객체
         TimeSpan LastRender;
+        DispatcherTimer SizeTimer;
+        DispatcherTimer AdapterTimer;
         #endregion
 
         #region 생성자
@@ -80,6 +83,15 @@ namespace L2DLib
             HRESULT.Check(NativeMethods.SetArgument(argument));
 
             CompositionTarget.Rendering += CompositionTarget_Rendering;
+            AdapterTimer = new DispatcherTimer();
+            AdapterTimer.Tick += AdapterTimer_Tick;
+            AdapterTimer.Interval = new TimeSpan(0, 0, 0, 0, 500);
+            AdapterTimer.Start();
+
+            SizeTimer = new DispatcherTimer(DispatcherPriority.Render);
+            SizeTimer.Tick += SizeTimer_Tick;
+            SizeTimer.Interval = new TimeSpan(0, 0, 0, 0, 200);
+            SizeTimer.Start();
         }
         #endregion
 
@@ -119,6 +131,24 @@ namespace L2DLib
 
                     LastRender = args.RenderingTime;
                 }
+            }
+        }
+        #endregion
+
+        #region 크기 변경 이벤트
+        private void AdapterTimer_Tick(object sender, EventArgs e)
+        {
+            NativeStructure.POINT p = new NativeStructure.POINT(RenderHolder.PointToScreen(new Point(0, 0)));
+            HRESULT.Check(NativeMethods.SetAdapter(p));
+        }
+
+        private void SizeTimer_Tick(object sender, EventArgs e)
+        {
+            uint actualWidth = (uint)RenderHolder.ActualWidth;
+            uint actualHeight = (uint)RenderHolder.ActualHeight;
+            if ((actualWidth > 0 && actualHeight > 0) && (actualWidth != (uint)RenderScene.Width || actualHeight != (uint)RenderScene.Height))
+            {
+                HRESULT.Check(NativeMethods.SetSize(actualWidth, actualHeight));
             }
         }
         #endregion
