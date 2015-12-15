@@ -325,3 +325,17 @@ void CRendererL2D::LoadParam()
 {
 	live2DModel->loadParam();
 }
+
+//+-----------------------------------------------------------------------------
+//
+//  Member:
+//      CRendererL2D::Dispose
+//
+//  Synopsis:
+//      매개변수를 불러옵니다.
+//
+//------------------------------------------------------------------------------
+void CRendererL2D::Dispose()
+{
+	live2d::Live2D::dispose();
+}

@@ -21,6 +21,8 @@ public:
 	virtual HRESULT BeginRender() = 0;
 	virtual HRESULT EndRender() = 0;
 
+	virtual void Dispose() = 0;
+
 	IDirect3DSurface9 *GetSurfaceNoRef() { return m_pd3dRTS; }
 
 protected:

@@ -29,6 +29,8 @@ public:
 	HRESULT BeginRender();
 	HRESULT EndRender();
 
+	void Dispose();
+
 private:
 	CRendererManager();
 
