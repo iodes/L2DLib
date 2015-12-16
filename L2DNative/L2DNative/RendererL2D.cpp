@@ -139,8 +139,8 @@ long CRendererL2D::AddModel(Model* model)
 //------------------------------------------------------------------------------
 void CRendererL2D::RemoveModel(long hModel)
 {
-	delete m_models[hModel-1];
-	m_models[hModel-1] = NULL;
+	delete[] m_models[hModel - 1];
+	m_models[hModel - 1] = NULL;
 }
 
 long CRendererL2D::GetModelTexCnt(long hModel)
