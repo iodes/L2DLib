@@ -22,6 +22,9 @@ namespace L2DLib.Core
         public static extern int SetParamFloat(IntPtr model, string key, float value);
 
         [DllImport("L2DNative.dll")]
+        public static extern int GetParamFloat(IntPtr model, string key, out float ret);
+
+        [DllImport("L2DNative.dll")]
         public static extern int AddToParamFloat(IntPtr model, string key, float value);
 
         [DllImport("L2DNative.dll")]
@@ -31,10 +34,28 @@ namespace L2DLib.Core
         public static extern int SetPartsOpacity(IntPtr model, string key, float value);
 
         [DllImport("L2DNative.dll")]
+        public static extern int GetPartsOpacity(IntPtr model, string key, out float ret);
+
+        [DllImport("L2DNative.dll")]
         public static extern int SaveParam(IntPtr model);
 
         [DllImport("L2DNative.dll")]
         public static extern int LoadParam(IntPtr model);
+
+        [DllImport("L2DNative.dll")]
+        public static extern int LoadMotion(string motionPath, out long ret);
+
+        [DllImport("L2DNative.dll")]
+        public static extern int SetFadeIn(IntPtr motion, IntPtr msec);
+
+        [DllImport("L2DNative.dll")]
+        public static extern int SetFadeOut(IntPtr motion, IntPtr msec);
+
+        [DllImport("L2DNative.dll")]
+        public static extern int SetLoop(IntPtr motion, bool loop);
+
+        [DllImport("L2DNative.dll")]
+        public static extern int StartMotion(IntPtr motion);
 
         [DllImport("L2DNative.dll")]
         public static extern int BeginRender(IntPtr model);

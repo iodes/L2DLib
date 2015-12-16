@@ -107,7 +107,21 @@ namespace L2DLib.Framework
         public void SetParamFloat(string key, float value)
         {
             CheckDispose();
-            NativeMethods.SetParamFloat(new IntPtr(Handle), key, value);
+            HRESULT.Check(NativeMethods.SetParamFloat(new IntPtr(Handle), key, value));
+        }
+
+        /// <summary>
+        /// 키에 해당하는 매개변수에 값을 가져옵니다.
+        /// BeginRender() 함수와 EndRender() 함수 사이에서 호출되어야 합니다.
+        /// </summary>
+        /// <param name="key">대상 매개변수의 이름입니다.</param>
+        public float GetParamFloat(string key)
+        {
+            CheckDispose();
+            float result = 0;
+            HRESULT.Check(NativeMethods.GetParamFloat(new IntPtr(Handle), key, out result));
+
+            return result;
         }
 
         /// <summary>
@@ -119,7 +133,7 @@ namespace L2DLib.Framework
         public void AddToParamFloat(string key, float value)
         {
             CheckDispose();
-            NativeMethods.AddToParamFloat(new IntPtr(Handle), key, value);
+            HRESULT.Check(NativeMethods.AddToParamFloat(new IntPtr(Handle), key, value));
         }
 
         /// <summary>
@@ -131,7 +145,7 @@ namespace L2DLib.Framework
         public void MultParamFloat(string key, float value)
         {
             CheckDispose();
-            NativeMethods.MultParamFloat(new IntPtr(Handle), key, value);
+            HRESULT.Check(NativeMethods.MultParamFloat(new IntPtr(Handle), key, value));
         }
 
         /// <summary>
@@ -143,7 +157,16 @@ namespace L2DLib.Framework
         public void SetPartsOpacity(string key, float value)
         {
             CheckDispose();
-            NativeMethods.SetPartsOpacity(new IntPtr(Handle), key, value);
+            HRESULT.Check(NativeMethods.SetPartsOpacity(new IntPtr(Handle), key, value));
+        }
+
+        public float GetPartsOpacity(string key)
+        {
+            CheckDispose();
+            float result = 0;
+            HRESULT.Check(NativeMethods.GetPartsOpacity(new IntPtr(Handle), key, out result));
+
+            return result;
         }
 
         /// <summary>
@@ -153,7 +176,7 @@ namespace L2DLib.Framework
         public void SaveParam()
         {
             CheckDispose();
-            NativeMethods.SaveParam(new IntPtr(Handle));
+            HRESULT.Check(NativeMethods.SaveParam(new IntPtr(Handle)));
         }
 
         /// <summary>
@@ -163,7 +186,7 @@ namespace L2DLib.Framework
         public void LoadParam()
         {
             CheckDispose();
-            NativeMethods.LoadParam(new IntPtr(Handle));
+            HRESULT.Check(NativeMethods.LoadParam(new IntPtr(Handle)));
         }
         #endregion
     }

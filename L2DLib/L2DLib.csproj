@@ -48,6 +48,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Framework\L2DMotion.cs" />
     <Compile Include="Framework\L2DView.cs" />
     <Compile Include="Core\HRESULT.cs" />
     <Compile Include="Core\NativeMethods.cs" />

@@ -21,15 +21,22 @@ namespace L2DSample
     /// </summary>
     public partial class MainWindow : Window
     {
+        #region 객체
+        L2DModel model;
+        L2DMotion motion;
+        #endregion
+
+        #region 생성자
         public MainWindow()
         {
             InitializeComponent();
         }
+        #endregion
 
         private void BtnLoad_Click(object sender, RoutedEventArgs e)
         {
             // 모델 불러오기
-            L2DModel model = new L2DModel(@"Resources\haru\haru.moc");
+            model = new L2DModel(@"Resources\haru\haru.moc");
 
             // 텍스처 불러오기
             model.SetTexture
@@ -43,6 +50,12 @@ namespace L2DSample
                     }
                 );
 
+            // 모션 불러오기
+            motion = new L2DMotion(@"Resources\haru\motions\tapBody_01.mtn");
+            motion.SetFadeIn(1000);
+            motion.SetFadeOut(1000);
+            motion.SetLoop(true);
+
             // 렌더러에 모델 설정
             RenderView.Model = model;
         }
@@ -50,7 +63,7 @@ namespace L2DSample
         private void BtnReset_Click(object sender, RoutedEventArgs e)
         {
             // 모델 메모리 해제
-            RenderView.Model.Dispose();
+            model.Dispose();
         }
     }
 }
