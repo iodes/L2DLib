@@ -26,7 +26,7 @@ SetFadeIn
 SetFadeOut
 SetLoop
 StartMotion
-UpdateParam
+UpdateMotion
 
 BeginRender
 EndRender

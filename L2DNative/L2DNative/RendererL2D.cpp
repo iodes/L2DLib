@@ -391,7 +391,7 @@ void CRendererL2D::StartMotion(long hMotion)
 	m_motionManager->startMotion(motion, true);
 }
 
-void CRendererL2D::UpdateParam(long hModel)
+void CRendererL2D::UpdateMotion(long hModel)
 {
 	Model* model = GetModel(hModel);
 	m_motionManager->updateParam(model);

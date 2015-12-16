@@ -274,12 +274,12 @@ Cleanup:
 	return hr;
 }
 
-extern "C" HRESULT WINAPI UpdateParam(long hModel)
+extern "C" HRESULT WINAPI UpdateMotion(long hModel)
 {
 	HRESULT hr = S_OK;
 	IFC(EnsureRendererManager());
 
-	pManager->UpdateParam(hModel);
+	pManager->UpdateMotion(hModel);
 
 Cleanup:
 	return hr;

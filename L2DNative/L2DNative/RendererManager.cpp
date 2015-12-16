@@ -676,10 +676,10 @@ void CRendererManager::StartMotion(long hMotion)
 		m_pCurrentRenderer->StartMotion(hMotion);
 }
 
-void CRendererManager::UpdateParam(long hModel)
+void CRendererManager::UpdateMotion(long hModel)
 {
 	if (m_pCurrentRenderer)
-		m_pCurrentRenderer->UpdateParam(hModel);
+		m_pCurrentRenderer->UpdateMotion(hModel);
 }
 #pragma endregion
 

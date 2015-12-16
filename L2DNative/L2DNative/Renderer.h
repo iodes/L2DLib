@@ -25,7 +25,7 @@ public:
 	virtual void SetFadeOut(long hMotion, int msec) = 0;
 	virtual void SetLoop(long hMotion, bool loop) = 0;
 	virtual void StartMotion(long hMotion) = 0;
-	virtual void UpdateParam(long hModel) = 0;
+	virtual void UpdateMotion(long hModel) = 0;
 
 	virtual HRESULT BeginRender(long hModel) = 0;
 	virtual HRESULT EndRender(long hModel) = 0;
