@@ -107,111 +107,111 @@ Cleanup:
 	return hr;
 }
 
-extern "C" HRESULT WINAPI RemoveModel(long model)
+extern "C" HRESULT WINAPI RemoveModel(long hModel)
 {
 	HRESULT hr = S_OK;
 	IFC(EnsureRendererManager());
 
-	pManager->RemoveModel(model - 1);
+	pManager->RemoveModel(hModel);
 
 Cleanup:
 	return hr;
 }
 
-extern "C" HRESULT WINAPI SetParamFloat(long model, char* key, float value)
+extern "C" HRESULT WINAPI SetParamFloat(long hModel, char* key, float value)
 {
 	HRESULT hr = S_OK;
 	IFC(EnsureRendererManager());
 
-	pManager->SetParamFloat(model - 1, key, value);
+	pManager->SetParamFloat(hModel, key, value);
 
 Cleanup:
 	return hr;
 }
 
-extern "C" HRESULT WINAPI GetParamFloat(long model, char* key, float* ret)
+extern "C" HRESULT WINAPI GetParamFloat(long hModel, char* key, float* ret)
 {
 	HRESULT hr = S_OK;
 	IFC(EnsureRendererManager());
 
-	*ret = pManager->GetParamFloat(model - 1, key);
+	*ret = pManager->GetParamFloat(hModel, key);
 
 Cleanup:
 	return hr;
 }
 
-extern "C" HRESULT WINAPI MultParamFloat(long model, char* key, float value)
+extern "C" HRESULT WINAPI MultParamFloat(long hModel, char* key, float value)
 {
 	HRESULT hr = S_OK;
 	IFC(EnsureRendererManager());
 
-	pManager->MultParamFloat(model - 1, key, value);
+	pManager->MultParamFloat(hModel, key, value);
 
 Cleanup:
 	return hr;
 }
 
-extern "C" HRESULT WINAPI AddToParamFloat(long model, char* key, float value)
+extern "C" HRESULT WINAPI AddToParamFloat(long hModel, char* key, float value)
 {
 	HRESULT hr = S_OK;
 	IFC(EnsureRendererManager());
 
-	pManager->AddToParamFloat(model - 1, key, value);
+	pManager->AddToParamFloat(hModel, key, value);
 
 Cleanup:
 	return hr;
 }
 
-extern "C" HRESULT WINAPI SetPartsOpacity(long model, char* key, float value)
+extern "C" HRESULT WINAPI SetPartsOpacity(long hModel, char* key, float value)
 {
 	HRESULT hr = S_OK;
 	IFC(EnsureRendererManager());
 
-	pManager->SetPartsOpacity(model - 1, key, value);
+	pManager->SetPartsOpacity(hModel, key, value);
 
 Cleanup:
 	return hr;
 }
 
-extern "C" HRESULT WINAPI GetPartsOpacity(long model, char* key, float* ret)
+extern "C" HRESULT WINAPI GetPartsOpacity(long hModel, char* key, float* ret)
 {
 	HRESULT hr = S_OK;
 	IFC(EnsureRendererManager());
 
-	*ret = pManager->GetPartsOpacity(model - 1, key);
+	*ret = pManager->GetPartsOpacity(hModel, key);
 
 Cleanup:
 	return hr;
 }
 
-extern "C" HRESULT WINAPI SaveParam(long model)
+extern "C" HRESULT WINAPI SaveParam(long hModel)
 {
 	HRESULT hr = S_OK;
 	IFC(EnsureRendererManager());
 
-	pManager->SaveParam(model - 1);
+	pManager->SaveParam(hModel);
 
 Cleanup:
 	return hr;
 }
 
-extern "C" HRESULT WINAPI LoadParam(long model)
+extern "C" HRESULT WINAPI LoadParam(long hModel)
 {
 	HRESULT hr = S_OK;
 	IFC(EnsureRendererManager());
 
-	pManager->LoadParam(model - 1);
+	pManager->LoadParam(hModel);
 
 Cleanup:
 	return hr;
 }
 
-extern "C" HRESULT WINAPI SetTexture(long model, LPCWSTR texturePath)
+extern "C" HRESULT WINAPI SetTexture(long hModel, LPCWSTR texturePath)
 {
 	HRESULT hr = S_OK;
 	IFC(EnsureRendererManager());
 
-	pManager->SetTexture(model - 1, texturePath);
+	pManager->SetTexture(hModel, texturePath);
 
 Cleanup:
 	return hr;
@@ -224,7 +224,51 @@ extern "C" HRESULT WINAPI LoadMotion(char* motionPath, long* ret)
 	HRESULT hr = S_OK;
 	IFC(EnsureRendererManager());
 
-	//pManager->LoadMotion(model - 1, texturePath);
+	*ret = pManager->LoadMotion(motionPath);
+
+Cleanup:
+	return hr;
+}
+
+extern "C" HRESULT WINAPI SetFadeIn(long hMotion, int msec)
+{
+	HRESULT hr = S_OK;
+	IFC(EnsureRendererManager());
+
+	pManager->SetFadeIn(hMotion, msec);
+
+Cleanup:
+	return hr;
+}
+
+extern "C" HRESULT WINAPI SetFadeOut(long hMotion, int msec)
+{
+	HRESULT hr = S_OK;
+	IFC(EnsureRendererManager());
+
+	pManager->SetFadeOut(hMotion, msec);
+
+Cleanup:
+	return hr;
+}
+
+extern "C" HRESULT WINAPI SetLoop(long hMotion, bool loop)
+{
+	HRESULT hr = S_OK;
+	IFC(EnsureRendererManager());
+
+	pManager->SetLoop(hMotion, loop);
+
+Cleanup:
+	return hr;
+}
+
+extern "C" HRESULT WINAPI StartMotion(long hMotion)
+{
+	HRESULT hr = S_OK;
+	IFC(EnsureRendererManager());
+
+	pManager->StartMotion(hMotion);
 
 Cleanup:
 	return hr;
@@ -232,23 +276,23 @@ Cleanup:
 #pragma endregion
 
 #pragma region [   Live2D Extern   ]
-extern "C" HRESULT WINAPI BeginRender(long model)
+extern "C" HRESULT WINAPI BeginRender(long hModel)
 {
 	HRESULT hr = S_OK;
 	IFC(EnsureRendererManager());
 
-	return pManager->BeginRender(model - 1);
+	return pManager->BeginRender(hModel);
 
 Cleanup:
 	return hr;
 }
 
-extern "C" HRESULT WINAPI EndRender(long model)
+extern "C" HRESULT WINAPI EndRender(long hModel)
 {
 	HRESULT hr = S_OK;
 	IFC(EnsureRendererManager());
 
-	return pManager->EndRender(model - 1);
+	return pManager->EndRender(hModel);
 
 Cleanup:
 	return hr;

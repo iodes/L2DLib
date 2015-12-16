@@ -509,10 +509,10 @@ CRendererManager::LoadModel(char* modelPath)
 //
 //------------------------------------------------------------------------------
 void
-CRendererManager::RemoveModel(long model)
+CRendererManager::RemoveModel(long hModel)
 {
 	if (m_pCurrentRenderer)
-		m_pCurrentRenderer->RemoveModel(model);
+		m_pCurrentRenderer->RemoveModel(hModel);
 }
 
 //+-----------------------------------------------------------------------------
@@ -524,10 +524,10 @@ CRendererManager::RemoveModel(long model)
 //     키에 해당하는 매개변수에 값을 설정합니다.
 //
 //------------------------------------------------------------------------------
-void CRendererManager::SetParamFloat(long model, char* key, float value)
+void CRendererManager::SetParamFloat(long hModel, char* key, float value)
 {
 	if (m_pCurrentRenderer)
-		m_pCurrentRenderer->SetParamFloat(model, key, value);
+		m_pCurrentRenderer->SetParamFloat(hModel, key, value);
 }
 
 //+-----------------------------------------------------------------------------
@@ -539,10 +539,10 @@ void CRendererManager::SetParamFloat(long model, char* key, float value)
 //      키에 해당하는 매개변수에 값을 더합니다.
 //
 //------------------------------------------------------------------------------
-void CRendererManager::AddToParamFloat(long model, char* key, float value)
+void CRendererManager::AddToParamFloat(long hModel, char* key, float value)
 {
 	if (m_pCurrentRenderer)
-		m_pCurrentRenderer->AddToParamFloat(model, key, value);
+		m_pCurrentRenderer->AddToParamFloat(hModel, key, value);
 }
 
 //+-----------------------------------------------------------------------------
@@ -554,10 +554,10 @@ void CRendererManager::AddToParamFloat(long model, char* key, float value)
 //      키에 해당하는 매개변수에 값을 곱합니다.
 //
 //------------------------------------------------------------------------------
-void CRendererManager::MultParamFloat(long model, char* key, float value)
+void CRendererManager::MultParamFloat(long hModel, char* key, float value)
 {
 	if (m_pCurrentRenderer)
-		m_pCurrentRenderer->MultParamFloat(model, key, value);
+		m_pCurrentRenderer->MultParamFloat(hModel, key, value);
 }
 
 //+-----------------------------------------------------------------------------
@@ -569,10 +569,10 @@ void CRendererManager::MultParamFloat(long model, char* key, float value)
 //      키에 해당하는 매개변수의 값을 가져옵니다.
 //
 //------------------------------------------------------------------------------
-float CRendererManager::GetParamFloat(long model, char* key)
+float CRendererManager::GetParamFloat(long hModel, char* key)
 {
 	if (m_pCurrentRenderer)
-		return m_pCurrentRenderer->GetParamFloat(model, key);
+		return m_pCurrentRenderer->GetParamFloat(hModel, key);
 
 	return NULL;
 }
@@ -586,10 +586,10 @@ float CRendererManager::GetParamFloat(long model, char* key)
 //      키에 해당하는 부분의 투명도를 설정합니다.
 //
 //------------------------------------------------------------------------------
-void CRendererManager::SetPartsOpacity(long model, char* key, float value)
+void CRendererManager::SetPartsOpacity(long hModel, char* key, float value)
 {
 	if (m_pCurrentRenderer)
-		m_pCurrentRenderer->SetPartsOpacity(model, key, value);
+		m_pCurrentRenderer->SetPartsOpacity(hModel, key, value);
 }
 
 //+-----------------------------------------------------------------------------
@@ -601,10 +601,10 @@ void CRendererManager::SetPartsOpacity(long model, char* key, float value)
 //      키에 해당하는 부분의 투명도를 가져옵니다.
 //
 //------------------------------------------------------------------------------
-float CRendererManager::GetPartsOpacity(long model, char* key)
+float CRendererManager::GetPartsOpacity(long hModel, char* key)
 {
 	if (m_pCurrentRenderer)
-		return m_pCurrentRenderer->GetPartsOpacity(model, key);
+		return m_pCurrentRenderer->GetPartsOpacity(hModel, key);
 
 	return NULL;
 }
@@ -618,10 +618,10 @@ float CRendererManager::GetPartsOpacity(long model, char* key)
 //      매개변수를 저장합니다.
 //
 //------------------------------------------------------------------------------
-void CRendererManager::SaveParam(long model)
+void CRendererManager::SaveParam(long hModel)
 {
 	if (m_pCurrentRenderer)
-		m_pCurrentRenderer->SaveParam(model);
+		m_pCurrentRenderer->SaveParam(hModel);
 }
 
 //+-----------------------------------------------------------------------------
@@ -633,17 +633,48 @@ void CRendererManager::SaveParam(long model)
 //      매개변수를 불러옵니다.
 //
 //------------------------------------------------------------------------------
-void CRendererManager::LoadParam(long model)
+void CRendererManager::LoadParam(long hModel)
 {
 	if (m_pCurrentRenderer)
-		m_pCurrentRenderer->LoadParam(model);
+		m_pCurrentRenderer->LoadParam(hModel);
 }
 
-HRESULT CRendererManager::SetTexture(long model, LPCWSTR texturePath)
+HRESULT CRendererManager::SetTexture(long hModel, LPCWSTR texturePath)
 {
-	return m_pCurrentRenderer ? m_pCurrentRenderer->SetTexture(model, texturePath) : S_OK;
+	return m_pCurrentRenderer ? m_pCurrentRenderer->SetTexture(hModel, texturePath) : S_OK;
 }
 
+#pragma endregion
+
+#pragma region [   Motion   ]
+long CRendererManager::LoadMotion(char* motionPath)
+{
+	return (m_pCurrentRenderer) ? m_pCurrentRenderer->LoadMotion(motionPath) : 0;
+}
+
+void CRendererManager::SetFadeIn(long hMotion, int msec)
+{
+	if (m_pCurrentRenderer)
+		m_pCurrentRenderer->SetFadeIn(hMotion, msec);
+}
+
+void CRendererManager::SetFadeOut(long hMotion, int msec)
+{
+	if (m_pCurrentRenderer)
+		m_pCurrentRenderer->SetFadeOut(hMotion, msec);
+}
+
+void CRendererManager::SetLoop(long hMotion, bool loop)
+{
+	if (m_pCurrentRenderer)
+		m_pCurrentRenderer->SetLoop(hMotion, loop);
+}
+
+void CRendererManager::StartMotion(long hMotion)
+{
+	if (m_pCurrentRenderer)
+		m_pCurrentRenderer->StartMotion(hMotion);
+}
 #pragma endregion
 
 #pragma region [   Live2D   ]
@@ -657,9 +688,9 @@ HRESULT CRendererManager::SetTexture(long model, LPCWSTR texturePath)
 //
 //------------------------------------------------------------------------------
 HRESULT
-CRendererManager::BeginRender(long model)
+CRendererManager::BeginRender(long hModel)
 {
-	return m_pCurrentRenderer ? m_pCurrentRenderer->BeginRender(model) : S_OK;
+	return m_pCurrentRenderer ? m_pCurrentRenderer->BeginRender(hModel) : S_OK;
 }
 
 //+-----------------------------------------------------------------------------
@@ -672,9 +703,9 @@ CRendererManager::BeginRender(long model)
 //
 //------------------------------------------------------------------------------
 HRESULT
-CRendererManager::EndRender(long model)
+CRendererManager::EndRender(long hModel)
 {
-	return m_pCurrentRenderer ? m_pCurrentRenderer->EndRender(model) : S_OK;
+	return m_pCurrentRenderer ? m_pCurrentRenderer->EndRender(hModel) : S_OK;
 }
 
 //+-----------------------------------------------------------------------------

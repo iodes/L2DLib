@@ -106,6 +106,7 @@ CRendererL2D::Init(IDirect3D9 *pD3D, HWND hwnd, UINT uAdapter)
 
 	// 엔진 초기화
 	live2d::Live2D::init();
+	m_motionManager = new live2d::MotionQueueManager();
 
 Cleanup:
 	return hr;
@@ -113,7 +114,46 @@ Cleanup:
 #pragma endregion
 
 #pragma region [   Model   ]
+//+------------------------------------------
+Model* CRendererL2D::GetModel(long hModel)
+{
+	return m_models[hModel - 1];
+}
+
+long CRendererL2D::AddModel(Model* model)
+{
+	m_models.push_back(model);
+	m_modelTexCnt.push_back(0);
+
+	return m_models.size();
+}
+
 //+-----------------------------------------------------------------------------
+//
+//  Member:
+//      CRendererL2D::RemoveModel
+//
+//  Synopsis:
+//     관리중인 Live2D 모델을 삭제합니다.
+//
+//------------------------------------------------------------------------------
+void CRendererL2D::RemoveModel(long hModel)
+{
+	delete m_models[hModel-1];
+	m_models[hModel-1] = NULL;
+}
+
+long CRendererL2D::GetModelTexCnt(long hModel)
+{
+	return m_modelTexCnt[hModel - 1];
+}
+
+void CRendererL2D::IncreaseModelTexCnt(long hModel)
+{
+	m_modelTexCnt[hModel - 1]++;
+}
+
+//------------------------------------------------------------------------------
 //
 //  Member:
 //      CRendererL2D::LoadModel
@@ -124,24 +164,10 @@ Cleanup:
 //------------------------------------------------------------------------------
 long CRendererL2D::LoadModel(char* modelPath)
 {
-	m_models.push_back(live2d::Live2DModelD3D::loadModel(modelPath));
-	m_modelsTexCnt.push_back(0);
+	Model* model = Model::loadModel(modelPath);
+	long hModel = AddModel(model);
 
-	return m_models.size();
-}
-//+-----------------------------------------------------------------------------
-//
-//  Member:
-//      CRendererL2D::RemoveModel
-//
-//  Synopsis:
-//     관리중인 Live2D 모델을 삭제합니다.
-//
-//------------------------------------------------------------------------------
-void CRendererL2D::RemoveModel(long model)
-{
-	delete m_models[model];
-	m_models[model] = NULL;
+	return hModel;
 }
 
 //+-----------------------------------------------------------------------------
@@ -153,9 +179,10 @@ void CRendererL2D::RemoveModel(long model)
 //     키에 해당하는 매개변수에 값을 설정합니다.
 //
 //------------------------------------------------------------------------------
-void CRendererL2D::SetParamFloat(long model, char* key, float value)
+void CRendererL2D::SetParamFloat(long hModel, char* key, float value)
 {
-	m_models[model]->setParamFloat(key, value);
+	Model* model = GetModel(hModel);
+	model->setParamFloat(key, value);
 }
 
 //+-----------------------------------------------------------------------------
@@ -167,9 +194,10 @@ void CRendererL2D::SetParamFloat(long model, char* key, float value)
 //      키에 해당하는 매개변수에 값을 더합니다.
 //
 //------------------------------------------------------------------------------
-void CRendererL2D::AddToParamFloat(long model, char* key, float value)
+void CRendererL2D::AddToParamFloat(long hModel, char* key, float value)
 {
-	m_models[model]->addToParamFloat(key, value);
+	Model* model = GetModel(hModel);
+	model->addToParamFloat(key, value);
 }
 
 //+-----------------------------------------------------------------------------
@@ -181,9 +209,10 @@ void CRendererL2D::AddToParamFloat(long model, char* key, float value)
 //      키에 해당하는 매개변수에 값을 곱합니다.
 //
 //------------------------------------------------------------------------------
-void CRendererL2D::MultParamFloat(long model, char* key, float value)
+void CRendererL2D::MultParamFloat(long hModel, char* key, float value)
 {
-	m_models[model]->multParamFloat(key, value);
+	Model* model = GetModel(hModel);
+	model->multParamFloat(key, value);
 }
 
 //+-----------------------------------------------------------------------------
@@ -195,9 +224,10 @@ void CRendererL2D::MultParamFloat(long model, char* key, float value)
 //      키에 해당하는 매개변수의 값을 가져옵니다.
 //
 //------------------------------------------------------------------------------
-float CRendererL2D::GetParamFloat(long model, char* key)
+float CRendererL2D::GetParamFloat(long hModel, char* key)
 {
-	return m_models[model]->getParamFloat(key);
+	Model* model = GetModel(hModel);
+	return model->getParamFloat(key);
 }
 
 //+-----------------------------------------------------------------------------
@@ -209,9 +239,10 @@ float CRendererL2D::GetParamFloat(long model, char* key)
 //      키에 해당하는 부분의 투명도를 설정합니다.
 //
 //------------------------------------------------------------------------------
-void CRendererL2D::SetPartsOpacity(long model, char* key, float value)
+void CRendererL2D::SetPartsOpacity(long hModel, char* key, float value)
 {
-	m_models[model]->setPartsOpacity(key, value);
+	Model* model = GetModel(hModel);
+	model->setPartsOpacity(key, value);
 }
 
 //+-----------------------------------------------------------------------------
@@ -223,9 +254,10 @@ void CRendererL2D::SetPartsOpacity(long model, char* key, float value)
 //      키에 해당하는 부분의 투명도를 가져옵니다.
 //
 //------------------------------------------------------------------------------
-float CRendererL2D::GetPartsOpacity(long model, char* key)
+float CRendererL2D::GetPartsOpacity(long hModel, char* key)
 {
-	return m_models[model]->getPartsOpacity(key);
+	 Model* model = GetModel(hModel);
+	 return model->getPartsOpacity(key);
 }
 
 //+-----------------------------------------------------------------------------
@@ -237,9 +269,10 @@ float CRendererL2D::GetPartsOpacity(long model, char* key)
 //      매개변수를 저장합니다.
 //
 //------------------------------------------------------------------------------
-void CRendererL2D::SaveParam(long model)
+void CRendererL2D::SaveParam(long hModel)
 {
-	m_models[model]->saveParam();
+	Model* model = GetModel(hModel);
+	model->saveParam();
 }
 
 //+-----------------------------------------------------------------------------
@@ -251,12 +284,13 @@ void CRendererL2D::SaveParam(long model)
 //      매개변수를 불러옵니다.
 //
 //------------------------------------------------------------------------------
-void CRendererL2D::LoadParam(long model)
+void CRendererL2D::LoadParam(long hModel)
 {
-	m_models[model]->loadParam();
+	Model* model = GetModel(hModel);
+	model->loadParam();
 }
 
-HRESULT CRendererL2D::SetTexture(long model, LPCWSTR texturePath)
+HRESULT CRendererL2D::SetTexture(long hModel, LPCWSTR texturePath)
 {
 	HRESULT hr = S_OK;
 
@@ -281,11 +315,65 @@ HRESULT CRendererL2D::SetTexture(long model, LPCWSTR texturePath)
 	}
 	else
 	{
-		m_models[model]->setTexture(m_modelsTexCnt[model]++, tex);
+		Model* model = GetModel(hModel);
+		model->setTexture(GetModelTexCnt(hModel), tex);
+		IncreaseModelTexCnt(hModel);
 	}
 
 Cleanup:
 	return hr;
+}
+#pragma endregion
+
+#pragma region [   Motion   ]
+Motion* CRendererL2D::GetMotion(long hMotion)
+{
+	return m_motions[hMotion - 1];
+}
+
+long CRendererL2D::AddMotion(Motion* motion)
+{
+	m_motions.push_back(motion);
+
+	return m_motions.size();
+}
+
+void CRendererL2D::RemoveMotion(long hModel)
+{
+	delete m_motions[hModel - 1];
+	m_motions[hModel - 1] = NULL;
+}
+
+long CRendererL2D::LoadMotion(char* motionPath)
+{
+	Motion* motion = Motion::loadMotion(motionPath);
+	long hMotion = AddMotion(motion);
+	return hMotion;
+}
+
+void CRendererL2D::SetFadeIn(long hMotion, int msec)
+{
+	Motion* motion = GetMotion(hMotion);
+	motion->setFadeIn(msec);
+}
+
+void CRendererL2D::SetFadeOut(long hMotion, int msec)
+{
+	Motion* motion = GetMotion(hMotion);
+	motion->setFadeIn(msec);
+}
+
+void CRendererL2D::SetLoop(long hMotion, bool loop)
+{
+	Motion* motion = GetMotion(hMotion);
+	motion->setLoop(loop);
+}
+
+void CRendererL2D::StartMotion(long hMotion)
+{
+	Motion* motion = GetMotion(hMotion);
+	m_motionManager->startMotion(motion, true);
+
 }
 #pragma endregion
 
@@ -299,7 +387,7 @@ Cleanup:
 //      Live2D 렌더링을 시작합니다.
 //
 //------------------------------------------------------------------------------
-HRESULT CRendererL2D::BeginRender(long model)
+HRESULT CRendererL2D::BeginRender(long hModel)
 {
 	HRESULT hr = S_OK;
 
@@ -317,9 +405,9 @@ HRESULT CRendererL2D::BeginRender(long model)
 	int w, h;
 	w = 800;
 	h = 800;
-
-	float modelWidth = m_models[model]->getModelImpl()->getCanvasWidth();
-	float modelHeight = m_models[model]->getModelImpl()->getCanvasHeight();
+	Model* model = GetModel(hModel);
+	float modelWidth = model->getModelImpl()->getCanvasWidth();
+	float modelHeight = model->getModelImpl()->getCanvasHeight();
 
 	D3DXMatrixOrthoLH(&Ortho2D, modelHeight, -modelHeight *h / w, -1.0f, 1.0f);
 	D3DXMatrixIdentity(&Identity);
@@ -348,14 +436,15 @@ Cleanup:
 //      Live2D 렌더링을 끝냅니다.
 //
 //------------------------------------------------------------------------------
-HRESULT CRendererL2D::EndRender(long model)
+HRESULT CRendererL2D::EndRender(long hModel)
 {
 	HRESULT hr = S_OK;
 
 	// 그리기 작업 수행
-	m_models[model]->setDevice(m_pd3dDevice);
-	m_models[model]->update();
-	m_models[model]->draw();
+	Model* model = GetModel(hModel);
+	model->setDevice(m_pd3dDevice);
+	model->update();
+	model->draw();
 
 	// 그리기 종료
 	IFC(m_pd3dDevice->EndScene());
