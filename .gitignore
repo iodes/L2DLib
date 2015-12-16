@@ -4,6 +4,7 @@
 *.opensdf
 *.ipch
 *.user
+*.opendb
 /Debug
 L2DLib/bin
 L2DLib/obj
