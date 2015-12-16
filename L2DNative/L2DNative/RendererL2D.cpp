@@ -389,7 +389,12 @@ void CRendererL2D::StartMotion(long hMotion)
 {
 	Motion* motion = GetMotion(hMotion);
 	m_motionManager->startMotion(motion, true);
+}
 
+void CRendererL2D::UpdateParam(long hModel)
+{
+	Model* model = GetModel(hModel);
+	m_motionManager->updateParam(model);
 }
 #pragma endregion
 

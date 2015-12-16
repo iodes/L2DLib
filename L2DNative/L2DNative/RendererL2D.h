@@ -46,6 +46,7 @@ public:
 	void SetLoop(long hMotion, bool loop);
 
 	void StartMotion(long hMotion);
+	void UpdateParam(long hModel);
 
 	HRESULT BeginRender(long hModel);
 	HRESULT EndRender(long hModel);

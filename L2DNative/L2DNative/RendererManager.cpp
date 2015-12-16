@@ -675,6 +675,12 @@ void CRendererManager::StartMotion(long hMotion)
 	if (m_pCurrentRenderer)
 		m_pCurrentRenderer->StartMotion(hMotion);
 }
+
+void CRendererManager::UpdateParam(long hModel)
+{
+	if (m_pCurrentRenderer)
+		m_pCurrentRenderer->UpdateParam(hModel);
+}
 #pragma endregion
 
 #pragma region [   Live2D   ]

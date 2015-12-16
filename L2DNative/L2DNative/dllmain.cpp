@@ -273,6 +273,17 @@ extern "C" HRESULT WINAPI StartMotion(long hMotion)
 Cleanup:
 	return hr;
 }
+
+extern "C" HRESULT WINAPI UpdateParam(long hModel)
+{
+	HRESULT hr = S_OK;
+	IFC(EnsureRendererManager());
+
+	pManager->UpdateParam(hModel);
+
+Cleanup:
+	return hr;
+}
 #pragma endregion
 
 #pragma region [   Live2D Extern   ]
