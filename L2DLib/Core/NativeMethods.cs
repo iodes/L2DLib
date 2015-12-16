@@ -46,6 +46,12 @@ namespace L2DLib.Core
         public static extern int LoadMotion(string motionPath, out long ret);
 
         [DllImport("L2DNative.dll")]
+        public static extern int UpdateMotion(IntPtr model);
+
+        [DllImport("L2DNative.dll")]
+        public static extern int EyeBlinkUpdate(IntPtr model);
+
+        [DllImport("L2DNative.dll")]
         public static extern int SetFadeIn(IntPtr motion, IntPtr msec);
 
         [DllImport("L2DNative.dll")]

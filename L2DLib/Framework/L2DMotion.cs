@@ -1,9 +1,5 @@
-﻿using L2DLib.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using L2DLib.Core;
 
 namespace L2DLib.Framework
 {

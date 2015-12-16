@@ -42,6 +42,30 @@ namespace L2DLib.Framework
         {
             HRESULT.Check(NativeMethods.EndRender(new IntPtr(Model.Handle)));
         }
+
+        /// <summary>
+        /// 모션 렌더링을 갱신합니다.
+        /// BeginRender() 함수와 EndRender() 함수 사이에서 호출되어야 합니다.
+        /// </summary>
+        public void UpdateMotion()
+        {
+            if (Model != null && Model.Motion?.Length > 0)
+            {
+                HRESULT.Check(NativeMethods.UpdateMotion(new IntPtr(Model.Handle)));
+            }
+        }
+
+        /// <summary>
+        /// 자동 윙크 렌더링을 갱신합니다.
+        /// BeginRender() 함수와 EndRender() 함수 사이에서 호출되어야 합니다.
+        /// </summary>
+        public void EyeBlinkUpdate()
+        {
+            if (Model != null && Model.UseEyeBlink)
+            {
+                HRESULT.Check(NativeMethods.EyeBlinkUpdate(new IntPtr(Model.Handle)));
+            }
+        }
         #endregion
     }
 }

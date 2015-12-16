@@ -114,6 +114,8 @@ namespace L2DLib.Framework
                     {
                         render.BeginRender();
                         Rendering();
+                        render.UpdateMotion();
+                        render.EyeBlinkUpdate();
                         render.EndRender();
                     }
 
@@ -127,21 +129,27 @@ namespace L2DLib.Framework
 
         private void L2DView_SizeChanged(object sender, System.Windows.SizeChangedEventArgs e)
         {
-            HRESULT.Check
-                (NativeMethods.SetSize
-                    (
-                        (uint)renderHolder.ActualWidth,
-                        (uint)renderHolder.ActualHeight
-                    )
-                );
+            if (Model != null && Model.IsLoaded)
+            {
+                HRESULT.Check
+                    (NativeMethods.SetSize
+                        (
+                            (uint)renderHolder.ActualWidth,
+                            (uint)renderHolder.ActualHeight
+                        )
+                    );
+            }
         }
         #endregion
 
         #region 어댑터 설정 이벤트
         private void AdapterTimer_Tick(object sender, EventArgs e)
         {
-            NativeStructure.POINT point = new NativeStructure.POINT(renderHolder.PointToScreen(new Point(0, 0)));
-            HRESULT.Check(NativeMethods.SetAdapter(point));
+            if (Model != null && Model.IsLoaded)
+            {
+                NativeStructure.POINT point = new NativeStructure.POINT(renderHolder.PointToScreen(new Point(0, 0)));
+                HRESULT.Check(NativeMethods.SetAdapter(point));
+            }
         }
         #endregion
     }

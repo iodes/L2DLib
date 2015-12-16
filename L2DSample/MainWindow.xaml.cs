@@ -23,7 +23,7 @@ namespace L2DSample
     {
         #region 객체
         L2DModel model;
-        L2DMotion motion;
+        Random rnd = new Random();
         #endregion
 
         #region 생성자
@@ -45,16 +45,23 @@ namespace L2DSample
                     {
                         @"Resources\haru\haru.1024\texture_00.png",
                         @"Resources\haru\haru.1024\texture_01.png",
-                        @"Resources\haru\haru.1024\texture_02.png",
-                        null
+                        @"Resources\haru\haru.1024\texture_02.png"
                     }
                 );
 
             // 모션 불러오기
-            motion = new L2DMotion(@"Resources\haru\motions\tapBody_01.mtn");
-            motion.SetFadeIn(1000);
-            motion.SetFadeOut(1000);
-            motion.SetLoop(true);
+            List<L2DMotion> motionList = new List<L2DMotion>();
+            motionList.Add(new L2DMotion(@"Resources\haru\motions\shake_00.mtn"));
+            motionList.Add(new L2DMotion(@"Resources\haru\motions\tapBody_00.mtn"));
+            motionList.Add(new L2DMotion(@"Resources\haru\motions\tapBody_01.mtn"));
+            motionList.Add(new L2DMotion(@"Resources\haru\motions\tapBody_02.mtn"));
+            motionList.Add(new L2DMotion(@"Resources\haru\motions\tapBody_03.mtn"));
+
+            // 모델에 모션 설정
+            model.Motion = motionList.ToArray();
+
+            // 모델에 자동 윙크 설정
+            model.UseEyeBlink = true;
 
             // 렌더러에 모델 설정
             RenderView.Model = model;
@@ -64,6 +71,12 @@ namespace L2DSample
         {
             // 모델 메모리 해제
             model.Dispose();
+        }
+
+        private void BtnMotion_Click(object sender, RoutedEventArgs e)
+        {
+            // 무작위 모션 재생
+            model.Motion[rnd.Next(0, model.Motion.Length - 1)].StartMotion();
         }
     }
 }

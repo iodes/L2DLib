@@ -1,5 +1,4 @@
-﻿using System;
-using L2DLib.Core;
+﻿using L2DLib.Core;
 
 namespace L2DLib.Framework
 {

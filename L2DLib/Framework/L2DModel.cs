@@ -9,6 +9,34 @@ namespace L2DLib.Framework
     /// </summary>
     public class L2DModel : L2DBase, IDisposable
     {
+        #region 속성
+        /// <summary>
+        /// 렌더러가 표시할 모델을 가져옵니다.
+        /// </summary>
+        public L2DMotion[] Motion
+        {
+            get { return _Motion; }
+            set
+            {
+                _Motion = value;
+            }
+        }
+        private L2DMotion[] _Motion;
+
+        /// <summary>
+        /// 자동 윙크 기능의 사용 여부를 가져오거나 설정합니다.
+        /// </summary>
+        public bool UseEyeBlink
+        {
+            get { return _UseEyeBlink; }
+            set
+            {
+                _UseEyeBlink = value;
+            }
+        }
+        private bool _UseEyeBlink = false;
+        #endregion
+
         #region 객체
         private bool IsModelLoaded = false;
         private bool IsTextureLoaded = false;

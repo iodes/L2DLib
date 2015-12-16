@@ -13,6 +13,7 @@
             <Grid>
                 <Button x:Name="BtnLoad" Click="BtnLoad_Click" Content="모델 불러오기" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" Height="30" Margin="15,0,0,0"/>
                 <Button x:Name="BtnReset" Click="BtnReset_Click" Content="모든 리소스 해제" HorizontalAlignment="Left" VerticalAlignment="Center" Width="120" Height="30" Margin="120,0,0,0"/>
+                <Button x:Name="BtnMotion" Click="BtnMotion_Click" Content="무작위 모션 재생" HorizontalAlignment="Left" VerticalAlignment="Center" Width="120" Height="30" Margin="245,0,0,0"/>
             </Grid>
         </GroupBox>
     </Grid>
