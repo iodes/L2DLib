@@ -646,6 +646,16 @@ HRESULT CRendererManager::SetTexture(long model, LPCWSTR texturePath)
 
 #pragma endregion
 
+#pragma region [   Motion   ]
+long CRendererManager::LoadMotion(char* motionPath)
+{
+	if (m_pCurrentRenderer)
+		return m_pCurrentRenderer->LoadMotion(motionPath);
+
+	return NULL;
+}
+#pragma endregion
+
 #pragma region [   Live2D   ]
 //+-----------------------------------------------------------------------------
 //

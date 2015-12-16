@@ -25,8 +25,9 @@ public:
 	float GetPartsOpacity(long model, char* key);
 	void SaveParam(long model);
 	void LoadParam(long model);
-
 	HRESULT SetTexture(long model, LPCWSTR texturePath);
+
+	long LoadMotion(char* motionPath);
 
 	HRESULT BeginRender(long model);
 	HRESULT EndRender(long model);

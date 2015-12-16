@@ -224,7 +224,7 @@ extern "C" HRESULT WINAPI LoadMotion(char* motionPath, long* ret)
 	HRESULT hr = S_OK;
 	IFC(EnsureRendererManager());
 
-	//pManager->LoadMotion(model - 1, texturePath);
+	*ret = pManager->LoadMotion(motionPath);
 
 Cleanup:
 	return hr;

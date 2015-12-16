@@ -25,8 +25,9 @@ public:
 	float GetPartsOpacity(long model, char* key);
 	void SaveParam(long model);
 	void LoadParam(long model);
-
 	HRESULT SetTexture(long model, LPCWSTR texturePath);
+
+	long LoadMotion(char* motionPath);
 
 	HRESULT BeginRender(long model);
 	HRESULT EndRender(long model);
@@ -38,6 +39,8 @@ protected:
 private:
 	vector<live2d::Live2DModelD3D*> m_models;
 	vector<long> m_modelsTexCnt;
+
+	vector<live2d::Live2DMotion*> m_motions;
 
 	CRendererL2D();
 	IDirect3DVertexBuffer9 *m_pd3dVB;

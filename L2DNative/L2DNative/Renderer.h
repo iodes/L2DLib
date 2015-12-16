@@ -19,8 +19,9 @@ public:
 	virtual float GetPartsOpacity(long model, char* key) = 0;
 	virtual void SaveParam(long model) = 0;
 	virtual void LoadParam(long model) = 0;
-
 	virtual HRESULT SetTexture(long model, LPCWSTR texturePath) = 0;
+
+	virtual long LoadMotion(char* motionPath) = 0;
 
 	virtual HRESULT BeginRender(long model) = 0;
 	virtual HRESULT EndRender(long model) = 0;

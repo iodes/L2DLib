@@ -289,6 +289,15 @@ Cleanup:
 }
 #pragma endregion
 
+#pragma region [   Motion   ]
+long CRendererL2D::LoadMotion(char* motionPath)
+{
+	m_motions.push_back(live2d::Live2DMotion::loadMotion(motionPath));
+
+	return m_motions.size();
+}
+#pragma endregion
+
 #pragma region [   Live2D   ]
 //+-----------------------------------------------------------------------------
 //
