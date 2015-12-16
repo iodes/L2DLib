@@ -4,77 +4,43 @@ using System.Runtime.InteropServices;
 namespace L2DLib.Core
 {
     /// <summary>
-    /// L2DNative 라이브러리의 상호 운용 기능을 제공합니다.
+    /// L2DNative 라이브러리와 상호 운용 가능성을 제공합니다.
     /// </summary>
     class NativeMethods
     {
         #region Live2D
-        /// <summary>
-        /// Live2D 초기화에 사용될 명령줄 인수를 설정합니다.
-        /// ARGUMENT 구조체 형식을 사용하여 정보를 전달할 수 있습니다.
-        /// </summary>
         [DllImport("L2DNative.dll")]
-        public static extern int SetArgument(NativeStructure.ARGUMENT argument);
+        public static extern int LoadModel(string modelPath, out long ret);
 
-        /// <summary>
-        /// 키에 해당하는 매개변수에 값을 설정합니다.
-        /// BeginRender() 함수와 EndRender() 함수 사이에서 호출되어야 합니다.
-        /// </summary>
         [DllImport("L2DNative.dll")]
-        public static extern void SetParamFloat(string key, float value);
+        public static extern int SetTexture(IntPtr model, IntPtr texturePath);
 
-        /// <summary>
-        /// 키에 해당하는 매개변수에 값을 더합니다.
-        /// BeginRender() 함수와 EndRender() 함수 사이에서 호출되어야 합니다.
-        /// </summary>
         [DllImport("L2DNative.dll")]
-        public static extern void AddToParamFloat(string key, float value);
+        public static extern int SetParamFloat(IntPtr model, string key, float value);
 
-        /// <summary>
-        /// 키에 해당하는 매개변수에 값을 곱합니다.
-        /// BeginRender() 함수와 EndRender() 함수 사이에서 호출되어야 합니다.
-        /// </summary>
         [DllImport("L2DNative.dll")]
-        public static extern void MultParamFloat(string key, float value);
+        public static extern int AddToParamFloat(IntPtr model, string key, float value);
 
-        /// <summary>
-        /// 키에 해당하는 부분의 투명도를 설정합니다.
-        /// BeginRender() 함수와 EndRender() 함수 사이에서 호출되어야 합니다.
-        /// </summary>
         [DllImport("L2DNative.dll")]
-        public static extern void SetPartsOpacity(string key, float value);
+        public static extern int MultParamFloat(IntPtr model, string key, float value);
 
-        /// <summary>
-        /// 매개변수를 저장합니다.
-        /// BeginRender() 함수와 EndRender() 함수 사이에서 호출되어야 합니다.
-        /// </summary>
         [DllImport("L2DNative.dll")]
-        public static extern void SaveParam();
+        public static extern int SetPartsOpacity(IntPtr model, string key, float value);
 
-        /// <summary>
-        /// 메개변수를 불러옵니다.
-        /// BeginRender() 함수와 EndRender() 함수 사이에서 호출되어야 합니다.
-        /// </summary>
         [DllImport("L2DNative.dll")]
-        public static extern void LoadParam();
+        public static extern int SaveParam(IntPtr model);
 
-        /// <summary>
-        /// Live2D 렌더링을 시작합니다.
-        /// </summary>
         [DllImport("L2DNative.dll")]
-        public static extern void BeginRender();
+        public static extern int LoadParam(IntPtr model);
 
-        /// <summary>
-        /// Live2D 렌더링을 끝냅니다.
-        /// </summary>
         [DllImport("L2DNative.dll")]
-        public static extern void EndRender();
+        public static extern int BeginRender(IntPtr model);
 
-        /// <summary>
-        /// Live2D에서 확보한 모든 자원을 해제합니다.
-        /// </summary>
         [DllImport("L2DNative.dll")]
-        public static extern void Dispose();
+        public static extern int EndRender(IntPtr model);
+
+        [DllImport("L2DNative.dll")]
+        public static extern int Dispose();
         #endregion
 
         #region DirectX

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using L2DLib.Framework;
 
 namespace L2DSample
 {
@@ -27,24 +28,31 @@ namespace L2DSample
 
         private void BtnLoad_Click(object sender, RoutedEventArgs e)
         {
-            // Live2D 초기화
-            L2DRenderView.Initialize
-            (
-                @"Resources\haru\haru.moc",
-                new string[]
-                {
-                    @"Resources\haru\haru.1024\texture_00.png",
-                    @"Resources\haru\haru.1024\texture_01.png",
-                    @"Resources\haru\haru.1024\texture_02.png",
-                    null
-                }
-            );
+            // 모델 초기화
+            L2DModel model = new L2DModel();
+
+            // 모델 불러오기
+            model.LoadModel(@"Resources\haru\haru.moc");
+
+            // 텍스처 불러오기
+            model.SetTexture
+                (
+                    new string[]
+                    {
+                        @"Resources\haru\haru.1024\texture_00.png",
+                        @"Resources\haru\haru.1024\texture_01.png",
+                        @"Resources\haru\haru.1024\texture_02.png",
+                        null
+                    }
+                );
+
+            // 렌더러에 모델 설정
+            L2DView.Model = model;
         }
 
         private void BtnReset_Click(object sender, RoutedEventArgs e)
         {
-            // Live2D 리소스 해제
-            L2DRenderView.Dispose();
+
         }
     }
 }
