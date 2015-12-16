@@ -15,21 +15,24 @@ public:
 	HRESULT GetBackBufferNoRef(IDirect3DSurface9 **ppSurface);
 
 	long LoadModel(char* modelPath);
-	void RemoveModel(long model);
-	void SetParamFloat(long model, char* key, float value);
-	void AddToParamFloat(long model, char* key, float value);
-	void MultParamFloat(long model, char* key, float value);
-	float GetParamFloat(long model, char* key);
-	void SetPartsOpacity(long model, char* key, float value);
-	float GetPartsOpacity(long model, char* key);
-	void SaveParam(long model);
-	void LoadParam(long model);
-	HRESULT SetTexture(long model, LPCWSTR texturePath);
+	void RemoveModel(long hModel);
+	void SetParamFloat(long hModel, char* key, float value);
+	void AddToParamFloat(long hModel, char* key, float value);
+	void MultParamFloat(long hModel, char* key, float value);
+	float GetParamFloat(long hModel, char* key);
+	void SetPartsOpacity(long hModel, char* key, float value);
+	float GetPartsOpacity(long hModel, char* key);
+	void SaveParam(long hModel);
+	void LoadParam(long hModel);
+	HRESULT SetTexture(long hModel, LPCWSTR texturePath);
 
 	long LoadMotion(char* motionPath);
+	void SetFadeIn(long hMotion, int msec);
+	void SetFadeOut(long hMotion, int msec);
+	void SetLoop(long hMotion, bool loop);
 
-	HRESULT BeginRender(long model);
-	HRESULT EndRender(long model);
+	HRESULT BeginRender(long hModel);
+	HRESULT EndRender(long hModel);
 	void Dispose();
 
 private:

@@ -22,6 +22,9 @@ LoadParam
 SetTexture
 
 LoadMotion
+SetFadeIn
+SetFadeOut
+SetLoop
 
 BeginRender
 EndRender
