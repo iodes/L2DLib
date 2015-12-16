@@ -48,6 +48,8 @@ public:
 	void StartMotion(long hMotion);
 	void UpdateMotion(long hModel);
 
+	void EyeBlinkUpdate(long hModel);
+
 	HRESULT BeginRender(long hModel);
 	HRESULT EndRender(long hModel);
 	void Dispose();
@@ -64,6 +66,7 @@ private:
 #pragma endregion
 
 	live2d::MotionQueueManager* m_motionManager;
+	live2d::EyeBlinkMotion* m_eyeBlink;
 
 	CRendererL2D();
 	IDirect3DVertexBuffer9 *m_pd3dVB;

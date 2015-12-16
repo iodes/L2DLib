@@ -286,6 +286,19 @@ Cleanup:
 }
 #pragma endregion
 
+#pragma region [   Eye Blink   ]
+extern "C" HRESULT WINAPI EyeBlinkUpdate(long hModel)
+{
+	HRESULT hr = S_OK;
+	IFC(EnsureRendererManager());
+
+	pManager->EyeBlinkUpdate(hModel);
+
+Cleanup:
+	return hr;
+}
+#pragma endregion
+
 #pragma region [   Live2D Extern   ]
 extern "C" HRESULT WINAPI BeginRender(long hModel)
 {

@@ -683,6 +683,14 @@ void CRendererManager::UpdateMotion(long hModel)
 }
 #pragma endregion
 
+#pragma region [   Eye Blink   ]
+void CRendererManager::EyeBlinkUpdate(long hModel)
+{
+	if (m_pCurrentRenderer)
+		m_pCurrentRenderer->EyeBlinkUpdate(hModel);
+}
+#pragma endregion
+
 #pragma region [   Live2D   ]
 //+-----------------------------------------------------------------------------
 //

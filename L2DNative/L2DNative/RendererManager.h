@@ -33,6 +33,8 @@ public:
 	void StartMotion(long hMotion);
 	void UpdateMotion(long hModel);
 
+	void EyeBlinkUpdate(long hModel);
+
 	HRESULT BeginRender(long hModel);
 	HRESULT EndRender(long hModel);
 	void Dispose();

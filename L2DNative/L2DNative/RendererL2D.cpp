@@ -398,6 +398,14 @@ void CRendererL2D::UpdateMotion(long hModel)
 }
 #pragma endregion
 
+#pragma region [   Eye Blink   ]
+void CRendererL2D::EyeBlinkUpdate(long hModel)
+{
+	Model* model = GetModel(hModel);
+	m_eyeBlink->setParam(model);
+}
+#pragma endregion
+
 #pragma region [   Live2D   ]
 //+-----------------------------------------------------------------------------
 //

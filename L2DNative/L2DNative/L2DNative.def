@@ -28,6 +28,8 @@ SetLoop
 StartMotion
 UpdateMotion
 
+EyeBlinkUpdate
+
 BeginRender
 EndRender
 Dispose
