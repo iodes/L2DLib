@@ -10,6 +10,7 @@ using std::vector;
 
 typedef live2d::Live2DModelD3D Model;
 typedef live2d::Live2DMotion Motion;
+typedef LPDIRECT3DTEXTURE9 Texture;
 
 class CRendererL2D : public CRenderer
 {
@@ -20,7 +21,9 @@ public:
 	long AddModel(Model* model);
 	Model* GetModel(long hModel);
 	void RemoveModel(long hModel);
-	long* GetModelTexCnt(long hModel);
+
+	void AddTexture(long hModel, Texture texture);
+	long GetTextureCount(long hModel);
 
 	long LoadModel(char* modelPath);
 	void SetParamFloat(long hModel, char* key, float value);
@@ -34,7 +37,6 @@ public:
 	HRESULT SetTexture(long hModel, LPCWSTR texturePath);
 
 	long AddMotion(Motion* motion);
-	void AddMotion(long hMotion, Motion* motion);
 	Motion* GetMotion(long hMotion);
 	void RemoveMotion(long hMotion);
 
@@ -56,7 +58,7 @@ private:
 
 #pragma region [   HandleVectors   ]
 	vector<Model*> m_models;
-	vector<long> m_modelTexCnt;
+	vector<vector<Texture>> m_textures;
 	vector<Motion*> m_motions;
 #pragma endregion
 

@@ -123,7 +123,9 @@ Model* CRendererL2D::GetModel(long hModel)
 long CRendererL2D::AddModel(Model* model)
 {
 	m_models.push_back(model);
-	m_modelTexCnt.push_back(0);
+
+	vector<Texture> textureVector;
+	m_textures.push_back(textureVector);
 
 	return m_models.size();
 }
@@ -141,21 +143,30 @@ void CRendererL2D::RemoveModel(long hModel)
 {
 	Model* model = GetModel(hModel);
 
-	long* textureCount = GetModelTexCnt(hModel);
+	long textureCount = GetTextureCount(hModel);
 
-	for (int i = 0; i < *textureCount; i++)
+	for (int i = 0; i < textureCount; i++)
 	{
 		model->releaseModelTextureNo(i);
+	}
+
+	for (Texture texture : m_textures[hModel - 1])
+	{
+		texture->Release();
 	}
 
 	delete model;
 }
 
-long* CRendererL2D::GetModelTexCnt(long hModel)
+void CRendererL2D::AddTexture(long hModel, Texture texture)
 {
-	return &m_modelTexCnt[hModel - 1];
+	m_textures[hModel - 1].push_back(texture);
 }
 
+long CRendererL2D::GetTextureCount(long hModel)
+{
+	return m_textures[hModel - 1].size();
+}
 
 //------------------------------------------------------------------------------
 //
@@ -299,7 +310,7 @@ HRESULT CRendererL2D::SetTexture(long hModel, LPCWSTR texturePath)
 	HRESULT hr = S_OK;
 	// 텍스처 불러오기 수행
 
-	LPDIRECT3DTEXTURE9 texture;
+	Texture texture;
 	if (FAILED(D3DXCreateTextureFromFileExW(m_pd3dDevice
 		, texturePath
 		, 0
@@ -320,8 +331,9 @@ HRESULT CRendererL2D::SetTexture(long hModel, LPCWSTR texturePath)
 	else
 	{
 		Model* model = GetModel(hModel);
-		long* textureCount = GetModelTexCnt(hModel);
-		model->setTexture((*textureCount)++, texture);
+		long textureCount = GetTextureCount(hModel);
+		model->setTexture(textureCount, texture);
+		AddTexture(hModel, texture);
 	}
 
 Cleanup:
