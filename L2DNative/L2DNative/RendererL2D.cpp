@@ -107,6 +107,7 @@ CRendererL2D::Init(IDirect3D9 *pD3D, HWND hwnd, UINT uAdapter)
 	// 엔진 초기화
 	live2d::Live2D::init();
 	m_motionManager = new live2d::MotionQueueManager();
+	m_eyeBlink = new live2d::EyeBlinkMotion();
 
 Cleanup:
 	return hr;
