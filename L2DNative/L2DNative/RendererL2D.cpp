@@ -259,8 +259,8 @@ void CRendererL2D::LoadParam(long model)
 HRESULT CRendererL2D::SetTexture(long model, LPCWSTR texturePath)
 {
 	HRESULT hr = S_OK;
-	// 텍스처 불러오기 수행
 
+	// 텍스처 불러오기 수행
 	LPDIRECT3DTEXTURE9 tex;
 	if (FAILED(D3DXCreateTextureFromFileExW(m_pd3dDevice
 		, texturePath

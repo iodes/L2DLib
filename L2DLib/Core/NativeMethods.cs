@@ -13,6 +13,9 @@ namespace L2DLib.Core
         public static extern int LoadModel(string modelPath, out long ret);
 
         [DllImport("L2DNative.dll")]
+        public static extern int RemoveModel(IntPtr model);
+
+        [DllImport("L2DNative.dll")]
         public static extern int SetTexture(IntPtr model, IntPtr texturePath);
 
         [DllImport("L2DNative.dll")]
@@ -78,7 +81,7 @@ namespace L2DLib.Core
         /// 대상의 소멸자를 호출합니다.
         /// </summary>
         [DllImport("L2DNative.dll")]
-        public static extern void Destroy();
+        public static extern int Destroy();
         #endregion
     }
 }
