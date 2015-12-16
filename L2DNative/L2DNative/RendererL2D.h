@@ -20,8 +20,7 @@ public:
 	long AddModel(Model* model);
 	Model* GetModel(long hModel);
 	void RemoveModel(long hModel);
-	long GetModelTexCnt(long hModel);
-	void IncreaseModelTexCnt(long hModel);
+	long* GetModelTexCnt(long hModel);
 
 	long LoadModel(char* modelPath);
 	void SetParamFloat(long hModel, char* key, float value);
@@ -35,6 +34,7 @@ public:
 	HRESULT SetTexture(long hModel, LPCWSTR texturePath);
 
 	long AddMotion(Motion* motion);
+	void AddMotion(long hMotion, Motion* motion);
 	Motion* GetMotion(long hMotion);
 	void RemoveMotion(long hMotion);
 
@@ -53,10 +53,12 @@ protected:
 	HRESULT Init(IDirect3D9 *pD3D, HWND hwnd, UINT uAdapter);
 
 private:
+
+#pragma region [   HandleVectors   ]
 	vector<Model*> m_models;
 	vector<long> m_modelTexCnt;
-
 	vector<Motion*> m_motions;
+#pragma endregion
 
 	live2d::MotionQueueManager* m_motionManager;
 

@@ -139,19 +139,23 @@ long CRendererL2D::AddModel(Model* model)
 //------------------------------------------------------------------------------
 void CRendererL2D::RemoveModel(long hModel)
 {
-	delete[] m_models[hModel - 1];
-	m_models[hModel - 1] = NULL;
+	Model* model = GetModel(hModel);
+
+	long* textureCount = GetModelTexCnt(hModel);
+
+	for (int i = 0; i < *textureCount; i++)
+	{
+		model->releaseModelTextureNo(i);
+	}
+
+	delete model;
 }
 
-long CRendererL2D::GetModelTexCnt(long hModel)
+long* CRendererL2D::GetModelTexCnt(long hModel)
 {
-	return m_modelTexCnt[hModel - 1];
+	return &m_modelTexCnt[hModel - 1];
 }
 
-void CRendererL2D::IncreaseModelTexCnt(long hModel)
-{
-	m_modelTexCnt[hModel - 1]++;
-}
 
 //------------------------------------------------------------------------------
 //
@@ -293,9 +297,9 @@ void CRendererL2D::LoadParam(long hModel)
 HRESULT CRendererL2D::SetTexture(long hModel, LPCWSTR texturePath)
 {
 	HRESULT hr = S_OK;
-
 	// 텍스처 불러오기 수행
-	LPDIRECT3DTEXTURE9 tex;
+
+	LPDIRECT3DTEXTURE9 texture;
 	if (FAILED(D3DXCreateTextureFromFileExW(m_pd3dDevice
 		, texturePath
 		, 0
@@ -309,15 +313,15 @@ HRESULT CRendererL2D::SetTexture(long hModel, LPCWSTR texturePath)
 		, 0
 		, NULL
 		, NULL
-		, &tex)))
+		, &texture)))
 	{
 		goto Cleanup;
 	}
 	else
 	{
 		Model* model = GetModel(hModel);
-		model->setTexture(GetModelTexCnt(hModel), tex);
-		IncreaseModelTexCnt(hModel);
+		long* textureCount = GetModelTexCnt(hModel);
+		model->setTexture((*textureCount)++, texture);
 	}
 
 Cleanup:
@@ -338,10 +342,10 @@ long CRendererL2D::AddMotion(Motion* motion)
 	return m_motions.size();
 }
 
-void CRendererL2D::RemoveMotion(long hModel)
+void CRendererL2D::RemoveMotion(long hMotion)
 {
-	delete m_motions[hModel - 1];
-	m_motions[hModel - 1] = NULL;
+	Motion* motion = GetMotion(hMotion);
+	delete motion;
 }
 
 long CRendererL2D::LoadMotion(char* motionPath)
