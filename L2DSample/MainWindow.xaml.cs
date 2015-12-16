@@ -28,11 +28,8 @@ namespace L2DSample
 
         private void BtnLoad_Click(object sender, RoutedEventArgs e)
         {
-            // 모델 초기화
-            L2DModel model = new L2DModel();
-
             // 모델 불러오기
-            model.LoadModel(@"Resources\haru\haru.moc");
+            L2DModel model = new L2DModel(@"Resources\haru\haru.moc");
 
             // 텍스처 불러오기
             model.SetTexture
@@ -47,12 +44,13 @@ namespace L2DSample
                 );
 
             // 렌더러에 모델 설정
-            L2DView.Model = model;
+            RenderView.Model = model;
         }
 
         private void BtnReset_Click(object sender, RoutedEventArgs e)
         {
-
+            // 모델 메모리 해제
+            RenderView.Model.Dispose();
         }
     }
 }

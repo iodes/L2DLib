@@ -7,11 +7,57 @@ namespace L2DLib.Framework
     /// <summary>
     /// Live2D 모델과 관련된 기능을 제공합니다.
     /// </summary>
-    public class L2DModel : L2DBase
+    public class L2DModel : L2DBase, IDisposable
     {
         #region 객체
         private bool IsModelLoaded = false;
         private bool IsTextureLoaded = false;
+        #endregion
+
+        #region 생성자
+        /// <summary>
+        /// 모델 객체를 생성합니다.
+        /// </summary>
+        /// <param name="path">모델 파일의 경로입니다.</param>
+        public L2DModel(string path)
+        {
+            HRESULT.Check(NativeMethods.LoadModel(path, out _Handle));
+            IsModelLoaded = true;
+            SetLoaded();
+        }
+        #endregion
+
+        #region 소멸자
+        private bool disposedValue = false;
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                _IsLoaded = false;
+
+                if (disposing)
+                {
+                    IsModelLoaded = false;
+                    IsTextureLoaded = false;
+                }
+
+                HRESULT.Check(NativeMethods.RemoveModel(new IntPtr(Handle)));
+
+                disposedValue = true;
+            }
+        }
+
+        ~L2DModel()
+        {
+            Dispose(false);
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
         #endregion
 
         #region 내부 함수
@@ -26,26 +72,24 @@ namespace L2DLib.Framework
                 _IsLoaded = false;
             }
         }
+
+        private void CheckDispose()
+        {
+            if (disposedValue)
+            {
+                throw new ObjectDisposedException(GetType().FullName);
+            }
+        }
         #endregion
 
         #region 사용자 함수
-        /// <summary>
-        /// 모델을 불러옵니다.
-        /// </summary>
-        /// <param name="path">모델 파일의 경로입니다.</param>
-        public void LoadModel(string path)
-        {
-            HRESULT.Check(NativeMethods.LoadModel(path, out _Handle));
-            IsModelLoaded = true;
-            SetLoaded();
-        }
-
         /// <summary>
         /// 텍스처를 설정합니다.
         /// </summary>
         /// <param name="path">텍스처 파일의 경로 배열입니다.</param>
         public void SetTexture(string[] path)
         {
+            CheckDispose();
             foreach (string texture in path)
             {
                 HRESULT.Check(NativeMethods.SetTexture(new IntPtr(Handle), Marshal.StringToHGlobalAuto(texture)));
@@ -62,6 +106,7 @@ namespace L2DLib.Framework
         /// <param name="value">대상 매개변수에 적용할 값입니다.</param>
         public void SetParamFloat(string key, float value)
         {
+            CheckDispose();
             NativeMethods.SetParamFloat(new IntPtr(Handle), key, value);
         }
 
@@ -73,6 +118,7 @@ namespace L2DLib.Framework
         /// <param name="value">대상 매개변수에 적용할 값입니다.</param>
         public void AddToParamFloat(string key, float value)
         {
+            CheckDispose();
             NativeMethods.AddToParamFloat(new IntPtr(Handle), key, value);
         }
 
@@ -84,6 +130,7 @@ namespace L2DLib.Framework
         /// <param name="value">대상 매개변수에 적용할 값입니다.</param>
         public void MultParamFloat(string key, float value)
         {
+            CheckDispose();
             NativeMethods.MultParamFloat(new IntPtr(Handle), key, value);
         }
 
@@ -95,6 +142,7 @@ namespace L2DLib.Framework
         /// <param name="value">대상 매개변수에 적용할 값입니다.</param>
         public void SetPartsOpacity(string key, float value)
         {
+            CheckDispose();
             NativeMethods.SetPartsOpacity(new IntPtr(Handle), key, value);
         }
 
@@ -104,6 +152,7 @@ namespace L2DLib.Framework
         /// </summary>
         public void SaveParam()
         {
+            CheckDispose();
             NativeMethods.SaveParam(new IntPtr(Handle));
         }
 
@@ -113,6 +162,7 @@ namespace L2DLib.Framework
         /// </summary>
         public void LoadParam()
         {
+            CheckDispose();
             NativeMethods.LoadParam(new IntPtr(Handle));
         }
         #endregion
