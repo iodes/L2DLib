@@ -6,13 +6,23 @@ namespace L2DLib.Framework
     /// <summary>
     /// Live2D 렌더링과 관련된 기능을 제공합니다.
     /// </summary>
-    public class L2DRender : L2DBase
+    public class L2DRender
     {
+        #region 속성
+        /// <summary>
+        /// 렌더러가 표시할 모델을 가져옵니다.
+        /// </summary>
+        public L2DModel Model
+        {
+            get { return _Model; }
+        }
+        private L2DModel _Model;
+        #endregion
+
         #region 생성자
         public L2DRender(L2DModel model)
         {
-            _Handle = model.Handle;
-            _IsLoaded = true;
+            _Model = model;
         }
         #endregion
 
@@ -22,7 +32,7 @@ namespace L2DLib.Framework
         /// </summary>
         public void BeginRender()
         {
-            HRESULT.Check(NativeMethods.BeginRender(new IntPtr(Handle)));
+            HRESULT.Check(NativeMethods.BeginRender(new IntPtr(Model.Handle)));
         }
 
         /// <summary>
@@ -30,7 +40,7 @@ namespace L2DLib.Framework
         /// </summary>
         public void EndRender()
         {
-            HRESULT.Check(NativeMethods.EndRender(new IntPtr(Handle)));
+            HRESULT.Check(NativeMethods.EndRender(new IntPtr(Model.Handle)));
         }
         #endregion
     }
