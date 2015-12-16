@@ -388,7 +388,7 @@ void CRendererL2D::SetLoop(long hMotion, bool loop)
 void CRendererL2D::StartMotion(long hMotion)
 {
 	Motion* motion = GetMotion(hMotion);
-	m_motionManager->startMotion(motion, true);
+	m_motionManager->startMotion(motion, false);
 }
 
 void CRendererL2D::UpdateMotion(long hModel)
