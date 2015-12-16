@@ -106,6 +106,7 @@ CRendererL2D::Init(IDirect3D9 *pD3D, HWND hwnd, UINT uAdapter)
 
 	// 엔진 초기화
 	live2d::Live2D::init();
+	m_motionManager = new live2d::MotionQueueManager();
 
 Cleanup:
 	return hr;
@@ -366,6 +367,13 @@ void CRendererL2D::SetLoop(long hMotion, bool loop)
 {
 	Motion* motion = GetMotion(hMotion);
 	motion->setLoop(loop);
+}
+
+void CRendererL2D::StartMotion(long hMotion)
+{
+	Motion* motion = GetMotion(hMotion);
+	m_motionManager->startMotion(motion, true);
+
 }
 #pragma endregion
 

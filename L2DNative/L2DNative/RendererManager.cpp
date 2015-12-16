@@ -669,6 +669,12 @@ void CRendererManager::SetLoop(long hMotion, bool loop)
 	if (m_pCurrentRenderer)
 		m_pCurrentRenderer->SetLoop(hMotion, loop);
 }
+
+void CRendererManager::StartMotion(long hMotion)
+{
+	if (m_pCurrentRenderer)
+		m_pCurrentRenderer->StartMotion(hMotion);
+}
 #pragma endregion
 
 #pragma region [   Live2D   ]

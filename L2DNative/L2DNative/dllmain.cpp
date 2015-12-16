@@ -262,6 +262,17 @@ extern "C" HRESULT WINAPI SetLoop(long hMotion, bool loop)
 Cleanup:
 	return hr;
 }
+
+extern "C" HRESULT WINAPI StartMotion(long hMotion)
+{
+	HRESULT hr = S_OK;
+	IFC(EnsureRendererManager());
+
+	pManager->StartMotion(hMotion);
+
+Cleanup:
+	return hr;
+}
 #pragma endregion
 
 #pragma region [   Live2D Extern   ]

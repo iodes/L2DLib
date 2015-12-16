@@ -30,6 +30,7 @@ public:
 	void SetFadeIn(long hMotion, int msec);
 	void SetFadeOut(long hMotion, int msec);
 	void SetLoop(long hMotion, bool loop);
+	void StartMotion(long hMotion);
 
 	HRESULT BeginRender(long hModel);
 	HRESULT EndRender(long hModel);

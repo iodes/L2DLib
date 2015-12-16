@@ -43,6 +43,8 @@ public:
 	void SetFadeOut(long hMotion, int msec);
 	void SetLoop(long hMotion, bool loop);
 
+	void StartMotion(long hMotion);
+
 	HRESULT BeginRender(long hModel);
 	HRESULT EndRender(long hModel);
 	void Dispose();
@@ -55,6 +57,8 @@ private:
 	vector<long> m_modelTexCnt;
 
 	vector<Motion*> m_motions;
+
+	live2d::MotionQueueManager* m_motionManager;
 
 	CRendererL2D();
 	IDirect3DVertexBuffer9 *m_pd3dVB;
