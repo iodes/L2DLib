@@ -11,6 +11,19 @@ namespace L2DLib.Framework
     {
         #region 속성
         /// <summary>
+        /// 렌더러의 포즈를 설정합니다.
+        /// </summary>
+        public L2DPose Pose
+        {
+            get { return _Pose; }
+            set
+            {
+                _Pose = value;
+            }
+        }
+        private L2DPose _Pose;
+
+        /// <summary>
         /// 렌더러가 표시할 모델을 가져옵니다.
         /// </summary>
         public L2DMotion[] Motion
