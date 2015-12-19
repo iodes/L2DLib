@@ -26,12 +26,16 @@ public:
 	long GetTextureCount(long hModel);
 
 	long LoadModel(char* modelPath);
-	void SetParamFloat(long hModel, char* key, float value);
+	void SetParamFloatInt(long hModel, int key, float value);
+	void SetParamFloatString(long hModel, char* key, float value);
 	void AddToParamFloat(long hModel, char* key, float value);
 	void MultParamFloat(long hModel, char* key, float value);
-	float GetParamFloat(long hModel, char* key);
+	float GetParamFloatInt(long hModel, int key);
+	float GetParamFloatString(long hModel, char* key);
 	void SetPartsOpacity(long hModel, char* key, float value);
 	float GetPartsOpacity(long hModel, char* key);
+	int GetParamIndex(long hModel, char* key);
+	int GetPartsDataIndex(long hModel, char* key);
 	void SaveParam(long hModel);
 	void LoadParam(long hModel);
 	HRESULT SetTexture(long hModel, LPCWSTR texturePath);

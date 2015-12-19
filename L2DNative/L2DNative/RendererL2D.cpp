@@ -195,7 +195,12 @@ long CRendererL2D::LoadModel(char* modelPath)
 //     키에 해당하는 매개변수에 값을 설정합니다.
 //
 //------------------------------------------------------------------------------
-void CRendererL2D::SetParamFloat(long hModel, char* key, float value)
+void CRendererL2D::SetParamFloatInt(long hModel, int key, float value)
+{
+	Model* model = GetModel(hModel);
+	model->setParamFloat(key, value);
+}
+void CRendererL2D::SetParamFloatString(long hModel, char* key, float value)
 {
 	Model* model = GetModel(hModel);
 	model->setParamFloat(key, value);
@@ -240,7 +245,12 @@ void CRendererL2D::MultParamFloat(long hModel, char* key, float value)
 //      키에 해당하는 매개변수의 값을 가져옵니다.
 //
 //------------------------------------------------------------------------------
-float CRendererL2D::GetParamFloat(long hModel, char* key)
+float CRendererL2D::GetParamFloatInt(long hModel, int key)
+{
+	Model* model = GetModel(hModel);
+	return model->getParamFloat(key);
+}
+float CRendererL2D::GetParamFloatString(long hModel, char* key)
 {
 	Model* model = GetModel(hModel);
 	return model->getParamFloat(key);
@@ -274,6 +284,36 @@ float CRendererL2D::GetPartsOpacity(long hModel, char* key)
 {
 	 Model* model = GetModel(hModel);
 	 return model->getPartsOpacity(key);
+}
+
+//+-----------------------------------------------------------------------------
+//
+//  Member:
+//      CRendererL2D::GetParamIndex
+//
+//  Synopsis:
+//      키에 해당하는 매개변수의 인덱스를 가져옵니다.
+//
+//------------------------------------------------------------------------------
+int CRendererL2D::GetParamIndex(long hModel, char* key)
+{
+	Model* model = GetModel(hModel);
+	return model->getParamIndex(key);
+}
+
+//+-----------------------------------------------------------------------------
+//
+//  Member:
+//      CRendererL2D::GetPartsDataIndex
+//
+//  Synopsis:
+//      키에 해당하는 파츠의 인덱스를 가져옵니다.
+//
+//------------------------------------------------------------------------------
+int CRendererL2D::GetPartsDataIndex(long hModel, char* key)
+{
+	Model* model = GetModel(hModel);
+	return model->getPartsDataIndex(key);
 }
 
 //+-----------------------------------------------------------------------------

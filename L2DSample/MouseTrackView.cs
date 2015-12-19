@@ -19,6 +19,7 @@ namespace L2DSample
             Model.SetParamFloat("PARAM_ANGLE_Y", (float)(angleY / (ActualHeight / 2) * 30));
             Model.SetParamFloat("PARAM_EYE_BALL_X", (float)(angleX / (ActualWidth / 2)));
             Model.SetParamFloat("PARAM_EYE_BALL_Y", (float)(angleY / (ActualHeight / 2)));
+            Model.SetParamFloat("PARAM_BODY_ANGLE_X", (float)(angleX / (ActualWidth / 2) * 10));
         }
     }
 }

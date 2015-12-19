@@ -11,12 +11,16 @@ Destroy
 
 LoadModel
 RemoveModel
-SetParamFloat
-GetParamFloat
+SetParamFloatInt
+SetParamFloatString
+GetParamFloatInt
+GetParamFloatString
 MultParamFloat
 AddToParamFloat
 SetPartsOpacity
 GetPartsOpacity
+GetParamIndex
+GetPartsDataIndex
 SaveParam
 LoadParam
 SetTexture

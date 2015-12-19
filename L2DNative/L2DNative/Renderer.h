@@ -10,12 +10,16 @@ public:
 
 	virtual long LoadModel(char* modelPath) = 0;
 	virtual void RemoveModel(long hModel) = 0;
-	virtual void SetParamFloat(long hModel, char* key, float value) = 0;
+	virtual void SetParamFloatInt(long hModel, int key, float value) = 0;
+	virtual void SetParamFloatString(long hModel, char* key, float value) = 0;
 	virtual void AddToParamFloat(long hModel, char* key, float value) = 0;
 	virtual void MultParamFloat(long hModel, char* key, float value) = 0;
-	virtual float GetParamFloat(long hModel, char* key) = 0;
+	virtual float GetParamFloatInt(long hModel, int key) = 0;
+	virtual float GetParamFloatString(long hModel, char* key) = 0;
 	virtual void SetPartsOpacity(long hModel, char* key, float value) = 0;
 	virtual float GetPartsOpacity(long hModel, char* key) = 0;
+	virtual int GetParamIndex(long hModel, char* key) = 0;
+	virtual int GetPartsDataIndex(long hModel, char* key) = 0;
 	virtual void SaveParam(long hModel) = 0;
 	virtual void LoadParam(long hModel) = 0;
 	virtual HRESULT SetTexture(long hModel, LPCWSTR texturePath) = 0;

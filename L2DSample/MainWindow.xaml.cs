@@ -36,22 +36,22 @@ namespace L2DSample
         private void BtnLoad_Click(object sender, RoutedEventArgs e)
         {
             // 모델 불러오기
-            model = new L2DModel(@"Resources\haru\haru.moc");
+            model = new L2DModel(@"Resources\haru\haru_01.moc");
 
             // 텍스처 불러오기
             model.SetTexture
                 (
                     new string[]
                     {
-                        @"Resources\haru\haru.1024\texture_00.png",
-                        @"Resources\haru\haru.1024\texture_01.png",
-                        @"Resources\haru\haru.1024\texture_02.png"
+                        @"Resources\haru\haru_01.1024\texture_00.png",
+                        @"Resources\haru\haru_01.1024\texture_01.png",
+                        @"Resources\haru\haru_01.1024\texture_02.png"
                     }
                 );
 
             // 모션 불러오기
             List<L2DMotion> motionList = new List<L2DMotion>();
-            motionList.Add(new L2DMotion(@"Resources\haru\motions\shake_00.mtn"));
+            motionList.Add(new L2DMotion(@"Resources\haru\motions\idle_00.mtn"));
             motionList.Add(new L2DMotion(@"Resources\haru\motions\tapBody_00.mtn"));
             motionList.Add(new L2DMotion(@"Resources\haru\motions\tapBody_01.mtn"));
             motionList.Add(new L2DMotion(@"Resources\haru\motions\tapBody_02.mtn"));
@@ -76,7 +76,7 @@ namespace L2DSample
         private void BtnMotion_Click(object sender, RoutedEventArgs e)
         {
             // 무작위 모션 재생
-            model.Motion[rnd.Next(0, model.Motion.Length - 1)].StartMotion();
+            model.Motion[rnd.Next(0, model.Motion.Length)].StartMotion();
         }
     }
 }

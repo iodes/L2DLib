@@ -524,10 +524,15 @@ CRendererManager::RemoveModel(long hModel)
 //     키에 해당하는 매개변수에 값을 설정합니다.
 //
 //------------------------------------------------------------------------------
-void CRendererManager::SetParamFloat(long hModel, char* key, float value)
+void CRendererManager::SetParamFloatInt(long hModel, int key, float value)
 {
 	if (m_pCurrentRenderer)
-		m_pCurrentRenderer->SetParamFloat(hModel, key, value);
+		m_pCurrentRenderer->SetParamFloatInt(hModel, key, value);
+}
+void CRendererManager::SetParamFloatString(long hModel, char* key, float value)
+{
+	if (m_pCurrentRenderer)
+		m_pCurrentRenderer->SetParamFloatString(hModel, key, value);
 }
 
 //+-----------------------------------------------------------------------------
@@ -569,10 +574,17 @@ void CRendererManager::MultParamFloat(long hModel, char* key, float value)
 //      키에 해당하는 매개변수의 값을 가져옵니다.
 //
 //------------------------------------------------------------------------------
-float CRendererManager::GetParamFloat(long hModel, char* key)
+float CRendererManager::GetParamFloatInt(long hModel, int key)
 {
 	if (m_pCurrentRenderer)
-		return m_pCurrentRenderer->GetParamFloat(hModel, key);
+		return m_pCurrentRenderer->GetParamFloatInt(hModel, key);
+
+	return NULL;
+}
+float CRendererManager::GetParamFloatString(long hModel, char* key)
+{
+	if (m_pCurrentRenderer)
+		return m_pCurrentRenderer->GetParamFloatString(hModel, key);
 
 	return NULL;
 }
@@ -608,6 +620,41 @@ float CRendererManager::GetPartsOpacity(long hModel, char* key)
 
 	return NULL;
 }
+
+//+-----------------------------------------------------------------------------
+//
+//  Member:
+//      CRendererManager::GetParamIndex
+//
+//  Synopsis:
+//      키에 해당하는 매개변수의 인덱스를 가져옵니다.
+//
+//------------------------------------------------------------------------------
+int CRendererManager::GetParamIndex(long hModel, char* key)
+{
+	if (m_pCurrentRenderer)
+		return m_pCurrentRenderer->GetParamIndex(hModel, key);
+
+	return NULL;
+}
+
+//+-----------------------------------------------------------------------------
+//
+//  Member:
+//      CRendererManager::GetPartsDataIndex
+//
+//  Synopsis:
+//      키에 해당하는 파츠의 인덱스를 가져옵니다.
+//
+//------------------------------------------------------------------------------
+int CRendererManager::GetPartsDataIndex(long hModel, char* key)
+{
+	if (m_pCurrentRenderer)
+		return m_pCurrentRenderer->GetPartsDataIndex(hModel, key);
+
+	return NULL;
+}
+
 
 //+-----------------------------------------------------------------------------
 //

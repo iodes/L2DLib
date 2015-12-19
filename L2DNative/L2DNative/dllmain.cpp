@@ -118,23 +118,45 @@ Cleanup:
 	return hr;
 }
 
-extern "C" HRESULT WINAPI SetParamFloat(long hModel, char* key, float value)
+extern "C" HRESULT WINAPI SetParamFloatInt(long hModel, int key, float value)
 {
 	HRESULT hr = S_OK;
 	IFC(EnsureRendererManager());
 
-	pManager->SetParamFloat(hModel, key, value);
+	pManager->SetParamFloatInt(hModel, key, value);
 
 Cleanup:
 	return hr;
 }
 
-extern "C" HRESULT WINAPI GetParamFloat(long hModel, char* key, float* ret)
+extern "C" HRESULT WINAPI SetParamFloatString(long hModel, char* key, float value)
 {
 	HRESULT hr = S_OK;
 	IFC(EnsureRendererManager());
 
-	*ret = pManager->GetParamFloat(hModel, key);
+	pManager->SetParamFloatString(hModel, key, value);
+
+Cleanup:
+	return hr;
+}
+
+extern "C" HRESULT WINAPI GetParamFloatInt(long hModel, int key, float* ret)
+{
+	HRESULT hr = S_OK;
+	IFC(EnsureRendererManager());
+
+	*ret = pManager->GetParamFloatInt(hModel, key);
+
+Cleanup:
+	return hr;
+}
+
+extern "C" HRESULT WINAPI GetParamFloatString(long hModel, char* key, float* ret)
+{
+	HRESULT hr = S_OK;
+	IFC(EnsureRendererManager());
+
+	*ret = pManager->GetParamFloatString(hModel, key);
 
 Cleanup:
 	return hr;
@@ -179,6 +201,28 @@ extern "C" HRESULT WINAPI GetPartsOpacity(long hModel, char* key, float* ret)
 	IFC(EnsureRendererManager());
 
 	*ret = pManager->GetPartsOpacity(hModel, key);
+
+Cleanup:
+	return hr;
+}
+
+extern "C" HRESULT WINAPI GetParamIndex(long hModel, char* key, int* ret)
+{
+	HRESULT hr = S_OK;
+	IFC(EnsureRendererManager());
+
+	*ret = pManager->GetParamIndex(hModel, key);
+
+Cleanup:
+	return hr;
+}
+
+extern "C" HRESULT WINAPI GetPartsDataIndex(long hModel, char* key, int* ret)
+{
+	HRESULT hr = S_OK;
+	IFC(EnsureRendererManager());
+
+	*ret = pManager->GetPartsDataIndex(hModel, key);
 
 Cleanup:
 	return hr;
