@@ -113,9 +113,10 @@ namespace L2DLib.Framework
                     if (Model != null && Model.IsLoaded)
                     {
                         render.BeginRender();
-                        Rendering();
+                        render.UpdatePose();
                         render.UpdateMotion();
                         render.EyeBlinkUpdate();
+                        Rendering();
                         render.EndRender();
                     }
 

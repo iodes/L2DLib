@@ -598,10 +598,15 @@ float CRendererManager::GetParamFloatString(long hModel, char* key)
 //      키에 해당하는 부분의 투명도를 설정합니다.
 //
 //------------------------------------------------------------------------------
-void CRendererManager::SetPartsOpacity(long hModel, char* key, float value)
+void CRendererManager::SetPartsOpacityInt(long hModel, int key, float value)
 {
 	if (m_pCurrentRenderer)
-		m_pCurrentRenderer->SetPartsOpacity(hModel, key, value);
+		m_pCurrentRenderer->SetPartsOpacityInt(hModel, key, value);
+}
+void CRendererManager::SetPartsOpacityString(long hModel, char* key, float value)
+{
+	if (m_pCurrentRenderer)
+		m_pCurrentRenderer->SetPartsOpacityString(hModel, key, value);
 }
 
 //+-----------------------------------------------------------------------------
@@ -613,10 +618,17 @@ void CRendererManager::SetPartsOpacity(long hModel, char* key, float value)
 //      키에 해당하는 부분의 투명도를 가져옵니다.
 //
 //------------------------------------------------------------------------------
-float CRendererManager::GetPartsOpacity(long hModel, char* key)
+float CRendererManager::GetPartsOpacityInt(long hModel, int key)
 {
 	if (m_pCurrentRenderer)
-		return m_pCurrentRenderer->GetPartsOpacity(hModel, key);
+		return m_pCurrentRenderer->GetPartsOpacityInt(hModel, key);
+
+	return NULL;
+}
+float CRendererManager::GetPartsOpacityString(long hModel, char* key)
+{
+	if (m_pCurrentRenderer)
+		return m_pCurrentRenderer->GetPartsOpacityString(hModel, key);
 
 	return NULL;
 }

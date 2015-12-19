@@ -184,23 +184,45 @@ Cleanup:
 	return hr;
 }
 
-extern "C" HRESULT WINAPI SetPartsOpacity(long hModel, char* key, float value)
+extern "C" HRESULT WINAPI SetPartsOpacityInt(long hModel, int key, float value)
 {
 	HRESULT hr = S_OK;
 	IFC(EnsureRendererManager());
 
-	pManager->SetPartsOpacity(hModel, key, value);
+	pManager->SetPartsOpacityInt(hModel, key, value);
 
 Cleanup:
 	return hr;
 }
 
-extern "C" HRESULT WINAPI GetPartsOpacity(long hModel, char* key, float* ret)
+extern "C" HRESULT WINAPI SetPartsOpacityString(long hModel, char* key, float value)
 {
 	HRESULT hr = S_OK;
 	IFC(EnsureRendererManager());
 
-	*ret = pManager->GetPartsOpacity(hModel, key);
+	pManager->SetPartsOpacityString(hModel, key, value);
+
+Cleanup:
+	return hr;
+}
+
+extern "C" HRESULT WINAPI GetPartsOpacityInt(long hModel, int key, float* ret)
+{
+	HRESULT hr = S_OK;
+	IFC(EnsureRendererManager());
+
+	*ret = pManager->GetPartsOpacityInt(hModel, key);
+
+Cleanup:
+	return hr;
+}
+
+extern "C" HRESULT WINAPI GetPartsOpacityString(long hModel, char* key, float* ret)
+{
+	HRESULT hr = S_OK;
+	IFC(EnsureRendererManager());
+
+	*ret = pManager->GetPartsOpacityString(hModel, key);
 
 Cleanup:
 	return hr;

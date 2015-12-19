@@ -265,7 +265,12 @@ float CRendererL2D::GetParamFloatString(long hModel, char* key)
 //      키에 해당하는 부분의 투명도를 설정합니다.
 //
 //------------------------------------------------------------------------------
-void CRendererL2D::SetPartsOpacity(long hModel, char* key, float value)
+void CRendererL2D::SetPartsOpacityInt(long hModel, int key, float value)
+{
+	Model* model = GetModel(hModel);
+	model->setPartsOpacity(key, value);
+}
+void CRendererL2D::SetPartsOpacityString(long hModel, char* key, float value)
 {
 	Model* model = GetModel(hModel);
 	model->setPartsOpacity(key, value);
@@ -280,7 +285,12 @@ void CRendererL2D::SetPartsOpacity(long hModel, char* key, float value)
 //      키에 해당하는 부분의 투명도를 가져옵니다.
 //
 //------------------------------------------------------------------------------
-float CRendererL2D::GetPartsOpacity(long hModel, char* key)
+float CRendererL2D::GetPartsOpacityInt(long hModel, int key)
+{
+	Model* model = GetModel(hModel);
+	return model->getPartsOpacity(key);
+}
+float CRendererL2D::GetPartsOpacityString(long hModel, char* key)
 {
 	 Model* model = GetModel(hModel);
 	 return model->getPartsOpacity(key);

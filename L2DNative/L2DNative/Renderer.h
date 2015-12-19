@@ -16,8 +16,10 @@ public:
 	virtual void MultParamFloat(long hModel, char* key, float value) = 0;
 	virtual float GetParamFloatInt(long hModel, int key) = 0;
 	virtual float GetParamFloatString(long hModel, char* key) = 0;
-	virtual void SetPartsOpacity(long hModel, char* key, float value) = 0;
-	virtual float GetPartsOpacity(long hModel, char* key) = 0;
+	virtual void SetPartsOpacityInt(long hModel, int key, float value) = 0;
+	virtual void SetPartsOpacityString(long hModel, char* key, float value) = 0;
+	virtual float GetPartsOpacityInt(long hModel, int key) = 0;
+	virtual float GetPartsOpacityString(long hModel, char* key) = 0;
 	virtual int GetParamIndex(long hModel, char* key) = 0;
 	virtual int GetPartsDataIndex(long hModel, char* key) = 0;
 	virtual void SaveParam(long hModel) = 0;

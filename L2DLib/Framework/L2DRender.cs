@@ -44,6 +44,18 @@ namespace L2DLib.Framework
         }
 
         /// <summary>
+        /// 포즈 렌더링을 갱신합니다.
+        /// BeginRender() 함수와 EndRender() 함수 사이에서 호출되어야 합니다.
+        /// </summary>
+        public void UpdatePose()
+        {
+            if (Model != null && Model.Pose != null)
+            {
+                Model.Pose.UpdateParam(Model);
+            }
+        }
+
+        /// <summary>
         /// 모션 렌더링을 갱신합니다.
         /// BeginRender() 함수와 EndRender() 함수 사이에서 호출되어야 합니다.
         /// </summary>

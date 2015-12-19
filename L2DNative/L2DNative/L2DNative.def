@@ -17,8 +17,10 @@ GetParamFloatInt
 GetParamFloatString
 MultParamFloat
 AddToParamFloat
-SetPartsOpacity
-GetPartsOpacity
+SetPartsOpacityInt
+SetPartsOpacityString
+GetPartsOpacityInt
+GetPartsOpacityString
 GetParamIndex
 GetPartsDataIndex
 SaveParam

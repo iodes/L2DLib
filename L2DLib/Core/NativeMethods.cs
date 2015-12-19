@@ -37,10 +37,16 @@ namespace L2DLib.Core
         public static extern int MultParamFloat(IntPtr model, string key, float value);
 
         [DllImport("L2DNative.dll")]
-        public static extern int SetPartsOpacity(IntPtr model, string key, float value);
+        public static extern int SetPartsOpacityInt(IntPtr model, int key, float value);
 
         [DllImport("L2DNative.dll")]
-        public static extern int GetPartsOpacity(IntPtr model, string key, out float ret);
+        public static extern int SetPartsOpacityString(IntPtr model, string key, float value);
+
+        [DllImport("L2DNative.dll")]
+        public static extern int GetPartsOpacityInt(IntPtr model, int key, out float ret);
+
+        [DllImport("L2DNative.dll")]
+        public static extern int GetPartsOpacityString(IntPtr model, string key, out float ret);
 
         [DllImport("L2DNative.dll")]
         public static extern int GetParamIndex(IntPtr model, string key, out int ret);

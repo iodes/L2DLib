@@ -219,12 +219,38 @@ namespace L2DLib.Framework
         /// 키에 해당하는 파츠의 투명도를 설정합니다.
         /// BeginRender() 함수와 EndRender() 함수 사이에서 호출되어야 합니다.
         /// </summary>
+        /// <param name="key">대상 매개변수의 인덱스입니다.</param>
+        /// <param name="value">대상 매개변수에 적용할 값입니다.</param>
+        public void SetPartsOpacity(int key, float value)
+        {
+            CheckDispose();
+            HRESULT.Check(NativeMethods.SetPartsOpacityInt(new IntPtr(Handle), key, value));
+        }
+
+        /// <summary>
+        /// 키에 해당하는 파츠의 투명도를 설정합니다.
+        /// BeginRender() 함수와 EndRender() 함수 사이에서 호출되어야 합니다.
+        /// </summary>
         /// <param name="key">대상 매개변수의 이름입니다.</param>
         /// <param name="value">대상 매개변수에 적용할 값입니다.</param>
         public void SetPartsOpacity(string key, float value)
         {
             CheckDispose();
-            HRESULT.Check(NativeMethods.SetPartsOpacity(new IntPtr(Handle), key, value));
+            HRESULT.Check(NativeMethods.SetPartsOpacityString(new IntPtr(Handle), key, value));
+        }
+
+        /// <summary>
+        /// 키에 해당하는 파츠의 투명도를 가져옵니다.
+        /// BeginRender() 함수와 EndRender() 함수 사이에서 호출되어야 합니다.
+        /// </summary>
+        /// <param name="key">대상 매개변수의 인덱스입니다.</param>
+        public float GetPartsOpacity(int key)
+        {
+            CheckDispose();
+            float result = 0;
+            HRESULT.Check(NativeMethods.GetPartsOpacityInt(new IntPtr(Handle), key, out result));
+
+            return result;
         }
 
         /// <summary>
@@ -236,7 +262,7 @@ namespace L2DLib.Framework
         {
             CheckDispose();
             float result = 0;
-            HRESULT.Check(NativeMethods.GetPartsOpacity(new IntPtr(Handle), key, out result));
+            HRESULT.Check(NativeMethods.GetPartsOpacityString(new IntPtr(Handle), key, out result));
 
             return result;
         }

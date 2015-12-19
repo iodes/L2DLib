@@ -57,6 +57,9 @@ namespace L2DSample
             motionList.Add(new L2DMotion(@"Resources\haru\motions\tapBody_02.mtn"));
             motionList.Add(new L2DMotion(@"Resources\haru\motions\tapBody_03.mtn"));
 
+            // 모델에 포즈 설정
+            model.Pose = new L2DPose(@"Resources\haru\haru.pose.json");
+
             // 모델에 모션 설정
             model.Motion = motionList.ToArray();
 

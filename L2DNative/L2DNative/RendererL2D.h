@@ -32,8 +32,10 @@ public:
 	void MultParamFloat(long hModel, char* key, float value);
 	float GetParamFloatInt(long hModel, int key);
 	float GetParamFloatString(long hModel, char* key);
-	void SetPartsOpacity(long hModel, char* key, float value);
-	float GetPartsOpacity(long hModel, char* key);
+	void SetPartsOpacityInt(long hModel, int key, float value);
+	void SetPartsOpacityString(long hModel, char* key, float value);
+	float GetPartsOpacityInt(long hModel, int key);
+	float GetPartsOpacityString(long hModel, char* key);
 	int GetParamIndex(long hModel, char* key);
 	int GetPartsDataIndex(long hModel, char* key);
 	void SaveParam(long hModel);
