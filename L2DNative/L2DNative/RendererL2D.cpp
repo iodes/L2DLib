@@ -523,6 +523,12 @@ void CRendererL2D::PhysicsAddTargetParam(long physicsHandler, const char* target
 
 	physics->addTargetParam(type, paramID, scale, weight);
 }
+void CRendererL2D::PhysicsUpdate(long physicsHandler, long hModel, long long time)
+{
+	live2d::PhysicsHair* physics = GetPhysics(physicsHandler);
+	Model* model = GetModel(hModel);
+	physics->update(model, time);
+}
 #pragma endregion
 
 #pragma region [   Live2D   ]

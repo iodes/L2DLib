@@ -45,6 +45,7 @@ public:
 	void PhysicsSetup(long physicsHandler, float baseLengthM, float airRegistance, float mass);
 	void PhysicsAddSrcParam(long physicsHandler, const char* srcType, const char * paramID, float scale, float weight);
 	void PhysicsAddTargetParam(long phsyicsHandler, const char* targetType, const char* paramID, float scale, float weight);
+	void PhysicsUpdate(long physicsHandler, long hModel, long long time);
 
 	INT64 GetUserTimeMSec();
 	HRESULT BeginRender(long hModel);

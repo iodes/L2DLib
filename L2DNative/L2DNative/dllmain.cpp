@@ -406,6 +406,17 @@ extern "C" HRESULT WINAPI PhysicsAddTargetParam(long physicsHandler, const char*
 Cleanup:
 	return hr;
 }
+
+extern "C" HRESULT WINAPI PhysicsUpdate(long physicsHandler, long hModel, long long time)
+{
+	HRESULT hr = S_OK;
+	IFC(EnsureRendererManager());
+
+	pManager->PhysicsUpdate(physicsHandler, hModel, time);
+
+Cleanup:
+	return hr;
+}
 #pragma endregion
 
 #pragma region [   Live2D Extern   ]

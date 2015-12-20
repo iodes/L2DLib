@@ -39,6 +39,7 @@ public:
 	virtual void PhysicsSetup(long physicsHandler, float baseLengthM, float airRegistance, float mass) = 0;
 	virtual void PhysicsAddSrcParam(long physicsHandler, const char* srcType, const char* paramID, float scale, float weight) = 0;
 	virtual void PhysicsAddTargetParam(long phsyicsHandler, const char* targetType, const char* paramID, float scale, float weight) = 0;
+	virtual void PhysicsUpdate(long physicsHandler, long hModel, long long time) = 0;
 
 	virtual INT64 GetUserTimeMSec() = 0;
 	virtual HRESULT BeginRender(long hModel) = 0;

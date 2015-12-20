@@ -38,6 +38,7 @@ CreatePhysics
 PhysicsSetup
 PhysicsAddSrcParam
 PhysicsAddTargetParam
+PhysicsUpdate
 
 EyeBlinkUpdate
 
