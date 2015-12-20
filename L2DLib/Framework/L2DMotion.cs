@@ -8,6 +8,21 @@ namespace L2DLib.Framework
     /// </summary>
     public class L2DMotion : L2DBase
     {
+        #region 속성
+        /// <summary>
+        /// 모션 재생시 재생될 사운드 파일입니다.
+        /// </summary>
+        public L2DSound Sound
+        {
+            get { return _Sound; }
+            set
+            {
+                _Sound = value;
+            }
+        }
+        private L2DSound _Sound;
+        #endregion
+
         #region 생성자
         /// <summary>
         /// 모션 객체를 생성합니다.
@@ -15,6 +30,25 @@ namespace L2DLib.Framework
         /// <param name="path">모션 파일의 경로입니다.</param>
         public L2DMotion(string path)
         {
+            LoadMotion(path);
+        }
+
+        /// <summary>
+        /// 모션 객체를 생성합니다.
+        /// </summary>
+        /// <param name="path">모션 파일의 경로입니다.</param>
+        /// /// <param name="soundPath">사운드 파일의 경로입니다.</param>
+        public L2DMotion(string path, string soundPath)
+        {
+            LoadMotion(path);
+            _Sound = new L2DSound(soundPath);
+        }
+        #endregion
+
+        #region 내부 함수
+        private void LoadMotion(string path)
+        {
+            _Path = path;
             HRESULT.Check(NativeMethods.LoadMotion(path, out _Handle));
             _IsLoaded = true;
         }
@@ -27,6 +61,11 @@ namespace L2DLib.Framework
         public void StartMotion()
         {
             HRESULT.Check(NativeMethods.StartMotion(new IntPtr(Handle)));
+
+            if (Sound != null)
+            {
+                Sound.Play();
+            }
         }
 
         /// <summary>

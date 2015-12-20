@@ -61,7 +61,7 @@ namespace L2DLib.Framework
         /// </summary>
         public void UpdateMotion()
         {
-            if (Model != null && Model.Motion?.Length > 0)
+            if (Model != null && Model.Motion?.Count > 0)
             {
                 HRESULT.Check(NativeMethods.UpdateMotion(new IntPtr(Model.Handle)));
             }

@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using L2DLib.Framework;
+using L2DLib.Utility;
 
 namespace L2DSample
 {
@@ -36,37 +37,12 @@ namespace L2DSample
         private void BtnLoad_Click(object sender, RoutedEventArgs e)
         {
             // 모델 불러오기
-            model = new L2DModel(@"Resources\haru\haru_01.moc");
+            model = L2DFunctions.LoadModel(@"Resources\haru\haru.model.json");
 
-            // 텍스처 불러오기
-            model.SetTexture
-                (
-                    new string[]
-                    {
-                        @"Resources\haru\haru_01.1024\texture_00.png",
-                        @"Resources\haru\haru_01.1024\texture_01.png",
-                        @"Resources\haru\haru_01.1024\texture_02.png"
-                    }
-                );
-
-            // 모션 불러오기
-            List<L2DMotion> motionList = new List<L2DMotion>();
-            motionList.Add(new L2DMotion(@"Resources\haru\motions\idle_00.mtn"));
-            motionList.Add(new L2DMotion(@"Resources\haru\motions\tapBody_00.mtn"));
-            motionList.Add(new L2DMotion(@"Resources\haru\motions\tapBody_01.mtn"));
-            motionList.Add(new L2DMotion(@"Resources\haru\motions\tapBody_02.mtn"));
-            motionList.Add(new L2DMotion(@"Resources\haru\motions\tapBody_03.mtn"));
-
-            // 모델에 포즈 설정
-            model.Pose = new L2DPose(@"Resources\haru\haru.pose.json");
-
-            // 모델에 모션 설정
-            model.Motion = motionList.ToArray();
-
-            // 모델에 자동 윙크 설정
+            // 모델 자동 윙크 설정
             model.UseEyeBlink = true;
 
-            // 렌더러에 모델 설정
+            // 렌더러에 대상 모델 설정
             RenderView.Model = model;
         }
 
@@ -79,7 +55,9 @@ namespace L2DSample
         private void BtnMotion_Click(object sender, RoutedEventArgs e)
         {
             // 무작위 모션 재생
-            model.Motion[rnd.Next(0, model.Motion.Length)].StartMotion();
+            L2DMotion[] motions = model.Motion["tap_body"];
+            L2DMotion motion = motions[rnd.Next(0, motions.Length)];
+            motion.StartMotion();
         }
     }
 }

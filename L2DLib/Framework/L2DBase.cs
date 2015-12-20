@@ -6,6 +6,15 @@
     public abstract class L2DBase
     {
         /// <summary>
+        /// 대상의 경로를 가져옵니다.
+        /// </summary>
+        public string Path
+        {
+            get { return _Path; }
+        }
+        protected string _Path;
+
+        /// <summary>
         /// 대상의 핸들을 가져옵니다.
         /// </summary>
         public long Handle

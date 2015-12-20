@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using L2DLib.Core;
 
@@ -26,7 +27,7 @@ namespace L2DLib.Framework
         /// <summary>
         /// 렌더러가 표시할 모델을 가져옵니다.
         /// </summary>
-        public L2DMotion[] Motion
+        public Dictionary<string, L2DMotion[]> Motion
         {
             get { return _Motion; }
             set
@@ -34,7 +35,7 @@ namespace L2DLib.Framework
                 _Motion = value;
             }
         }
-        private L2DMotion[] _Motion;
+        private Dictionary<string, L2DMotion[]> _Motion;
 
         /// <summary>
         /// 자동 윙크 기능의 사용 여부를 가져오거나 설정합니다.
@@ -62,6 +63,7 @@ namespace L2DLib.Framework
         /// <param name="path">모델 파일의 경로입니다.</param>
         public L2DModel(string path)
         {
+            _Path = path;
             HRESULT.Check(NativeMethods.LoadModel(path, out _Handle));
             IsModelLoaded = true;
             SetLoaded();
