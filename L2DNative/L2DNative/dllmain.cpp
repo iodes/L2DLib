@@ -407,7 +407,7 @@ Cleanup:
 	return hr;
 }
 
-extern "C" HRESULT WINAPI PhysicsUpdate(long physicsHandler, long hModel, long long time)
+extern "C" HRESULT WINAPI PhysicsUpdate(long physicsHandler, long hModel, INT64 time)
 {
 	HRESULT hr = S_OK;
 	IFC(EnsureRendererManager());
@@ -420,12 +420,12 @@ Cleanup:
 #pragma endregion
 
 #pragma region [   Live2D Extern   ]
-extern "C" HRESULT WINAPI GetUserTimeMSec()
+extern "C" HRESULT WINAPI GetUserTimeMSec(INT64* ret)
 {
 	HRESULT hr = S_OK;
 	IFC(EnsureRendererManager());
 
-	return pManager->GetUserTimeMSec();
+	*ret = pManager->GetUserTimeMSec();
 
 Cleanup:
 	return hr;

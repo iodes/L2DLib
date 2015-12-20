@@ -770,7 +770,7 @@ void CRendererManager::PhysicsAddTargetParam(long physicsHandler, const char* ta
 	if (m_pCurrentRenderer)
 		m_pCurrentRenderer->PhysicsAddTargetParam(physicsHandler, targetType, paramID, scale, weight);
 }
-void CRendererManager::PhysicsUpdate(long physicsHandler, long hModel, long long time)
+void CRendererManager::PhysicsUpdate(long physicsHandler, long hModel, INT64 time)
 {
 	if (m_pCurrentRenderer)
 		m_pCurrentRenderer->PhysicsUpdate(physicsHandler, hModel, time);

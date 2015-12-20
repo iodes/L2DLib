@@ -523,7 +523,7 @@ void CRendererL2D::PhysicsAddTargetParam(long physicsHandler, const char* target
 
 	physics->addTargetParam(type, paramID, scale, weight);
 }
-void CRendererL2D::PhysicsUpdate(long physicsHandler, long hModel, long long time)
+void CRendererL2D::PhysicsUpdate(long physicsHandler, long hModel, INT64 time)
 {
 	live2d::PhysicsHair* physics = GetPhysics(physicsHandler);
 	Model* model = GetModel(hModel);
