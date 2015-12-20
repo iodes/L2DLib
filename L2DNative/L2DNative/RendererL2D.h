@@ -4,6 +4,7 @@
 #include "motion\Live2DMotion.h"
 #include "motion\MotionQueueManager.h"
 #include "motion\EyeBlinkMotion.h" 
+#include "physics\PhysicsHair.h"
 #include <vector>
 
 using std::vector;
@@ -56,6 +57,12 @@ public:
 
 	void EyeBlinkUpdate(long hModel);
 
+	live2d::PhysicsHair* GetPhysics(long physicsHandler);
+	long CRendererL2D::AddPhysics(live2d::PhysicsHair* physics);
+	long CreatePhysics();
+	void PhysicsSetup(long physicsHandler, float baseLengthM, float airRegistance, float mass);
+	void PhysicsAddSrcParam(long physicsHandler, const char* srcType, const char * paramID, float scale, float weight);
+
 	INT64 GetUserTimeMSec();
 	HRESULT BeginRender(long hModel);
 	HRESULT EndRender(long hModel);
@@ -70,6 +77,7 @@ private:
 	vector<Model*> m_models;
 	vector<vector<Texture>> m_textures;
 	vector<Motion*> m_motions;
+	vector<live2d::PhysicsHair*> m_physics;
 #pragma endregion
 
 	live2d::MotionQueueManager* m_motionManager;

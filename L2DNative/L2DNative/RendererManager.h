@@ -41,6 +41,10 @@ public:
 
 	void EyeBlinkUpdate(long hModel);
 
+	long CreatePhysics();
+	void PhysicsSetup(long physicsHandler, float baseLengthM, float airRegistance, float mass);
+	void PhysicsAddSrcParam(long physicsHandler, const char* srcType, const char * paramID, float scale, float weight);
+
 	INT64 GetUserTimeMSec();
 	HRESULT BeginRender(long hModel);
 	HRESULT EndRender(long hModel);

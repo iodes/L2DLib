@@ -35,6 +35,10 @@ public:
 	
 	virtual void EyeBlinkUpdate(long hModel) = 0;
 
+	virtual long CreatePhysics() = 0;
+	virtual void PhysicsSetup(long physicsHandler, float baseLengthM, float airRegistance, float mass) = 0;
+	virtual void PhysicsAddSrcParam(long physicsHandler, const char* srcType, const char * paramID, float scale, float weight) = 0;
+
 	virtual INT64 GetUserTimeMSec() = 0;
 	virtual HRESULT BeginRender(long hModel) = 0;
 	virtual HRESULT EndRender(long hModel) = 0;

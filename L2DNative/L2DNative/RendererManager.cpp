@@ -750,6 +750,23 @@ void CRendererManager::EyeBlinkUpdate(long hModel)
 }
 #pragma endregion
 
+#pragma region [   Physics   ]
+long CRendererManager::CreatePhysics()
+{
+	return m_pCurrentRenderer ? m_pCurrentRenderer->CreatePhysics() : 0;
+}
+void CRendererManager::PhysicsSetup(long physicsHandler, float baseLengthM, float airRegistance, float mass)
+{
+	if (m_pCurrentRenderer)
+		m_pCurrentRenderer->PhysicsSetup(physicsHandler, baseLengthM, airRegistance, mass);
+}
+void CRendererManager::PhysicsAddSrcParam(long physicsHandler, const char* srcType, const char * paramID, float scale, float weight)
+{
+	if (m_pCurrentRenderer)
+		m_pCurrentRenderer->PhysicsAddSrcParam(physicsHandler, srcType, paramID, scale, weight);
+}
+#pragma endregion
+
 #pragma region [   Live2D   ]
 INT64 CRendererManager::GetUserTimeMSec()
 {

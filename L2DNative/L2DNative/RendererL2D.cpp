@@ -14,6 +14,7 @@
 #include "motion\MotionQueueManager.h"
 #include "motion\EyeBlinkMotion.h" 
 #include "util/UtSystem.h"
+#include "physics\PhysicsHair.h"
 #include <iostream>
 #include <sstream>
 #include <string>
@@ -454,6 +455,49 @@ void CRendererL2D::EyeBlinkUpdate(long hModel)
 {
 	Model* model = GetModel(hModel);
 	m_eyeBlink->setParam(model);
+}
+#pragma endregion
+
+#pragma region [   Physics   ]
+live2d::PhysicsHair* CRendererL2D::GetPhysics(long physicsHandler)
+{
+	return m_physics[physicsHandler - 1];
+}
+long CRendererL2D::AddPhysics(live2d::PhysicsHair* physics)
+{
+	m_physics.push_back(physics);
+	return m_physics.size();
+}
+long CRendererL2D::CreatePhysics()
+{
+	live2d::PhysicsHair* physics = new live2d::PhysicsHair();
+	long physicsHandler = AddPhysics(physics);
+	return physicsHandler;
+}
+void CRendererL2D::PhysicsSetup(long physicsHandler, float baseLengthM, float airRegistance, float mass)
+{
+	live2d::PhysicsHair* physics = GetPhysics(physicsHandler);
+	physics->setup(baseLengthM, airRegistance, mass);
+}
+void CRendererL2D::PhysicsAddSrcParam(long physicsHandler, const char* srcType, const char* paramID, float scale, float weight)
+{
+	live2d::PhysicsHair* physics = GetPhysics(physicsHandler);
+	live2d::PhysicsHair::Src type;
+
+	if (strcmp(srcType, "x") == 0)
+	{
+		type = live2d::PhysicsHair::SRC_TO_X;
+	}
+	else if (strcmp(srcType, "y") == 0)
+	{
+		type = live2d::PhysicsHair::SRC_TO_Y;
+	}
+	else if (strcmp(srcType, "angle") == 0)
+	{
+		type = live2d::PhysicsHair::SRC_TO_G_ANGLE;
+	}
+
+	physics->addSrcParam(type, paramID, scale, weight);
 }
 #pragma endregion
 

@@ -365,6 +365,39 @@ Cleanup:
 }
 #pragma endregion
 
+#pragma region [   Physics   ]
+extern "C" HRESULT WINAPI CreatePhysics(long* physicsHandler)
+{
+	HRESULT hr = S_OK;
+	IFC(EnsureRendererManager());
+
+	*physicsHandler = pManager->CreatePhysics();
+
+Cleanup:
+	return hr;
+}
+extern "C" HRESULT WINAPI PhysicsSetup(long physicsHandler, float baseLengthM, float airRegistance, float mass)
+{
+	HRESULT hr = S_OK;
+	IFC(EnsureRendererManager());
+
+	pManager->PhysicsSetup(physicsHandler, baseLengthM, airRegistance, mass);
+
+Cleanup:
+	return hr;
+}
+extern "C" HRESULT WINAPI PhysicsAddSrcParam(long physicsHandler, const char* srcType, const char * paramID, float scale, float weight)
+{
+	HRESULT hr = S_OK;
+	IFC(EnsureRendererManager());
+
+	pManager->PhysicsAddSrcParam(physicsHandler, srcType, paramID, scale, weight);
+
+Cleanup:
+	return hr;
+}
+#pragma endregion
+
 #pragma region [   Live2D Extern   ]
 extern "C" HRESULT WINAPI GetUserTimeMSec()
 {

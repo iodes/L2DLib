@@ -34,6 +34,10 @@ SetLoop
 StartMotion
 UpdateMotion
 
+CreatePhysics
+PhysicsSetup
+PhysicsAddSrcParam
+
 EyeBlinkUpdate
 
 GetUserTimeMSec
