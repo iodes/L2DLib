@@ -52,10 +52,15 @@ namespace L2DLib.Framework
                     string id = groupResult.GetValue("id").Value<string>();
                     List<L2DParts> linkList = new List<L2DParts>();
 
-                    foreach (JValue linkResult in groupResult["link"].Children().ToList())
+                    JToken resultLink;
+                    groupResult.TryGetValue("link", out resultLink);
+                    if (resultLink != null)
                     {
-                        L2DParts linkParts = new L2DParts(linkResult.Value<string>());
-                        linkList.Add(linkParts);
+                        foreach (JValue linkResult in resultLink.Children().ToList())
+                        {
+                            L2DParts linkParts = new L2DParts(linkResult.Value<string>());
+                            linkList.Add(linkParts);
+                        }
                     }
 
                     partsGroup.Add(new L2DParts(id, linkList.ToArray()));
