@@ -21,6 +21,33 @@ namespace L2DLib.Framework
             }
         }
         private L2DSound _Sound;
+
+        /// <summary>
+        /// 모션의 반복 재생 여부를 가져옵니다.
+        /// </summary>
+        public bool Loop
+        {
+            get { return _Loop; }
+        }
+        private bool _Loop = false;
+
+        /// <summary>
+        /// 모션의 페이드인 시간을 가져옵니다.
+        /// </summary>
+        public int FadeIn
+        {
+            get { return _FadeIn; }
+        }
+        private int _FadeIn;
+
+        /// <summary>
+        /// 모션의 페이드 아웃 시간을 가져옵니다.
+        /// </summary>
+        public int FadeOut
+        {
+            get { return _FadeOut; }
+        }
+        private int _FadeOut;
         #endregion
 
         #region 생성자
@@ -75,6 +102,7 @@ namespace L2DLib.Framework
         public void SetFadeIn(int msec)
         {
             HRESULT.Check(NativeMethods.SetFadeIn(new IntPtr(Handle), new IntPtr(msec)));
+            _FadeIn = msec;
         }
 
         /// <summary>
@@ -84,6 +112,7 @@ namespace L2DLib.Framework
         public void SetFadeOut(int msec)
         {
             HRESULT.Check(NativeMethods.SetFadeOut(new IntPtr(Handle), new IntPtr(msec)));
+            _FadeOut = msec;
         }
 
         /// <summary>
@@ -93,6 +122,7 @@ namespace L2DLib.Framework
         public void SetLoop(bool loop)
         {
             HRESULT.Check(NativeMethods.SetLoop(new IntPtr(Handle), loop));
+            _Loop = loop;
         }
         #endregion
     }

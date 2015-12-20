@@ -49,29 +49,52 @@ namespace L2DLib.Utility
             }
 
             // - motions
-            foreach (JProperty motion in jsonObject["motions"].Children())
+            foreach (JProperty jsonMotion in jsonObject["motions"].Children())
             {
                 List<L2DMotion> motionList = new List<L2DMotion>();
-                foreach (JArray children in motion.Children().ToList())
+                foreach (JArray jsonChildren in jsonMotion.Children().ToList())
                 {
-                    foreach (JObject result in children)
+                    foreach (JObject result in jsonChildren)
                     {
+                        L2DMotion motion = null;
                         string motionFile = FixPath(path, result.GetValue("file").Value<string>());
-                        JToken soundFileToken; result.TryGetValue("sound", out soundFileToken);
+                        JToken resultSound;
+                        result.TryGetValue("sound", out resultSound);
 
-                        if (soundFileToken == null)
+                        if (resultSound == null)
                         {
-                            motionList.Add(new L2DMotion(motionFile));
+                            motion = new L2DMotion(motionFile);
                         }
                         else
                         {
-                            string soundFile = FixPath(path, soundFileToken.Value<string>());
-                            motionList.Add(new L2DMotion(motionFile, soundFile));
+                            string soundFile = FixPath(path, resultSound.Value<string>());
+                            motion = new L2DMotion(motionFile, soundFile);
+                        }
+
+                        JToken resultFadeIn;
+                        result.TryGetValue("fade_in", out resultFadeIn);
+
+                        JToken resultFadeOut;
+                        result.TryGetValue("fade_out", out resultFadeOut);
+
+                        if (resultFadeIn != null)
+                        {
+                            motion.SetFadeIn(resultFadeIn.Value<int>());
+                        }
+
+                        if (resultFadeOut != null)
+                        {
+                            motion.SetFadeOut(resultFadeOut.Value<int>());
+                        }
+
+                        if (motion != null)
+                        {
+                            motionList.Add(motion);
                         }
                     }
                 }
 
-                motionDictionary.Add(motion.Name, motionList.ToArray());
+                motionDictionary.Add(jsonMotion.Name, motionList.ToArray());
             }
 
             // L2DModel 생성
