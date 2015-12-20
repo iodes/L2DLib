@@ -1,9 +1,6 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using L2DLib.Framework;
 
@@ -28,7 +25,7 @@ namespace L2DLib.Utility
             // JSON 분석
             string modelPath;
             string[] texturePath;
-            string posePath;
+            string posePath = null;
             Dictionary<string, L2DMotion[]> motionDictionary = new Dictionary<string, L2DMotion[]>();
             string parentPath = Directory.GetParent(path).FullName;
             JObject jsonObject = JObject.Parse(File.ReadAllText(path));
@@ -44,7 +41,12 @@ namespace L2DLib.Utility
             }
 
             // - pose
-            posePath = FixPath(path, jsonObject.GetValue("pose").Value<string>());
+            JToken resultPose;
+            jsonObject.TryGetValue("pose", out resultPose);
+            if (resultPose != null)
+            {
+                posePath = FixPath(path, resultPose.Value<string>());
+            }
 
             // - motions
             foreach (JProperty motion in jsonObject["motions"].Children())
@@ -76,7 +78,10 @@ namespace L2DLib.Utility
             L2DModel model = new L2DModel(modelPath);
             model.SetTexture(texturePath);
             model.Motion = motionDictionary;
-            model.Pose = new L2DPose(posePath);
+            if (posePath != null)
+            {
+                model.Pose = new L2DPose(posePath);
+            }
 
             return model;
         }
