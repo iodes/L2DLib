@@ -508,11 +508,11 @@ void CRendererL2D::PhysicsAddTargetParam(long physicsHandler, const char* target
 	live2d::PhysicsHair* physics = GetPhysics(physicsHandler);
 	live2d::PhysicsHair::Target type = live2d::PhysicsHair::TARGET_FROM_ANGLE;
 
-	if (strcmp(targetType, "angle"))
+	if (strcmp(targetType, "angle") == 0)
 	{
 		type = live2d::PhysicsHair::TARGET_FROM_ANGLE;
 	}
-	else if (strcmp(targetType, "angle_v"))
+	else if (strcmp(targetType, "angle_v") == 0)
 	{
 		type = live2d::PhysicsHair::TARGET_FROM_ANGLE_V;
 	}
@@ -526,6 +526,7 @@ void CRendererL2D::PhysicsAddTargetParam(long physicsHandler, const char* target
 void CRendererL2D::PhysicsUpdate(long physicsHandler, long hModel, INT64 time)
 {
 	live2d::PhysicsHair* physics = GetPhysics(physicsHandler);
+
 	Model* model = GetModel(hModel);
 	physics->update(model, time);
 }
