@@ -41,6 +41,7 @@ public:
 
 	void EyeBlinkUpdate(long hModel);
 
+	INT64 GetUserTimeMSec();
 	HRESULT BeginRender(long hModel);
 	HRESULT EndRender(long hModel);
 	void Dispose();

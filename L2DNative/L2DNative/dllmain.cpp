@@ -366,6 +366,17 @@ Cleanup:
 #pragma endregion
 
 #pragma region [   Live2D Extern   ]
+extern "C" HRESULT WINAPI GetUserTimeMSec()
+{
+	HRESULT hr = S_OK;
+	IFC(EnsureRendererManager());
+
+	return pManager->GetUserTimeMSec();
+
+Cleanup:
+	return hr;
+}
+
 extern "C" HRESULT WINAPI BeginRender(long hModel)
 {
 	HRESULT hr = S_OK;

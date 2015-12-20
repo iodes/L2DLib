@@ -458,6 +458,10 @@ void CRendererL2D::EyeBlinkUpdate(long hModel)
 #pragma endregion
 
 #pragma region [   Live2D   ]
+INT64 CRendererL2D::GetUserTimeMSec()
+{
+	return live2d::UtSystem::getUserTimeMSec();
+}
 //+-----------------------------------------------------------------------------
 //
 //  Member:

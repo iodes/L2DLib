@@ -36,6 +36,7 @@ UpdateMotion
 
 EyeBlinkUpdate
 
+GetUserTimeMSec
 BeginRender
 EndRender
 Dispose

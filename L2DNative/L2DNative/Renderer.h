@@ -35,6 +35,7 @@ public:
 	
 	virtual void EyeBlinkUpdate(long hModel) = 0;
 
+	virtual INT64 GetUserTimeMSec() = 0;
 	virtual HRESULT BeginRender(long hModel) = 0;
 	virtual HRESULT EndRender(long hModel) = 0;
 
