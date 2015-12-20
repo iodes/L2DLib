@@ -396,6 +396,16 @@ extern "C" HRESULT WINAPI PhysicsAddSrcParam(long physicsHandler, const char* sr
 Cleanup:
 	return hr;
 }
+extern "C" HRESULT WINAPI PhysicsAddTargetParam(long physicsHandler, const char* targetType, const char * paramID, float scale, float weight)
+{
+	HRESULT hr = S_OK;
+	IFC(EnsureRendererManager());
+
+	pManager->PhysicsAddTargetParam(physicsHandler, targetType, paramID, scale, weight);
+
+Cleanup:
+	return hr;
+}
 #pragma endregion
 
 #pragma region [   Live2D Extern   ]

@@ -37,6 +37,7 @@ UpdateMotion
 CreatePhysics
 PhysicsSetup
 PhysicsAddSrcParam
+PhysicsAddTargetParam
 
 EyeBlinkUpdate
 

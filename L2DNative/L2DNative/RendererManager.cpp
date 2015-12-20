@@ -765,6 +765,11 @@ void CRendererManager::PhysicsAddSrcParam(long physicsHandler, const char* srcTy
 	if (m_pCurrentRenderer)
 		m_pCurrentRenderer->PhysicsAddSrcParam(physicsHandler, srcType, paramID, scale, weight);
 }
+void CRendererManager::PhysicsAddTargetParam(long physicsHandler, const char* targetType, const char * paramID, float scale, float weight)
+{
+	if (m_pCurrentRenderer)
+		m_pCurrentRenderer->PhysicsAddTargetParam(physicsHandler, targetType, paramID, scale, weight);
+}
 #pragma endregion
 
 #pragma region [   Live2D   ]

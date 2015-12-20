@@ -482,7 +482,7 @@ void CRendererL2D::PhysicsSetup(long physicsHandler, float baseLengthM, float ai
 void CRendererL2D::PhysicsAddSrcParam(long physicsHandler, const char* srcType, const char* paramID, float scale, float weight)
 {
 	live2d::PhysicsHair* physics = GetPhysics(physicsHandler);
-	live2d::PhysicsHair::Src type;
+	live2d::PhysicsHair::Src type = live2d::PhysicsHair::SRC_TO_X;
 
 	if (strcmp(srcType, "x") == 0)
 	{
@@ -496,8 +496,32 @@ void CRendererL2D::PhysicsAddSrcParam(long physicsHandler, const char* srcType, 
 	{
 		type = live2d::PhysicsHair::SRC_TO_G_ANGLE;
 	}
+	else
+	{
+		live2d::UtDebug::error("live2d", "Invalid parameter:PhysicsHair.Src");
+	}
 
 	physics->addSrcParam(type, paramID, scale, weight);
+}
+void CRendererL2D::PhysicsAddTargetParam(long physicsHandler, const char* targetType, const char* paramID, float scale, float weight)
+{
+	live2d::PhysicsHair* physics = GetPhysics(physicsHandler);
+	live2d::PhysicsHair::Target type = live2d::PhysicsHair::TARGET_FROM_ANGLE;
+
+	if (strcmp(targetType, "angle"))
+	{
+		type = live2d::PhysicsHair::TARGET_FROM_ANGLE;
+	}
+	else if (strcmp(targetType, "angle_v"))
+	{
+		type = live2d::PhysicsHair::TARGET_FROM_ANGLE_V;
+	}
+	else
+	{
+		live2d::UtDebug::error("live2d", "Invalid parameter:PhysicsHair.Target");
+	}
+
+	physics->addTargetParam(type, paramID, scale, weight);
 }
 #pragma endregion
 
