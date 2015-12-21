@@ -6,6 +6,7 @@
 *.user
 *.opendb
 /Debug
+/packages
 L2DLib/bin
 L2DLib/obj
 L2DNative/L2DNative/Debug
