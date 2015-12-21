@@ -8,7 +8,7 @@
         Title="MainWindow" Height="650" Width="450" WindowStartupLocation="CenterScreen">
 
     <Grid>
-        <local:MouseTrackView x:Name="RenderView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,120"/>
+        <local:HeadShakeView x:Name="RenderView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,120"/>
         <GroupBox Header="제어판" HorizontalAlignment="Stretch" Margin="10" VerticalAlignment="Bottom" Height="80">
             <Grid>
                 <Button x:Name="BtnLoad" Click="BtnLoad_Click" Content="모델 불러오기" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" Height="30" Margin="15,0,0,0"/>
