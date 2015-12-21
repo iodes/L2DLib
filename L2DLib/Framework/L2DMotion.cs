@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 using L2DLib.Core;
 
 namespace L2DLib.Framework
@@ -85,7 +86,7 @@ namespace L2DLib.Framework
         private void LoadMotion(string path)
         {
             _Path = path;
-            HRESULT.Check(NativeMethods.LoadMotion(path, out _Handle));
+            HRESULT.Check(NativeMethods.LoadMotion(Marshal.StringToHGlobalAnsi(path), out _Handle));
             _IsLoaded = true;
         }
         #endregion

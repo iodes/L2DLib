@@ -86,7 +86,7 @@ namespace L2DLib.Framework
         public L2DModel(string path)
         {
             _Path = path;
-            HRESULT.Check(NativeMethods.LoadModel(path, out _Handle));
+            HRESULT.Check(NativeMethods.LoadModel(Marshal.StringToHGlobalAnsi(path), out _Handle));
             IsModelLoaded = true;
             SetLoaded();
         }
@@ -184,7 +184,7 @@ namespace L2DLib.Framework
         public void SetParamFloat(string key, float value)
         {
             CheckDispose();
-            HRESULT.Check(NativeMethods.SetParamFloatString(new IntPtr(Handle), key, value));
+            HRESULT.Check(NativeMethods.SetParamFloatString(new IntPtr(Handle), Marshal.StringToHGlobalAnsi(key), value));
         }
 
         /// <summary>
@@ -210,7 +210,7 @@ namespace L2DLib.Framework
         {
             CheckDispose();
             float result = 0;
-            HRESULT.Check(NativeMethods.GetParamFloatString(new IntPtr(Handle), key, out result));
+            HRESULT.Check(NativeMethods.GetParamFloatString(new IntPtr(Handle), Marshal.StringToHGlobalAnsi(key), out result));
 
             return result;
         }
@@ -224,7 +224,7 @@ namespace L2DLib.Framework
         public void AddToParamFloat(string key, float value)
         {
             CheckDispose();
-            HRESULT.Check(NativeMethods.AddToParamFloat(new IntPtr(Handle), key, value));
+            HRESULT.Check(NativeMethods.AddToParamFloat(new IntPtr(Handle), Marshal.StringToHGlobalAnsi(key), value));
         }
 
         /// <summary>
@@ -236,7 +236,7 @@ namespace L2DLib.Framework
         public void MultParamFloat(string key, float value)
         {
             CheckDispose();
-            HRESULT.Check(NativeMethods.MultParamFloat(new IntPtr(Handle), key, value));
+            HRESULT.Check(NativeMethods.MultParamFloat(new IntPtr(Handle), Marshal.StringToHGlobalAnsi(key), value));
         }
 
         /// <summary>
@@ -260,7 +260,7 @@ namespace L2DLib.Framework
         public void SetPartsOpacity(string key, float value)
         {
             CheckDispose();
-            HRESULT.Check(NativeMethods.SetPartsOpacityString(new IntPtr(Handle), key, value));
+            HRESULT.Check(NativeMethods.SetPartsOpacityString(new IntPtr(Handle), Marshal.StringToHGlobalAnsi(key), value));
         }
 
         /// <summary>
@@ -286,7 +286,7 @@ namespace L2DLib.Framework
         {
             CheckDispose();
             float result = 0;
-            HRESULT.Check(NativeMethods.GetPartsOpacityString(new IntPtr(Handle), key, out result));
+            HRESULT.Check(NativeMethods.GetPartsOpacityString(new IntPtr(Handle), Marshal.StringToHGlobalAnsi(key), out result));
 
             return result;
         }
@@ -300,7 +300,7 @@ namespace L2DLib.Framework
         {
             CheckDispose();
             int result = 0;
-            HRESULT.Check(NativeMethods.GetParamIndex(new IntPtr(Handle), key, out result));
+            HRESULT.Check(NativeMethods.GetParamIndex(new IntPtr(Handle), Marshal.StringToHGlobalAnsi(key), out result));
 
             return result;
         }
@@ -314,7 +314,7 @@ namespace L2DLib.Framework
         {
             CheckDispose();
             int result = 0;
-            HRESULT.Check(NativeMethods.GetPartsDataIndex(new IntPtr(Handle), key, out result));
+            HRESULT.Check(NativeMethods.GetPartsDataIndex(new IntPtr(Handle), Marshal.StringToHGlobalAnsi(key), out result));
 
             return result;
         }

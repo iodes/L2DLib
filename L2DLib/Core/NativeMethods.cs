@@ -10,7 +10,7 @@ namespace L2DLib.Core
     {
         #region Live2D
         [DllImport("L2DNative.dll")]
-        public static extern int LoadModel(string modelPath, out long ret);
+        public static extern int LoadModel(IntPtr modelPath, out long ret);
 
         [DllImport("L2DNative.dll")]
         public static extern int RemoveModel(IntPtr model);
@@ -22,37 +22,37 @@ namespace L2DLib.Core
         public static extern int SetParamFloatInt(IntPtr model, int key, float value);
 
         [DllImport("L2DNative.dll")]
-        public static extern int SetParamFloatString(IntPtr model, string key, float value);
+        public static extern int SetParamFloatString(IntPtr model, IntPtr key, float value);
 
         [DllImport("L2DNative.dll")]
         public static extern int GetParamFloatInt(IntPtr model, int key, out float ret);
 
         [DllImport("L2DNative.dll")]
-        public static extern int GetParamFloatString(IntPtr model, string key, out float ret);
+        public static extern int GetParamFloatString(IntPtr model, IntPtr key, out float ret);
 
         [DllImport("L2DNative.dll")]
-        public static extern int AddToParamFloat(IntPtr model, string key, float value);
+        public static extern int AddToParamFloat(IntPtr model, IntPtr key, float value);
 
         [DllImport("L2DNative.dll")]
-        public static extern int MultParamFloat(IntPtr model, string key, float value);
+        public static extern int MultParamFloat(IntPtr model, IntPtr key, float value);
 
         [DllImport("L2DNative.dll")]
         public static extern int SetPartsOpacityInt(IntPtr model, int key, float value);
 
         [DllImport("L2DNative.dll")]
-        public static extern int SetPartsOpacityString(IntPtr model, string key, float value);
+        public static extern int SetPartsOpacityString(IntPtr model, IntPtr key, float value);
 
         [DllImport("L2DNative.dll")]
         public static extern int GetPartsOpacityInt(IntPtr model, int key, out float ret);
 
         [DllImport("L2DNative.dll")]
-        public static extern int GetPartsOpacityString(IntPtr model, string key, out float ret);
+        public static extern int GetPartsOpacityString(IntPtr model, IntPtr key, out float ret);
 
         [DllImport("L2DNative.dll")]
-        public static extern int GetParamIndex(IntPtr model, string key, out int ret);
+        public static extern int GetParamIndex(IntPtr model, IntPtr key, out int ret);
 
         [DllImport("L2DNative.dll")]
-        public static extern int GetPartsDataIndex(IntPtr model, string key, out int ret);
+        public static extern int GetPartsDataIndex(IntPtr model, IntPtr key, out int ret);
 
         [DllImport("L2DNative.dll")]
         public static extern int SaveParam(IntPtr model);
@@ -61,7 +61,7 @@ namespace L2DLib.Core
         public static extern int LoadParam(IntPtr model);
 
         [DllImport("L2DNative.dll")]
-        public static extern int LoadMotion(string motionPath, out long ret);
+        public static extern int LoadMotion(IntPtr motionPath, out long ret);
 
         [DllImport("L2DNative.dll")]
         public static extern int UpdateMotion(IntPtr model);
