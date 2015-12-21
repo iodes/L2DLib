@@ -1,5 +1,6 @@
 ﻿using System;
 using L2DLib.Core;
+using L2DLib.Utility;
 
 namespace L2DLib.Framework
 {
@@ -83,10 +84,23 @@ namespace L2DLib.Framework
         }
 
         /// <summary>
+        /// 자동 호흡 렌더링을 갱신합니다.
+        /// BeginRender() 함수와 EndRender() 함수 사이에서 호출되어야 합니다.
+        /// </summary>
+        public void UpdateBreath()
+        {
+            if (Model != null && Model.UseBreath)
+            {
+                double t = (L2DUtility.GetUserTimeMSec() / 1000.0) * 2 * 3.14;
+                Model.SetParamFloat("PARAM_BREATH", (float)(0.5f + 0.5f * Math.Sin(t / 3.2345)));
+            }
+        }
+
+        /// <summary>
         /// 자동 윙크 렌더링을 갱신합니다.
         /// BeginRender() 함수와 EndRender() 함수 사이에서 호출되어야 합니다.
         /// </summary>
-        public void EyeBlinkUpdate()
+        public void UpdateEyeBlink()
         {
             if (Model != null && Model.UseEyeBlink)
             {

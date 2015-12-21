@@ -60,6 +60,19 @@ namespace L2DLib.Framework
         private L2DPhysics[] _Physics;
 
         /// <summary>
+        /// 모델의 자동 호흡 기능의 사용 여부를 가져오거나 설정합니다.
+        /// </summary>
+        public bool UseBreath
+        {
+            get { return _UseBreath; }
+            set
+            {
+                _UseBreath = value;
+            }
+        }
+        private bool _UseBreath = false;
+
+        /// <summary>
         /// 모델의 자동 윙크 기능의 사용 여부를 가져오거나 설정합니다.
         /// </summary>
         public bool UseEyeBlink

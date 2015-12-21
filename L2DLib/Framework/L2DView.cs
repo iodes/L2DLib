@@ -115,7 +115,8 @@ namespace L2DLib.Framework
                         render.BeginRender();
                         render.UpdatePose();
                         render.UpdateMotion();
-                        render.EyeBlinkUpdate();
+                        render.UpdateBreath();
+                        render.UpdateEyeBlink();
                         Rendering();
                         render.UpdatePhysics();
                         render.EndRender();

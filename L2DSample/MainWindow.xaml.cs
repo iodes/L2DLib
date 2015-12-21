@@ -39,6 +39,9 @@ namespace L2DSample
             // 모델 불러오기
             model = L2DFunctions.LoadModel(@"Resources\haru\haru.model.json");
 
+            // 모델 자동 호흡 설정
+            model.UseBreath = true;
+
             // 모델 자동 윙크 설정
             model.UseEyeBlink = true;
 
