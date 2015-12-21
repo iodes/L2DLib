@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Interop;
 using System.Windows.Media;
+using System.Windows.Interop;
+using System.Windows.Controls;
 using System.Windows.Threading;
 using System.ComponentModel;
 using L2DLib.Core;
@@ -117,6 +117,7 @@ namespace L2DLib.Framework
                         render.UpdateMotion();
                         render.EyeBlinkUpdate();
                         Rendering();
+                        render.UpdatePhysics();
                         render.EndRender();
                     }
 

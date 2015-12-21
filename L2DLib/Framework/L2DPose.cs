@@ -1,7 +1,5 @@
-﻿using System.IO;
-using System.Linq;
+﻿using System.Linq;
 using System.Collections.Generic;
-using Newtonsoft.Json.Linq;
 
 namespace L2DLib.Framework
 {
@@ -9,68 +7,34 @@ namespace L2DLib.Framework
     {
         #region 속성
         /// <summary>
-        /// 파츠 그룹을 가져옵니다.
+        /// 파츠 그룹을 설정하거나 가져옵니다.
         /// </summary>
         public List<L2DParts>[] Groups
         {
             get { return _Groups; }
+            set
+            {
+                _Groups = value;
+            }
         }
         private List<L2DParts>[] _Groups;
 
         /// <summary>
-        /// 페이드인 시간을 가져옵니다.
+        /// 페이드 시간을 설정하거나 가져옵니다.
         /// </summary>
         public int FadeTime
         {
             get { return _FadeTime; }
+            set
+            {
+                _FadeTime = value;
+            }
         }
         private int _FadeTime = 500;
         #endregion
 
         #region 객체
         L2DModel lastModel;
-        #endregion
-
-        #region 생성자
-        public L2DPose(string path)
-        {
-            JObject jsonObject = JObject.Parse(File.ReadAllText(path));
-
-            JToken fadeTime;
-            jsonObject.TryGetValue("fade_in", out fadeTime);
-            if (fadeTime != null)
-            {
-                _FadeTime = fadeTime.Value<int>();
-            }
-
-            List<List<L2DParts>> groupList = new List<List<L2DParts>>();
-            foreach (JObject partsResult in jsonObject["parts_visible"].Children().ToList())
-            {
-                List<L2DParts> partsGroup = new List<L2DParts>();
-                foreach (JObject groupResult in partsResult["group"].Children().ToList())
-                {
-                    string id = groupResult.GetValue("id").Value<string>();
-                    List<L2DParts> linkList = new List<L2DParts>();
-
-                    JToken resultLink;
-                    groupResult.TryGetValue("link", out resultLink);
-                    if (resultLink != null)
-                    {
-                        foreach (JValue linkResult in resultLink.Children().ToList())
-                        {
-                            L2DParts linkParts = new L2DParts(linkResult.Value<string>());
-                            linkList.Add(linkParts);
-                        }
-                    }
-
-                    partsGroup.Add(new L2DParts(id, linkList.ToArray()));
-                }
-
-                groupList.Add(partsGroup);
-            }
-
-            _Groups = groupList.ToArray();
-        }
         #endregion
 
         #region 내부 함수

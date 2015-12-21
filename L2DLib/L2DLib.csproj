@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="Framework\L2DMotion.cs" />
     <Compile Include="Framework\L2DParts.cs" />
+    <Compile Include="Framework\L2DPhysics.cs" />
     <Compile Include="Framework\L2DPose.cs" />
     <Compile Include="Framework\L2DSound.cs" />
     <Compile Include="Framework\L2DView.cs" />
@@ -63,7 +64,7 @@
     <Compile Include="Framework\L2DBase.cs" />
     <Compile Include="Framework\L2DModel.cs" />
     <Compile Include="Framework\L2DRender.cs" />
-    <Compile Include="Framework\L2DUtility.cs" />
+    <Compile Include="Utility\L2DUtility.cs" />
     <Compile Include="Interface\IL2DRenderer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

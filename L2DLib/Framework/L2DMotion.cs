@@ -10,6 +10,15 @@ namespace L2DLib.Framework
     {
         #region 속성
         /// <summary>
+        /// 대상의 경로를 가져옵니다.
+        /// </summary>
+        public string Path
+        {
+            get { return _Path; }
+        }
+        protected string _Path;
+
+        /// <summary>
         /// 모션 재생시 재생될 사운드 파일입니다.
         /// </summary>
         public L2DSound Sound
@@ -101,7 +110,7 @@ namespace L2DLib.Framework
         /// <param name="msec">애니메이션을 진행할 밀리초단위의 시간입니다.</param>
         public void SetFadeIn(int msec)
         {
-            HRESULT.Check(NativeMethods.SetFadeIn(new IntPtr(Handle), new IntPtr(msec)));
+            HRESULT.Check(NativeMethods.SetFadeIn(new IntPtr(Handle), msec));
             _FadeIn = msec;
         }
 
@@ -111,7 +120,7 @@ namespace L2DLib.Framework
         /// <param name="msec">애니메이션을 진행할 밀리초단위의 시간입니다.</param>
         public void SetFadeOut(int msec)
         {
-            HRESULT.Check(NativeMethods.SetFadeOut(new IntPtr(Handle), new IntPtr(msec)));
+            HRESULT.Check(NativeMethods.SetFadeOut(new IntPtr(Handle), msec));
             _FadeOut = msec;
         }
 

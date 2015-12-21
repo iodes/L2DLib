@@ -12,7 +12,16 @@ namespace L2DLib.Framework
     {
         #region 속성
         /// <summary>
-        /// 렌더러의 포즈를 설정합니다.
+        /// 대상의 경로를 가져옵니다.
+        /// </summary>
+        public string Path
+        {
+            get { return _Path; }
+        }
+        protected string _Path;
+
+        /// <summary>
+        /// 모델의 포즈를 설정하거나 가져옵니다.
         /// </summary>
         public L2DPose Pose
         {
@@ -25,7 +34,7 @@ namespace L2DLib.Framework
         private L2DPose _Pose;
 
         /// <summary>
-        /// 렌더러가 표시할 모델을 가져옵니다.
+        /// 모델의 모션을 설정하거나 가져옵니다.
         /// </summary>
         public Dictionary<string, L2DMotion[]> Motion
         {
@@ -38,7 +47,20 @@ namespace L2DLib.Framework
         private Dictionary<string, L2DMotion[]> _Motion;
 
         /// <summary>
-        /// 자동 윙크 기능의 사용 여부를 가져오거나 설정합니다.
+        /// 모델의 물리를 설정하거나 가져옵니다.
+        /// </summary>
+        public L2DPhysics[] Physics
+        {
+            get { return _Physics; }
+            set
+            {
+                _Physics = value;
+            }
+        }
+        private L2DPhysics[] _Physics;
+
+        /// <summary>
+        /// 모델의 자동 윙크 기능의 사용 여부를 가져오거나 설정합니다.
         /// </summary>
         public bool UseEyeBlink
         {

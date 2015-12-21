@@ -70,16 +70,31 @@ namespace L2DLib.Core
         public static extern int EyeBlinkUpdate(IntPtr model);
 
         [DllImport("L2DNative.dll")]
-        public static extern int SetFadeIn(IntPtr motion, IntPtr msec);
+        public static extern int SetFadeIn(IntPtr motion, int msec);
 
         [DllImport("L2DNative.dll")]
-        public static extern int SetFadeOut(IntPtr motion, IntPtr msec);
+        public static extern int SetFadeOut(IntPtr motion, int msec);
 
         [DllImport("L2DNative.dll")]
         public static extern int SetLoop(IntPtr motion, bool loop);
 
         [DllImport("L2DNative.dll")]
         public static extern int StartMotion(IntPtr motion);
+
+        [DllImport("L2DNative.dll")]
+        public static extern int CreatePhysics(out long ret);
+
+        [DllImport("L2DNative.dll")]
+        public static extern int PhysicsSetup(IntPtr physicsHandler, float baseLengthM, float airRegistance, float mass);
+
+        [DllImport("L2DNative.dll")]
+        public static extern int PhysicsUpdate(IntPtr physicsHandler, IntPtr model, long time);
+
+        [DllImport("L2DNative.dll")]
+        public static extern int PhysicsAddSrcParam(IntPtr physicsHandler, IntPtr srcType, IntPtr paramID, float scale, float weight);
+
+        [DllImport("L2DNative.dll")]
+        public static extern int PhysicsAddTargetParam(IntPtr physicsHandler, IntPtr targetType, IntPtr paramID, float scale, float weight);
 
         [DllImport("L2DNative.dll")]
         public static extern int BeginRender(IntPtr model);
@@ -89,6 +104,9 @@ namespace L2DLib.Core
 
         [DllImport("L2DNative.dll")]
         public static extern int Dispose();
+
+        [DllImport("L2DNative.dll")]
+        public static extern int GetUserTimeMSec(out long ret);
         #endregion
 
         #region DirectX

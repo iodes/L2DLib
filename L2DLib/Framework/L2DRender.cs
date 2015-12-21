@@ -56,6 +56,21 @@ namespace L2DLib.Framework
         }
 
         /// <summary>
+        /// 물리 렌더링을 갱신합니다.
+        /// BeginRender() 함수와 EndRender() 함수 사이에서 호출되어야 합니다.
+        /// </summary>
+        public void UpdatePhysics()
+        {
+            if (Model.Physics != null && Model.Physics?.Length > 0)
+            {
+                foreach (L2DPhysics physics in Model.Physics)
+                {
+                    physics.UpdateParam(Model);
+                }
+            }
+        }
+
+        /// <summary>
         /// 모션 렌더링을 갱신합니다.
         /// BeginRender() 함수와 EndRender() 함수 사이에서 호출되어야 합니다.
         /// </summary>
