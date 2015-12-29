@@ -46,6 +46,13 @@ public:
 	void PhysicsAddSrcParam(long physicsHandler, const char* srcType, const char * paramID, float scale, float weight);
 	void PhysicsAddTargetParam(long phsyicsHandler, const char* targetType, const char* paramID, float scale, float weight);
 	void PhysicsUpdate(long physicsHandler, long hModel, INT64 time);
+	
+	long CreateExpression();
+	void StartExpression(long expressionHandler);
+	void ExpressionSetFadeIn(long expressionHandler, int FadeInMSec);
+	void ExpressionSetFadeOut(long expressionHandler, int FadeOutMSec);
+	void ExpressionAddParam(long expressionHandler, char* paramID, char* calc, float value, float defaultValue);
+	void ExpressionAddParamV09(long expressionHandler, char* paramID, float value, float defaultValue);
 
 	INT64 GetUserTimeMSec();
 	HRESULT BeginRender(long hModel);

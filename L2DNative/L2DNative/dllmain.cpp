@@ -366,16 +366,17 @@ Cleanup:
 #pragma endregion
 
 #pragma region [   Physics   ]
-extern "C" HRESULT WINAPI CreatePhysics(long* physicsHandler)
+extern "C" HRESULT WINAPI CreatePhysics(long* ret)
 {
 	HRESULT hr = S_OK;
 	IFC(EnsureRendererManager());
 
-	*physicsHandler = pManager->CreatePhysics();
+	*ret = pManager->CreatePhysics();
 
 Cleanup:
 	return hr;
 }
+
 extern "C" HRESULT WINAPI PhysicsSetup(long physicsHandler, float baseLengthM, float airRegistance, float mass)
 {
 	HRESULT hr = S_OK;
@@ -386,6 +387,7 @@ extern "C" HRESULT WINAPI PhysicsSetup(long physicsHandler, float baseLengthM, f
 Cleanup:
 	return hr;
 }
+
 extern "C" HRESULT WINAPI PhysicsAddSrcParam(long physicsHandler, const char* srcType, const char * paramID, float scale, float weight)
 {
 	HRESULT hr = S_OK;
@@ -396,6 +398,7 @@ extern "C" HRESULT WINAPI PhysicsAddSrcParam(long physicsHandler, const char* sr
 Cleanup:
 	return hr;
 }
+
 extern "C" HRESULT WINAPI PhysicsAddTargetParam(long physicsHandler, const char* targetType, const char * paramID, float scale, float weight)
 {
 	HRESULT hr = S_OK;
@@ -413,6 +416,74 @@ extern "C" HRESULT WINAPI PhysicsUpdate(long physicsHandler, long hModel, INT64 
 	IFC(EnsureRendererManager());
 
 	pManager->PhysicsUpdate(physicsHandler, hModel, time);
+
+Cleanup:
+	return hr;
+}
+#pragma endregion
+
+#pragma region [   Expression   ]
+extern "C" HRESULT WINAPI CreateExpression(long* ret)
+{
+	HRESULT hr = S_OK;
+	IFC(EnsureRendererManager());
+
+	*ret = pManager->CreateExpression();
+
+Cleanup:
+	return hr;
+}
+
+extern "C" HRESULT WINAPI StartExpression(long expressionHandler)
+{
+	HRESULT hr = S_OK;
+	IFC(EnsureRendererManager());
+
+	pManager->StartExpression(expressionHandler);
+
+Cleanup:
+	return hr;
+}
+
+extern "C" HRESULT WINAPI ExpressionSetFadeIn(long expressionHandler, int FadeInMSec)
+{
+	HRESULT hr = S_OK;
+	IFC(EnsureRendererManager());
+
+	pManager->ExpressionSetFadeIn(expressionHandler, FadeInMSec);
+
+Cleanup:
+	return hr;
+}
+
+extern "C" HRESULT WINAPI ExpressionSetFadeOut(long expressionHandler, int FadeOutMSec)
+{
+	HRESULT hr = S_OK;
+	IFC(EnsureRendererManager());
+
+	pManager->ExpressionSetFadeOut(expressionHandler, FadeOutMSec);
+
+Cleanup:
+	return hr;
+}
+
+extern "C" HRESULT WINAPI ExpressionAddParam(long expressionHandler, char* paramID, char* calc, float value, float defaultValue)
+{
+	HRESULT hr = S_OK;
+	IFC(EnsureRendererManager());
+
+	pManager->ExpressionAddParam(expressionHandler, paramID, calc, value, defaultValue);
+
+Cleanup:
+	return hr;
+}
+
+extern "C" HRESULT WINAPI ExpressionAddParamV09(long expressionHandler, char* paramID, float value, float defaultValue)
+{
+	HRESULT hr = S_OK;
+	IFC(EnsureRendererManager());
+
+	pManager->ExpressionAddParamV09(expressionHandler, paramID, value, defaultValue);
 
 Cleanup:
 	return hr;

@@ -153,6 +153,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="L2DExpressionMotion.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="RendererL2D.h" />
     <ClInclude Include="RendererManager.h" />
@@ -174,6 +175,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="L2DExpressionMotion.cpp" />
     <ClCompile Include="L2DNative.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="RendererL2D.cpp" />

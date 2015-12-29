@@ -5,6 +5,7 @@
 #include "motion\MotionQueueManager.h"
 #include "motion\EyeBlinkMotion.h" 
 #include "physics\PhysicsHair.h"
+#include "L2DExpressionMotion.h"
 #include <vector>
 
 using std::vector;
@@ -65,6 +66,16 @@ public:
 	void PhysicsAddTargetParam(long phsyicsHandler, const char* targetType, const char* paramID, float scale, float weight);
 	void PhysicsUpdate(long physicsHandler, long hModel, INT64 time);
 
+
+	live2d::framework::L2DExpressionMotion* GetExpression(long expressionHandler);
+	long AddExpression(live2d::framework::L2DExpressionMotion* expression);
+	long CreateExpression();
+	void StartExpression(long expressionHandler);
+	void ExpressionSetFadeIn(long expressionHandler, int FadeInMSec);
+	void ExpressionSetFadeOut(long expressionHandler, int FadeOutMSec);
+	void ExpressionAddParam(long expressionHandler, char* paramID, char* calc, float value, float defaultValue);
+	void ExpressionAddParamV09(long expressionHandler, char* paramID, float value, float defaultValue);
+
 	INT64 GetUserTimeMSec();
 	HRESULT BeginRender(long hModel);
 	HRESULT EndRender(long hModel);
@@ -80,6 +91,7 @@ private:
 	vector<vector<Texture>> m_textures;
 	vector<Motion*> m_motions;
 	vector<live2d::PhysicsHair*> m_physics;
+	vector<live2d::framework::L2DExpressionMotion*> m_expression;
 #pragma endregion
 
 	live2d::MotionQueueManager* m_motionManager;

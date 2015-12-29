@@ -777,6 +777,43 @@ void CRendererManager::PhysicsUpdate(long physicsHandler, long hModel, INT64 tim
 }
 #pragma endregion
 
+#pragma region [   Expression   ]
+long CRendererManager::CreateExpression()
+{
+	return m_pCurrentRenderer ? m_pCurrentRenderer->CreateExpression() : 0;
+}
+
+void CRendererManager::StartExpression(long expressionHandler)
+{
+	if (m_pCurrentRenderer)
+		m_pCurrentRenderer->StartExpression(expressionHandler);
+}
+
+void CRendererManager::ExpressionSetFadeIn(long expressionHandler, int FadeInMSec)
+{
+	if (m_pCurrentRenderer)
+		m_pCurrentRenderer->ExpressionSetFadeIn(expressionHandler, FadeInMSec);
+}
+
+void CRendererManager::ExpressionSetFadeOut(long expressionHandler, int FadeOutMSec)
+{
+	if (m_pCurrentRenderer)
+		m_pCurrentRenderer->ExpressionSetFadeOut(expressionHandler, FadeOutMSec);
+}
+
+void CRendererManager::ExpressionAddParam(long expressionHandler, char* paramID, char* calc, float value, float defaultValue)
+{
+	if (m_pCurrentRenderer)
+		m_pCurrentRenderer->ExpressionAddParam(expressionHandler, paramID, calc, value, defaultValue);
+}
+
+void CRendererManager::ExpressionAddParamV09(long expressionHandler, char* paramID, float value, float defaultValue)
+{
+	if (m_pCurrentRenderer)
+		m_pCurrentRenderer->ExpressionAddParamV09(expressionHandler, paramID, value, defaultValue);
+}
+#pragma endregion
+
 #pragma region [   Live2D   ]
 INT64 CRendererManager::GetUserTimeMSec()
 {

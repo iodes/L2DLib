@@ -40,6 +40,13 @@ PhysicsAddSrcParam
 PhysicsAddTargetParam
 PhysicsUpdate
 
+CreateExpression
+StartExpression
+ExpressionSetFadeIn
+ExpressionSetFadeOut
+ExpressionAddParam
+ExpressionAddParamV09
+
 EyeBlinkUpdate
 
 GetUserTimeMSec

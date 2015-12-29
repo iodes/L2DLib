@@ -41,6 +41,13 @@ public:
 	virtual void PhysicsAddTargetParam(long phsyicsHandler, const char* targetType, const char* paramID, float scale, float weight) = 0;
 	virtual void PhysicsUpdate(long physicsHandler, long hModel, INT64 time) = 0;
 
+	virtual long CreateExpression() = 0;
+	virtual void StartExpression(long expressionHandler) = 0;
+	virtual void ExpressionSetFadeIn(long expressionHandler, int FadeInMSec) = 0;
+	virtual void ExpressionSetFadeOut(long expressionHandler, int FadeOutMSec) = 0;
+	virtual void ExpressionAddParam(long expressionHandler, char* paramID, char* calc, float value, float defaultValue) = 0;
+	virtual void ExpressionAddParamV09(long expressionHandler, char* paramID, float value, float defaultValue) = 0;
+
 	virtual INT64 GetUserTimeMSec() = 0;
 	virtual HRESULT BeginRender(long hModel) = 0;
 	virtual HRESULT EndRender(long hModel) = 0;

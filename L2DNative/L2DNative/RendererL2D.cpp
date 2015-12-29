@@ -532,6 +532,58 @@ void CRendererL2D::PhysicsUpdate(long physicsHandler, long hModel, INT64 time)
 }
 #pragma endregion
 
+#pragma region [   Expression   ]
+live2d::framework::L2DExpressionMotion* CRendererL2D::GetExpression(long expressionHandler)
+{
+	return m_expression[expressionHandler];
+}
+
+long CRendererL2D::AddExpression(live2d::framework::L2DExpressionMotion* expression)
+{
+	m_expression.push_back(expression);
+
+	return m_expression.size();
+}
+
+long CRendererL2D::CreateExpression()
+{
+	live2d::framework::L2DExpressionMotion* expression = new live2d::framework::L2DExpressionMotion();
+	long expressionHandler = AddExpression(expression);
+
+	return expressionHandler;
+}
+
+void CRendererL2D::StartExpression(long expressionHandler)
+{
+	live2d::framework::L2DExpressionMotion* expression = GetExpression(expressionHandler);
+	m_motionManager->startMotion(expression, false);
+}
+
+void CRendererL2D::ExpressionSetFadeIn(long expressionHandler, int FadeInMSec)
+{
+	live2d::framework::L2DExpressionMotion* expression = GetExpression(expressionHandler);
+	expression->setFadeIn(FadeInMSec);
+}
+
+void CRendererL2D::ExpressionSetFadeOut(long expressionHandler, int FadeOutMSec)
+{
+	live2d::framework::L2DExpressionMotion* expression = GetExpression(expressionHandler);
+	expression->setFadeOut(FadeOutMSec);
+}
+
+void CRendererL2D::ExpressionAddParam(long expressionHandler, char* paramID, char* calc, float value, float defaultValue)
+{
+	live2d::framework::L2DExpressionMotion* expression = GetExpression(expressionHandler);
+	expression->addParam(paramID, calc, value, defaultValue);
+}
+
+void CRendererL2D::ExpressionAddParamV09(long expressionHandler, char* paramID, float value, float defaultValue)
+{
+	live2d::framework::L2DExpressionMotion* expression = GetExpression(expressionHandler);
+	expression->addParamV09(paramID, value, defaultValue);
+}
+#pragma endregion
+
 #pragma region [   Live2D   ]
 INT64 CRendererL2D::GetUserTimeMSec()
 {
