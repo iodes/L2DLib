@@ -25,10 +25,7 @@ namespace L2DLib.Framework
         public L2DSound Sound
         {
             get { return _Sound; }
-            set
-            {
-                _Sound = value;
-            }
+            set { _Sound = value; }
         }
         private L2DSound _Sound;
 
