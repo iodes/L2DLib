@@ -535,7 +535,7 @@ void CRendererL2D::PhysicsUpdate(long physicsHandler, long hModel, INT64 time)
 #pragma region [   Expression   ]
 live2d::framework::L2DExpressionMotion* CRendererL2D::GetExpression(long expressionHandler)
 {
-	return m_expression[expressionHandler];
+	return m_expression[expressionHandler - 1];
 }
 
 long CRendererL2D::AddExpression(live2d::framework::L2DExpressionMotion* expression)
