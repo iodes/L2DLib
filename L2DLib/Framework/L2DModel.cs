@@ -26,10 +26,7 @@ namespace L2DLib.Framework
         public L2DPose Pose
         {
             get { return _Pose; }
-            set
-            {
-                _Pose = value;
-            }
+            set { _Pose = value; }
         }
         private L2DPose _Pose;
 
@@ -39,10 +36,7 @@ namespace L2DLib.Framework
         public Dictionary<string, L2DMotion[]> Motion
         {
             get { return _Motion; }
-            set
-            {
-                _Motion = value;
-            }
+            set { _Motion = value; }
         }
         private Dictionary<string, L2DMotion[]> _Motion;
 
@@ -52,10 +46,7 @@ namespace L2DLib.Framework
         public L2DPhysics[] Physics
         {
             get { return _Physics; }
-            set
-            {
-                _Physics = value;
-            }
+            set { _Physics = value; }
         }
         private L2DPhysics[] _Physics;
 
@@ -65,10 +56,7 @@ namespace L2DLib.Framework
         public bool UseBreath
         {
             get { return _UseBreath; }
-            set
-            {
-                _UseBreath = value;
-            }
+            set { _UseBreath = value; }
         }
         private bool _UseBreath = false;
 
@@ -78,10 +66,7 @@ namespace L2DLib.Framework
         public bool UseEyeBlink
         {
             get { return _UseEyeBlink; }
-            set
-            {
-                _UseEyeBlink = value;
-            }
+            set { _UseEyeBlink = value; }
         }
         private bool _UseEyeBlink = false;
         #endregion

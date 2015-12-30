@@ -12,10 +12,7 @@ namespace L2DLib.Framework
         public List<L2DParts>[] Groups
         {
             get { return _Groups; }
-            set
-            {
-                _Groups = value;
-            }
+            set { _Groups = value; }
         }
         private List<L2DParts>[] _Groups;
 
@@ -25,10 +22,7 @@ namespace L2DLib.Framework
         public int FadeTime
         {
             get { return _FadeTime; }
-            set
-            {
-                _FadeTime = value;
-            }
+            set { _FadeTime = value; }
         }
         private int _FadeTime = 500;
         #endregion
