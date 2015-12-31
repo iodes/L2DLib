@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using L2DLib.Utility;
 using L2DLib.Framework;
+using Microsoft.Win32;
 
 namespace L2DSample
 {
@@ -25,26 +26,17 @@ namespace L2DSample
         }
         #endregion
 
-        private void BtnReset_Click(object sender, RoutedEventArgs e)
+        #region 내부 함수
+        private void ReleaseCheck()
         {
-            // 모델 메모리 해제
-            model.Dispose();
+            if (model != null)
+            {
+                model.Dispose();
+            }
         }
 
-        private void BtnMotion_Click(object sender, RoutedEventArgs e)
+        private void UpdateConfig()
         {
-            // 무작위 모션 재생
-            L2DMotion[] motions = model.Motion["tap_body"];
-            L2DMotion motion = motions[rnd.Next(0, motions.Length)];
-            motion.StartMotion();
-        }
-
-        private void LoadModelJSON_Click(object sender, RoutedEventArgs e)
-        {
-            // Live2D
-            // 모델 불러오기
-            model = L2DFunctions.LoadModel(@"Resources\haru\haru.model.json");
-
             // 모델 자동 호흡 설정
             model.UseBreath = true;
 
@@ -53,35 +45,119 @@ namespace L2DSample
 
             // 렌더러에 대상 모델 설정
             RenderView.Model = model;
+        }
+        #endregion
 
-            // Application
-            // 모션 목록 갱신
-            foreach (L2DMotion[] group in model.Motion.Values)
+        private void LoadModel_Click(object sender, RoutedEventArgs e)
+        {
+            try
             {
-                foreach (L2DMotion motion in group)
+                OpenFileDialog dialog = new OpenFileDialog
                 {
-                    ListMotion.Items.Add(Path.GetFileName(motion.Path));
+                    Filter = "MOC 모델|*.moc"
+                };
+
+                bool? result = dialog.ShowDialog();
+                if (result == true)
+                {
+                    // 모델 초기화
+                    if (model != null)
+                    {
+                        model.Dispose();
+                    }
+
+                    // 모델 불러오기
+                    ReleaseCheck();
+                    model = new L2DModel(dialog.FileName);
+
+                    // 텍스처 불러오기
+                    string texrueParh =
+                        string.Format("{0}\\{1}.1024",
+                        new FileInfo(dialog.FileName).Directory.FullName,
+                        Path.GetFileNameWithoutExtension(dialog.FileName));
+
+                    if (Directory.Exists(texrueParh))
+                    {
+                        model.SetTexture(Directory.GetFiles(texrueParh));
+                    }
+
+                    // 설정 업데이트
+                    UpdateConfig();
                 }
             }
-
-            // 표정 목록 갱신
-            for (int i = 0; i < model.Expression.Count; i++)
+            catch (Exception ex)
             {
-                ListExpression.Items.Add(model.Expression.Keys.ElementAt(i));
+                MessageBox.Show(ex.Message, "오류", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void LoadModelJSON_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                OpenFileDialog dialog = new OpenFileDialog
+                {
+                    Filter = "JSON 모델 구성|*.json"
+                };
+
+                bool? result = dialog.ShowDialog();
+                if (result == true)
+                {
+                    // Live2D
+                    // 모델 불러오기
+                    ReleaseCheck();
+                    model = L2DFunctions.LoadModel(dialog.FileName);
+
+                    // 설정 업데이트
+                    UpdateConfig();
+
+                    // Application
+                    // 목록 초기화
+                    ListMotion.Items.Clear();
+                    ListExpression.Items.Clear();
+
+                    // 모션 목록 갱신
+                    if (model.Motion != null)
+                    {
+                        foreach (L2DMotion[] group in model.Motion.Values)
+                        {
+                            foreach (L2DMotion motion in group)
+                            {
+                                ListMotion.Items.Add(Path.GetFileName(motion.Path));
+                            }
+                        }
+                    }
+
+                    // 표정 목록 갱신
+                    if (model.Expression != null)
+                    {
+                        for (int i = 0; i < model.Expression.Count; i++)
+                        {
+                            ListExpression.Items.Add(model.Expression.Keys.ElementAt(i));
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "오류", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
         private void ListMotion_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             // 모션 선택 이벤트
-            foreach (L2DMotion[] group in model.Motion.Values)
+            if (model.Motion != null)
             {
-                foreach (L2DMotion motion in group)
+                foreach (L2DMotion[] group in model.Motion.Values)
                 {
-                    if (Path.GetFileName(motion.Path) == ListMotion.SelectedItem.ToString())
+                    foreach (L2DMotion motion in group)
                     {
-                        motion.StartMotion();
-                        break;
+                        if (Path.GetFileName(motion.Path) == ListMotion.SelectedItem.ToString())
+                        {
+                            motion.StartMotion();
+                            break;
+                        }
                     }
                 }
             }
@@ -90,7 +166,25 @@ namespace L2DSample
         private void ListExpression_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             // 표정 선택 이벤트
-            model.Expression.Values.ElementAt(ListExpression.SelectedIndex).StartExpression();
+            if (model.Expression != null)
+            {
+                model.Expression.Values.ElementAt(ListExpression.SelectedIndex).StartExpression();
+            }
+        }
+
+        private void UseBreath_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("기능 준비중입니다.");
+        }
+
+        private void UseEyeBlink_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("기능 준비중입니다.");
+        }
+
+        private void About_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Live2D For WPF\nPowered By. Managed Live2D", "프로그램 정보", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }

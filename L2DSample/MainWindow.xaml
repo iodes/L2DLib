@@ -17,14 +17,15 @@
             <Grid>
                 <Menu Background="{x:Null}" VerticalAlignment="Center" Margin="10,0" Foreground="#FF6A6D7C" >
                     <MenuItem Header="파일(F)" Height="25">
-                        <MenuItem x:Name="LoadModelJSON" Header="JSON 모델 불러오기" FontWeight="Normal" Foreground="Black" Click="LoadModelJSON_Click"/>
+                        <MenuItem x:Name="LoadModel" Header="모델 불러오기" FontWeight="Normal" Foreground="Black" Click="LoadModel_Click"/>
+                        <MenuItem x:Name="LoadModelJSON" Header="모델 구성 불러오기" FontWeight="Normal" Foreground="Black" Click="LoadModelJSON_Click"/>
                     </MenuItem>
                     <MenuItem Header="애니메이션(A)" Height="25">
-                        <MenuItem Header="자동 호흡 사용" Foreground="Black"/>
-                        <MenuItem Header="자동 윙크 사용" Foreground="Black"/>
+                        <MenuItem x:Name="UseBreath" Header="자동 호흡 사용" Foreground="Black" Click="UseBreath_Click"/>
+                        <MenuItem x:Name="UseEyeBlink" Header="자동 윙크 사용" Foreground="Black" Click="UseEyeBlink_Click"/>
                     </MenuItem>
                     <MenuItem Header="도움말(H)" Height="25">
-                        
+                        <MenuItem x:Name="About" Header="프로그램 정보" Foreground="Black" Click="About_Click"/>
                     </MenuItem>
                 </Menu>
             </Grid>
