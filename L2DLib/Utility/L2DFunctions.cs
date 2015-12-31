@@ -268,13 +268,13 @@ namespace L2DLib.Utility
                     if (resultCalc != null)
                     {
                         calc = resultCalc.Value<string>();
+                    }
 
-                        JToken resultDef;
-                        json.TryGetValue("def", out resultDef);
-                        if (resultDef != null)
-                        {
-                            defaultValue = resultDef.Value<float>();
-                        }
+                    JToken resultDef;
+                    json.TryGetValue("def", out resultDef);
+                    if (resultDef != null)
+                    {
+                        defaultValue = resultDef.Value<float>();
                     }
 
                     expression.AddParam(paramID, calc, value, defaultValue);
