@@ -136,6 +136,7 @@ namespace L2DLib.Utility
             {
                 model.Pose = LoadPose(posePath);
             }
+            model.SaveParam();
 
             return model;
         }

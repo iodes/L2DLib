@@ -95,6 +95,7 @@ namespace L2DLib.Framework
         {
             _Path = path;
             HRESULT.Check(NativeMethods.LoadModel(Marshal.StringToHGlobalAnsi(path), out _Handle));
+            SaveParam();
             IsModelLoaded = true;
             SetLoaded();
         }

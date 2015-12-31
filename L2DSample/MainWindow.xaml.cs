@@ -1,19 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using L2DLib.Framework;
 using L2DLib.Utility;
+using L2DLib.Framework;
 
 namespace L2DSample
 {
@@ -69,7 +60,7 @@ namespace L2DSample
             {
                 foreach (L2DMotion motion in group)
                 {
-                    ListMotion.Items.Add(System.IO.Path.GetFileName(motion.Path));
+                    ListMotion.Items.Add(Path.GetFileName(motion.Path));
                 }
             }
 
@@ -87,7 +78,7 @@ namespace L2DSample
             {
                 foreach (L2DMotion motion in group)
                 {
-                    if (System.IO.Path.GetFileName(motion.Path) == ListMotion.SelectedItem.ToString())
+                    if (Path.GetFileName(motion.Path) == ListMotion.SelectedItem.ToString())
                     {
                         motion.StartMotion();
                         break;

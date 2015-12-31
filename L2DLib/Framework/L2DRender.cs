@@ -79,9 +79,7 @@ namespace L2DLib.Framework
         {
             if (Model != null && Model.Motion?.Count > 0)
             {
-                Model.LoadParam();
                 HRESULT.Check(NativeMethods.UpdateMotion(new IntPtr(Model.Handle)));
-                Model.SaveParam();
             }
         }
 

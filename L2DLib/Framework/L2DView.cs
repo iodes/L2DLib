@@ -123,13 +123,20 @@ namespace L2DLib.Framework
                     if (Model != null && Model.IsLoaded)
                     {
                         render.BeginRender();
+
+                        Model.LoadParam();
                         render.UpdateMotion();
                         render.UpdateEyeBlink();
-                        render.UpdateExpression();
+                        Model.SaveParam();
+
                         render.UpdateBreath();
+                        render.UpdateExpression();
+
                         Rendering();
+
                         render.UpdatePhysics();
                         render.UpdatePose();
+
                         render.EndRender();
                     }
 
