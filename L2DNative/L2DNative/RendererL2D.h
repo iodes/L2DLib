@@ -75,6 +75,7 @@ public:
 	void ExpressionSetFadeOut(long expressionHandler, int FadeOutMSec);
 	void ExpressionAddParam(long expressionHandler, char* paramID, char* calc, float value, float defaultValue);
 	void ExpressionAddParamV09(long expressionHandler, char* paramID, float value, float defaultValue);
+	void UpdateExpression(long hModel);
 
 	INT64 GetUserTimeMSec();
 	HRESULT BeginRender(long hModel);
@@ -95,6 +96,7 @@ private:
 #pragma endregion
 
 	live2d::MotionQueueManager* m_motionManager;
+	live2d::MotionQueueManager* m_expressionManager;
 	live2d::EyeBlinkMotion* m_eyeBlink;
 
 	CRendererL2D();

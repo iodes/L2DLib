@@ -34,21 +34,6 @@ namespace L2DSample
         }
         #endregion
 
-        private void BtnLoad_Click(object sender, RoutedEventArgs e)
-        {
-            // 모델 불러오기
-            model = L2DFunctions.LoadModel(@"Resources\haru\haru.model.json");
-
-            // 모델 자동 호흡 설정
-            model.UseBreath = true;
-
-            // 모델 자동 윙크 설정
-            model.UseEyeBlink = true;
-
-            // 렌더러에 대상 모델 설정
-            RenderView.Model = model;
-        }
-
         private void BtnReset_Click(object sender, RoutedEventArgs e)
         {
             // 모델 메모리 해제
@@ -61,6 +46,60 @@ namespace L2DSample
             L2DMotion[] motions = model.Motion["tap_body"];
             L2DMotion motion = motions[rnd.Next(0, motions.Length)];
             motion.StartMotion();
+        }
+
+        private void LoadModelJSON_Click(object sender, RoutedEventArgs e)
+        {
+            // Live2D
+            // 모델 불러오기
+            model = L2DFunctions.LoadModel(@"Resources\haru\haru.model.json");
+
+            // 모델 자동 호흡 설정
+            model.UseBreath = true;
+
+            // 모델 자동 윙크 설정
+            model.UseEyeBlink = true;
+
+            // 렌더러에 대상 모델 설정
+            RenderView.Model = model;
+
+            // Application
+            // 모션 목록 갱신
+            foreach (L2DMotion[] group in model.Motion.Values)
+            {
+                foreach (L2DMotion motion in group)
+                {
+                    ListMotion.Items.Add(System.IO.Path.GetFileName(motion.Path));
+                }
+            }
+
+            // 표정 목록 갱신
+            for (int i = 0; i < model.Expression.Count; i++)
+            {
+                ListExpression.Items.Add(model.Expression.Keys.ElementAt(i));
+            }
+        }
+
+        private void ListMotion_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // 모션 선택 이벤트
+            foreach (L2DMotion[] group in model.Motion.Values)
+            {
+                foreach (L2DMotion motion in group)
+                {
+                    if (System.IO.Path.GetFileName(motion.Path) == ListMotion.SelectedItem.ToString())
+                    {
+                        motion.StartMotion();
+                        break;
+                    }
+                }
+            }
+        }
+
+        private void ListExpression_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // 표정 선택 이벤트
+            model.Expression.Values.ElementAt(ListExpression.SelectedIndex).StartExpression();
         }
     }
 }

@@ -108,6 +108,7 @@ CRendererL2D::Init(IDirect3D9 *pD3D, HWND hwnd, UINT uAdapter)
 	// 엔진 초기화
 	live2d::Live2D::init();
 	m_motionManager = new live2d::MotionQueueManager();
+	m_expressionManager = new live2d::MotionQueueManager();
 	m_eyeBlink = new live2d::EyeBlinkMotion();
 
 Cleanup:
@@ -556,7 +557,7 @@ long CRendererL2D::CreateExpression()
 void CRendererL2D::StartExpression(long expressionHandler)
 {
 	live2d::framework::L2DExpressionMotion* expression = GetExpression(expressionHandler);
-	m_motionManager->startMotion(expression, false);
+	m_expressionManager->startMotion(expression, false);
 }
 
 void CRendererL2D::ExpressionSetFadeIn(long expressionHandler, int FadeInMSec)
@@ -581,6 +582,12 @@ void CRendererL2D::ExpressionAddParamV09(long expressionHandler, char* paramID, 
 {
 	live2d::framework::L2DExpressionMotion* expression = GetExpression(expressionHandler);
 	expression->addParamV09(paramID, value, defaultValue);
+}
+
+void CRendererL2D::UpdateExpression(long hModel)
+{
+	Model* model = GetModel(hModel);
+	m_expressionManager->updateParam(model);
 }
 #pragma endregion
 

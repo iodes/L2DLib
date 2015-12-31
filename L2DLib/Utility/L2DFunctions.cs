@@ -27,8 +27,9 @@ namespace L2DLib.Utility
             string[] texturePath;
             string physicsPath = null;
             string posePath = null;
-            Dictionary<string, L2DMotion[]> motionDictionary = new Dictionary<string, L2DMotion[]>();
             string parentPath = Directory.GetParent(path).FullName;
+            Dictionary<string, L2DMotion[]> motionDictionary = new Dictionary<string, L2DMotion[]>();
+            Dictionary<string, L2DExpression> expressionDictionary = new Dictionary<string, L2DExpression>();
             JObject jsonObject = JObject.Parse(File.ReadAllText(path));
 
             // - model
@@ -106,10 +107,27 @@ namespace L2DLib.Utility
                 motionDictionary.Add(jsonMotion.Name, motionList.ToArray());
             }
 
+            // - expression
+            JToken resultExpression;
+            jsonObject.TryGetValue("expressions", out resultExpression);
+            if (resultExpression != null)
+            {
+                foreach (JObject json in resultExpression)
+                {
+                    string name = json["name"].Value<string>();
+                    L2DExpression expression = LoadExpression(FixPath(path, json["file"].Value<string>()));
+                    expressionDictionary.Add(name, expression);
+                }
+            }
+
             // L2DModel 생성
             L2DModel model = new L2DModel(modelPath);
             model.SetTexture(texturePath);
             model.Motion = motionDictionary;
+            if (resultExpression != null)
+            {
+                model.Expression = expressionDictionary;
+            }
             if (physicsPath != null)
             {
                 model.Physics = LoadPhysics(physicsPath);
@@ -218,6 +236,51 @@ namespace L2DLib.Utility
             pose.Groups = groupList.ToArray();
 
             return pose;
+        }
+
+        /// <summary>
+        /// JSON 파일로 간편하게 표정을 불러옵니다.
+        /// </summary>
+        /// <param name="path">표정 구성을 포함한 표준 JSON 파일입니다.</param>
+        public static L2DExpression LoadExpression(string path)
+        {
+            L2DExpression expression = new L2DExpression();
+
+            JObject jsonObject = JObject.Parse(File.ReadAllText(path));
+            expression.SetFadeIn(jsonObject["fade_in"].Value<int>());
+            expression.SetFadeIn(jsonObject["fade_out"].Value<int>());
+
+            JToken resultParams;
+            jsonObject.TryGetValue("params", out resultParams);
+
+            if (resultParams != null)
+            {
+                foreach (JObject json in resultParams)
+                {
+                    string paramID = json["id"].Value<string>();
+                    float value = json["val"].Value<float>();
+                    string calc = "add";
+                    float defaultValue = 0;
+
+                    JToken resultCalc;
+                    json.TryGetValue("calc", out resultCalc);
+                    if (resultCalc != null)
+                    {
+                        calc = resultCalc.Value<string>();
+
+                        JToken resultDef;
+                        json.TryGetValue("def", out resultDef);
+                        if (resultDef != null)
+                        {
+                            defaultValue = resultDef.Value<float>();
+                        }
+                    }
+
+                    expression.AddParam(paramID, calc, value, defaultValue);
+                }
+            }
+
+            return expression;
         }
         #endregion
     }

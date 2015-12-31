@@ -3,18 +3,59 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:L2DSample"
+        xmlns:View="clr-namespace:L2DSample.View"
         mc:Ignorable="d"
-        Title="MainWindow" Height="650" Width="450" WindowStartupLocation="CenterScreen">
+        Title="Live2D" Height="685" Width="1000" WindowStartupLocation="CenterScreen">
 
     <Grid>
-        <local:HeadShakeView x:Name="RenderView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,120"/>
-        <GroupBox Header="제어판" HorizontalAlignment="Stretch" Margin="10" VerticalAlignment="Bottom" Height="80">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Background="#FFEEEEF2" BorderBrush="#FFCCCEDB" BorderThickness="0,0,0,1">
             <Grid>
-                <Button x:Name="BtnLoad" Click="BtnLoad_Click" Content="모델 불러오기" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" Height="30" Margin="15,0,0,0"/>
-                <Button x:Name="BtnReset" Click="BtnReset_Click" Content="모든 리소스 해제" HorizontalAlignment="Left" VerticalAlignment="Center" Width="120" Height="30" Margin="120,0,0,0"/>
-                <Button x:Name="BtnMotion" Click="BtnMotion_Click" Content="무작위 모션 재생" HorizontalAlignment="Left" VerticalAlignment="Center" Width="120" Height="30" Margin="245,0,0,0"/>
+                <Menu Background="{x:Null}" VerticalAlignment="Center" Margin="10,0" Foreground="#FF6A6D7C" >
+                    <MenuItem Header="파일(F)" Height="25">
+                        <MenuItem x:Name="LoadModelJSON" Header="JSON 모델 불러오기" FontWeight="Normal" Foreground="Black" Click="LoadModelJSON_Click"/>
+                    </MenuItem>
+                    <MenuItem Header="애니메이션(A)" Height="25">
+                        <MenuItem Header="자동 호흡 사용" Foreground="Black"/>
+                        <MenuItem Header="자동 윙크 사용" Foreground="Black"/>
+                    </MenuItem>
+                    <MenuItem Header="도움말(H)" Height="25">
+                        
+                    </MenuItem>
+                </Menu>
             </Grid>
-        </GroupBox>
+        </Border>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Background="#FFEEEEF2" BorderBrush="#FFCCCEDB" BorderThickness="0,0,1,0">
+                <StackPanel Orientation="Vertical">
+                    <Border VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="10" Height="270" BorderBrush="#FFCCCEDB" BorderThickness="1">
+                        <StackPanel Orientation="Vertical" Background="WhiteSmoke">
+                            <Label Content="모션 탐색기" Foreground="#FF868999" Margin="5" FontWeight="Bold" FontSize="10.667" BorderBrush="#FFCCCEDB" BorderThickness="0,0,0,1"/>
+                            <ListBox x:Name="ListMotion" Height="220" Foreground="#FF868999" Background="{x:Null}" BorderBrush="{x:Null}" Margin="10,5,10,10" SelectionChanged="ListMotion_SelectionChanged"/>
+                        </StackPanel>
+                    </Border>
+                    <Border VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="10" Height="270" BorderBrush="#FFCCCEDB" BorderThickness="1">
+                        <StackPanel Orientation="Vertical" Background="WhiteSmoke">
+                            <Label Content="표정 탐색기" Foreground="#FF868999" Margin="5" FontWeight="Bold" FontSize="10.667" BorderBrush="#FFCCCEDB" BorderThickness="0,0,0,1"/>
+                            <ListBox x:Name="ListExpression" Height="220" Foreground="#FF868999" Background="{x:Null}" BorderBrush="{x:Null}" Margin="10,5,10,10" SelectionChanged="ListExpression_SelectionChanged"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </Border>
+
+            <Grid Grid.Column="1">
+                <View:MouseDragView x:Name="RenderView" Background="#FFF7F7F7"/>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>

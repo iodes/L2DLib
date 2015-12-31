@@ -46,6 +46,7 @@ ExpressionSetFadeIn
 ExpressionSetFadeOut
 ExpressionAddParam
 ExpressionAddParamV09
+UpdateExpression
 
 EyeBlinkUpdate
 

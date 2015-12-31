@@ -812,6 +812,12 @@ void CRendererManager::ExpressionAddParamV09(long expressionHandler, char* param
 	if (m_pCurrentRenderer)
 		m_pCurrentRenderer->ExpressionAddParamV09(expressionHandler, paramID, value, defaultValue);
 }
+
+void CRendererManager::UpdateExpression(long hModel)
+{
+	if (m_pCurrentRenderer)
+		m_pCurrentRenderer->UpdateExpression(hModel);
+}
 #pragma endregion
 
 #pragma region [   Live2D   ]

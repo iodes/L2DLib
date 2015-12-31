@@ -79,7 +79,21 @@ namespace L2DLib.Framework
         {
             if (Model != null && Model.Motion?.Count > 0)
             {
+                Model.LoadParam();
                 HRESULT.Check(NativeMethods.UpdateMotion(new IntPtr(Model.Handle)));
+                Model.SaveParam();
+            }
+        }
+
+        /// <summary>
+        /// 표정 렌더링을 갱신합니다.
+        /// BeginRender() 함수와 EndRender() 함수 사이에서 호출되어야 합니다.
+        /// </summary>
+        public void UpdateExpression()
+        {
+            if (Model != null && Model.Expression?.Count > 0)
+            {
+                HRESULT.Check(NativeMethods.UpdateExpression(new IntPtr(Model.Handle)));
             }
         }
 

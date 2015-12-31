@@ -97,6 +97,27 @@ namespace L2DLib.Core
         public static extern int PhysicsAddTargetParam(IntPtr physicsHandler, IntPtr targetType, IntPtr paramID, float scale, float weight);
 
         [DllImport("L2DNative.dll")]
+        public static extern int CreateExpression(out long ret);
+
+        [DllImport("L2DNative.dll")]
+        public static extern int StartExpression(IntPtr expression);
+
+        [DllImport("L2DNative.dll")]
+        public static extern int ExpressionSetFadeIn(IntPtr expression, int msec);
+
+        [DllImport("L2DNative.dll")]
+        public static extern int ExpressionSetFadeOut(IntPtr expression, int msec);
+
+        [DllImport("L2DNative.dll")]
+        public static extern int ExpressionAddParam(IntPtr expression, IntPtr paramID, IntPtr calc, float value, float defaultValue);
+
+        [DllImport("L2DNative.dll")]
+        public static extern int ExpressionAddParamV09(IntPtr expression, IntPtr paramID, float value, float defaultValue);
+
+        [DllImport("L2DNative.dll")]
+        public static extern int UpdateExpression(IntPtr model);
+
+        [DllImport("L2DNative.dll")]
         public static extern int BeginRender(IntPtr model);
 
         [DllImport("L2DNative.dll")]

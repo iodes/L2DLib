@@ -47,6 +47,7 @@ public:
 	virtual void ExpressionSetFadeOut(long expressionHandler, int FadeOutMSec) = 0;
 	virtual void ExpressionAddParam(long expressionHandler, char* paramID, char* calc, float value, float defaultValue) = 0;
 	virtual void ExpressionAddParamV09(long expressionHandler, char* paramID, float value, float defaultValue) = 0;
+	virtual void UpdateExpression(long hModel) = 0;
 
 	virtual INT64 GetUserTimeMSec() = 0;
 	virtual HRESULT BeginRender(long hModel) = 0;

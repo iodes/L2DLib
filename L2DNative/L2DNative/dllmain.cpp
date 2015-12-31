@@ -488,6 +488,17 @@ extern "C" HRESULT WINAPI ExpressionAddParamV09(long expressionHandler, char* pa
 Cleanup:
 	return hr;
 }
+
+extern "C" HRESULT WINAPI UpdateExpression(long hModel)
+{
+	HRESULT hr = S_OK;
+	IFC(EnsureRendererManager());
+
+	pManager->UpdateExpression(hModel);
+
+Cleanup:
+	return hr;
+}
 #pragma endregion
 
 #pragma region [   Live2D Extern   ]

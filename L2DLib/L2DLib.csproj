@@ -52,6 +52,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Framework\L2DExpression.cs" />
     <Compile Include="Framework\L2DMotion.cs" />
     <Compile Include="Framework\L2DParts.cs" />
     <Compile Include="Framework\L2DPhysics.cs" />

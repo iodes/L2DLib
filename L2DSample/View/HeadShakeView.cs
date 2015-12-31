@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using L2DLib.Utility;
 using L2DLib.Framework;
 
-namespace L2DSample
+namespace L2DSample.View
 {
     class HeadShakeView : L2DView
     {

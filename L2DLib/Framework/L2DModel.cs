@@ -41,6 +41,16 @@ namespace L2DLib.Framework
         private Dictionary<string, L2DMotion[]> _Motion;
 
         /// <summary>
+        /// 모델의 표정을 설정하거나 가져옵니다.
+        /// </summary>
+        public Dictionary<string, L2DExpression> Expression
+        {
+            get { return _Expression; }
+            set { _Expression = value; }
+        }
+        private Dictionary<string, L2DExpression> _Expression;
+
+        /// <summary>
         /// 모델의 물리를 설정하거나 가져옵니다.
         /// </summary>
         public L2DPhysics[] Physics

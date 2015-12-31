@@ -76,10 +76,10 @@ namespace L2DLib.Framework
                 renderHolder.Source = renderScene;
                 Content = renderHolder;
 
-                HRESULT.Check(NativeMethods.SetSize(512, 512));
                 HRESULT.Check(NativeMethods.SetAlpha(AllowTransparency));
                 HRESULT.Check(NativeMethods.SetNumDesiredSamples(DesiredSamples));
 
+                Loaded += L2DView_Loaded;
                 SizeChanged += L2DView_SizeChanged;
                 CompositionTarget.Rendering += CompositionTarget_Rendering;
 
@@ -88,6 +88,16 @@ namespace L2DLib.Framework
                 adapterTimer.Interval = new TimeSpan(0, 0, 0, 0, 500);
                 adapterTimer.Start();
             }
+        }
+
+        private void L2DView_Loaded(object sender, RoutedEventArgs e)
+        {
+            HRESULT.Check
+                (NativeMethods.SetSize(
+                    (uint)renderHolder.ActualWidth,
+                    (uint)renderHolder.ActualHeight
+                    )
+                );
         }
         #endregion
 
@@ -113,12 +123,13 @@ namespace L2DLib.Framework
                     if (Model != null && Model.IsLoaded)
                     {
                         render.BeginRender();
-                        render.UpdatePose();
                         render.UpdateMotion();
-                        render.UpdateBreath();
                         render.UpdateEyeBlink();
+                        render.UpdateExpression();
+                        render.UpdateBreath();
                         Rendering();
                         render.UpdatePhysics();
+                        render.UpdatePose();
                         render.EndRender();
                     }
 
