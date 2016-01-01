@@ -37,7 +37,8 @@ public:
 	void SetFadeOut(long hMotion, int msec);
 	void SetLoop(long hMotion, bool loop);
 	void StartMotion(long hMotion);
-	void UpdateMotion(long hModel);
+	bool UpdateMotion(long hModel);
+	bool MotionIsFinished();
 
 	void EyeBlinkUpdate(long hModel);
 
@@ -53,7 +54,8 @@ public:
 	void ExpressionSetFadeOut(long expressionHandler, int FadeOutMSec);
 	void ExpressionAddParam(long expressionHandler, char* paramID, char* calc, float value, float defaultValue);
 	void ExpressionAddParamV09(long expressionHandler, char* paramID, float value, float defaultValue);
-	void UpdateExpression(long hModel);
+	bool UpdateExpression(long hModel);
+	bool ExpressionIsFinished();
 
 	INT64 GetUserTimeMSec();
 	HRESULT BeginRender(long hModel);

@@ -735,10 +735,14 @@ void CRendererManager::StartMotion(long hMotion)
 		m_pCurrentRenderer->StartMotion(hMotion);
 }
 
-void CRendererManager::UpdateMotion(long hModel)
+bool CRendererManager::UpdateMotion(long hModel)
 {
-	if (m_pCurrentRenderer)
-		m_pCurrentRenderer->UpdateMotion(hModel);
+	return m_pCurrentRenderer ? m_pCurrentRenderer->UpdateMotion(hModel) : 0;
+}
+
+bool CRendererManager::MotionIsFinished()
+{
+	return m_pCurrentRenderer ? m_pCurrentRenderer->MotionIsFinished() : 0;
 }
 #pragma endregion
 
@@ -813,10 +817,14 @@ void CRendererManager::ExpressionAddParamV09(long expressionHandler, char* param
 		m_pCurrentRenderer->ExpressionAddParamV09(expressionHandler, paramID, value, defaultValue);
 }
 
-void CRendererManager::UpdateExpression(long hModel)
+bool CRendererManager::UpdateExpression(long hModel)
 {
-	if (m_pCurrentRenderer)
-		m_pCurrentRenderer->UpdateExpression(hModel);
+	return m_pCurrentRenderer ? m_pCurrentRenderer->UpdateExpression(hModel) : 0;
+}
+
+bool CRendererManager::ExpressionIsFinished()
+{
+	return m_pCurrentRenderer ? m_pCurrentRenderer->ExpressionIsFinished() : 0;
 }
 #pragma endregion
 

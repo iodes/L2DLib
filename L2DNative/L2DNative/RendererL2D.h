@@ -54,7 +54,8 @@ public:
 	void SetLoop(long hMotion, bool loop);
 
 	void StartMotion(long hMotion);
-	void UpdateMotion(long hModel);
+	bool UpdateMotion(long hModel);
+	bool MotionIsFinished();
 
 	void EyeBlinkUpdate(long hModel);
 
@@ -66,7 +67,6 @@ public:
 	void PhysicsAddTargetParam(long phsyicsHandler, const char* targetType, const char* paramID, float scale, float weight);
 	void PhysicsUpdate(long physicsHandler, long hModel, INT64 time);
 
-
 	live2d::framework::L2DExpressionMotion* GetExpression(long expressionHandler);
 	long AddExpression(live2d::framework::L2DExpressionMotion* expression);
 	long CreateExpression();
@@ -75,7 +75,8 @@ public:
 	void ExpressionSetFadeOut(long expressionHandler, int FadeOutMSec);
 	void ExpressionAddParam(long expressionHandler, char* paramID, char* calc, float value, float defaultValue);
 	void ExpressionAddParamV09(long expressionHandler, char* paramID, float value, float defaultValue);
-	void UpdateExpression(long hModel);
+	bool UpdateExpression(long hModel);
+	bool ExpressionIsFinished();
 
 	INT64 GetUserTimeMSec();
 	HRESULT BeginRender(long hModel);

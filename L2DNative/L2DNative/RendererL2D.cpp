@@ -444,10 +444,15 @@ void CRendererL2D::StartMotion(long hMotion)
 	m_motionManager->startMotion(motion, false);
 }
 
-void CRendererL2D::UpdateMotion(long hModel)
+bool CRendererL2D::UpdateMotion(long hModel)
 {
 	Model* model = GetModel(hModel);
-	m_motionManager->updateParam(model);
+	return m_motionManager->updateParam(model);
+}
+
+bool CRendererL2D::MotionIsFinished()
+{
+	return m_motionManager->isFinished();
 }
 #pragma endregion
 
@@ -584,10 +589,15 @@ void CRendererL2D::ExpressionAddParamV09(long expressionHandler, char* paramID, 
 	expression->addParamV09(paramID, value, defaultValue);
 }
 
-void CRendererL2D::UpdateExpression(long hModel)
+bool CRendererL2D::UpdateExpression(long hModel)
 {
 	Model* model = GetModel(hModel);
-	m_expressionManager->updateParam(model);
+	return m_expressionManager->updateParam(model);
+}
+
+bool CRendererL2D::ExpressionIsFinished()
+{
+	return m_expressionManager->isFinished();
 }
 #pragma endregion
 

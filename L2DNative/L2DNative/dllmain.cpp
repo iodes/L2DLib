@@ -340,12 +340,23 @@ Cleanup:
 	return hr;
 }
 
-extern "C" HRESULT WINAPI UpdateMotion(long hModel)
+extern "C" HRESULT WINAPI UpdateMotion(long hModel, bool *ret)
 {
 	HRESULT hr = S_OK;
 	IFC(EnsureRendererManager());
 
-	pManager->UpdateMotion(hModel);
+	*ret = pManager->UpdateMotion(hModel);
+
+Cleanup:
+	return hr;
+}
+
+extern "C" HRESULT WINAPI MotionIsFinished(bool *ret)
+{
+	HRESULT hr = S_OK;
+	IFC(EnsureRendererManager());
+
+	*ret = pManager->MotionIsFinished();
 
 Cleanup:
 	return hr;
@@ -489,12 +500,23 @@ Cleanup:
 	return hr;
 }
 
-extern "C" HRESULT WINAPI UpdateExpression(long hModel)
+extern "C" HRESULT WINAPI UpdateExpression(long hModel, bool *ret)
 {
 	HRESULT hr = S_OK;
 	IFC(EnsureRendererManager());
 
-	pManager->UpdateExpression(hModel);
+	*ret = pManager->UpdateExpression(hModel);
+
+Cleanup:
+	return hr;
+}
+
+extern "C" HRESULT WINAPI ExpressionIsFinished(bool *ret)
+{
+	HRESULT hr = S_OK;
+	IFC(EnsureRendererManager());
+
+	*ret = pManager->ExpressionIsFinished();
 
 Cleanup:
 	return hr;

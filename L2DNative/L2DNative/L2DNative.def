@@ -33,6 +33,7 @@ SetFadeOut
 SetLoop
 StartMotion
 UpdateMotion
+MotionIsFinished
 
 CreatePhysics
 PhysicsSetup
@@ -47,6 +48,7 @@ ExpressionSetFadeOut
 ExpressionAddParam
 ExpressionAddParamV09
 UpdateExpression
+ExpressionIsFinished
 
 EyeBlinkUpdate
 
