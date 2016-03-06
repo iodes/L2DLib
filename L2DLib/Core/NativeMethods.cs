@@ -64,7 +64,7 @@ namespace L2DLib.Core
         public static extern int LoadMotion(IntPtr motionPath, out long ret);
 
         [DllImport("L2DNative.dll")]
-        public static extern int UpdateMotion(IntPtr model);
+        public static extern int UpdateMotion(IntPtr model, out bool ret);
 
         [DllImport("L2DNative.dll")]
         public static extern int EyeBlinkUpdate(IntPtr model);
@@ -115,7 +115,7 @@ namespace L2DLib.Core
         public static extern int ExpressionAddParamV09(IntPtr expression, IntPtr paramID, float value, float defaultValue);
 
         [DllImport("L2DNative.dll")]
-        public static extern int UpdateExpression(IntPtr model);
+        public static extern int UpdateExpression(IntPtr model, out bool ret);
 
         [DllImport("L2DNative.dll")]
         public static extern int BeginRender(IntPtr model);

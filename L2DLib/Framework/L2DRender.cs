@@ -75,24 +75,30 @@ namespace L2DLib.Framework
         /// 모션 렌더링을 갱신합니다.
         /// BeginRender() 함수와 EndRender() 함수 사이에서 호출되어야 합니다.
         /// </summary>
-        public void UpdateMotion()
+        public bool UpdateMotion()
         {
+            bool result = false;
             if (Model != null && Model.Motion?.Count > 0)
             {
-                HRESULT.Check(NativeMethods.UpdateMotion(new IntPtr(Model.Handle)));
+                HRESULT.Check(NativeMethods.UpdateMotion(new IntPtr(Model.Handle), out result));
             }
+
+            return result;
         }
 
         /// <summary>
         /// 표정 렌더링을 갱신합니다.
         /// BeginRender() 함수와 EndRender() 함수 사이에서 호출되어야 합니다.
         /// </summary>
-        public void UpdateExpression()
+        public bool UpdateExpression()
         {
+            bool result = false;
             if (Model != null && Model.Expression?.Count > 0)
             {
-                HRESULT.Check(NativeMethods.UpdateExpression(new IntPtr(Model.Handle)));
+                HRESULT.Check(NativeMethods.UpdateExpression(new IntPtr(Model.Handle), out result));
             }
+
+            return result;
         }
 
         /// <summary>
