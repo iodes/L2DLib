@@ -109,6 +109,7 @@ namespace L2DLib.Framework
 
         private void CompositionTarget_Rendering(object sender, EventArgs e)
         {
+            if (!IsPresented()) return;
             RenderingEventArgs args = (RenderingEventArgs)e;
 
             if (renderScene.IsFrontBufferAvailable && lastRender != args.RenderingTime)
@@ -150,6 +151,8 @@ namespace L2DLib.Framework
 
         private void L2DView_SizeChanged(object sender, System.Windows.SizeChangedEventArgs e)
         {
+            if (!IsPresented()) return;
+
             if (Model != null && Model.IsLoaded)
             {
                 HRESULT.Check
@@ -166,6 +169,8 @@ namespace L2DLib.Framework
         #region 어댑터 설정 이벤트
         private void AdapterTimer_Tick(object sender, EventArgs e)
         {
+            if (!IsPresented()) return;
+
             if (Model != null && Model.IsLoaded)
             {
                 NativeStructure.POINT point = new NativeStructure.POINT(renderHolder.PointToScreen(new Point(0, 0)));
@@ -173,5 +178,10 @@ namespace L2DLib.Framework
             }
         }
         #endregion
+
+        private bool IsPresented()
+        {
+            return PresentationSource.FromVisual(this) != null;
+        }
     }
 }

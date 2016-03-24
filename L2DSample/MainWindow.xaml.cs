@@ -71,14 +71,14 @@ namespace L2DSample
                     model = new L2DModel(dialog.FileName);
 
                     // 텍스처 불러오기
-                    string texrueParh =
+                    string texruePath =
                         string.Format("{0}\\{1}.1024",
                         new FileInfo(dialog.FileName).Directory.FullName,
                         Path.GetFileNameWithoutExtension(dialog.FileName));
 
-                    if (Directory.Exists(texrueParh))
+                    if (Directory.Exists(texruePath))
                     {
-                        model.SetTexture(Directory.GetFiles(texrueParh));
+                        model.SetTexture(Directory.GetFiles(texruePath));
                     }
 
                     // 설정 업데이트
