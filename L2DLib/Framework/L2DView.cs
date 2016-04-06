@@ -71,23 +71,35 @@ namespace L2DLib.Framework
         #region 생성자
         public L2DView()
         {
-            if (!DesignerProperties.GetIsInDesignMode(this))
+            DispatcherTimer timerPresent = new DispatcherTimer();
+            timerPresent.Tick += (s, e) =>
             {
-                renderHolder.Source = renderScene;
-                Content = renderHolder;
+                if (IsPresented())
+                {
+                    if (!DesignerProperties.GetIsInDesignMode(this))
+                    {
+                        renderHolder.Source = renderScene;
+                        Content = renderHolder;
 
-                HRESULT.Check(NativeMethods.SetAlpha(AllowTransparency));
-                HRESULT.Check(NativeMethods.SetNumDesiredSamples(DesiredSamples));
+                        HRESULT.Check(NativeMethods.SetAlpha(AllowTransparency));
+                        HRESULT.Check(NativeMethods.SetNumDesiredSamples(DesiredSamples));
 
-                Loaded += L2DView_Loaded;
-                SizeChanged += L2DView_SizeChanged;
-                CompositionTarget.Rendering += CompositionTarget_Rendering;
+                        Loaded += L2DView_Loaded;
+                        SizeChanged += L2DView_SizeChanged;
+                        CompositionTarget.Rendering += CompositionTarget_Rendering;
 
-                adapterTimer = new DispatcherTimer();
-                adapterTimer.Tick += AdapterTimer_Tick; ;
-                adapterTimer.Interval = new TimeSpan(0, 0, 0, 0, 500);
-                adapterTimer.Start();
-            }
+                        adapterTimer = new DispatcherTimer();
+                        adapterTimer.Tick += AdapterTimer_Tick; ;
+                        adapterTimer.Interval = new TimeSpan(0, 0, 0, 0, 500);
+                        adapterTimer.Start();
+                    }
+
+                    timerPresent.Stop();
+                }
+            };
+
+            timerPresent.Interval = TimeSpan.FromMilliseconds(1);
+            timerPresent.Start();
         }
 
         private void L2DView_Loaded(object sender, RoutedEventArgs e)
