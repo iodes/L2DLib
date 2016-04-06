@@ -109,7 +109,6 @@ namespace L2DLib.Framework
 
         private void CompositionTarget_Rendering(object sender, EventArgs e)
         {
-            if (!IsPresented()) return;
             RenderingEventArgs args = (RenderingEventArgs)e;
 
             if (renderScene.IsFrontBufferAvailable && lastRender != args.RenderingTime)
