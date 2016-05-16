@@ -192,7 +192,7 @@ namespace L2DLib.Framework
 
         private bool IsPresented()
         {
-            return PresentationSource.FromVisual(this) != null;
+            return PresentationSource.FromVisual(this) != null && ActualWidth > 0 && ActualHeight > 0;
         }
     }
 }
