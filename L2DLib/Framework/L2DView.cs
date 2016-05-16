@@ -71,45 +71,45 @@ namespace L2DLib.Framework
         #region 생성자
         public L2DView()
         {
-            DispatcherTimer timerPresent = new DispatcherTimer();
-            timerPresent.Tick += (s, e) =>
+            if (!DesignerProperties.GetIsInDesignMode(this))
             {
-                if (IsPresented())
-                {
-                    if (!DesignerProperties.GetIsInDesignMode(this))
-                    {
-                        renderHolder.Source = renderScene;
-                        Content = renderHolder;
+                Initialized += L2DView_Initialized;
+            }
+        }
 
-                        HRESULT.Check(NativeMethods.SetAlpha(AllowTransparency));
-                        HRESULT.Check(NativeMethods.SetNumDesiredSamples(DesiredSamples));
+        private void L2DView_Initialized(object sender, EventArgs e)
+        {
+            renderHolder.Source = renderScene;
+            Content = renderHolder;
 
-                        Loaded += L2DView_Loaded;
-                        SizeChanged += L2DView_SizeChanged;
-                        CompositionTarget.Rendering += CompositionTarget_Rendering;
+            HRESULT.Check(NativeMethods.SetAlpha(AllowTransparency));
+            HRESULT.Check(NativeMethods.SetNumDesiredSamples(DesiredSamples));
 
-                        adapterTimer = new DispatcherTimer();
-                        adapterTimer.Tick += AdapterTimer_Tick; ;
-                        adapterTimer.Interval = new TimeSpan(0, 0, 0, 0, 500);
-                        adapterTimer.Start();
-                    }
+            Loaded += L2DView_Loaded;
+            SizeChanged += L2DView_SizeChanged;
+            CompositionTarget.Rendering += CompositionTarget_Rendering;
 
-                    timerPresent.Stop();
-                }
-            };
-
-            timerPresent.Interval = TimeSpan.FromMilliseconds(1);
-            timerPresent.Start();
+            adapterTimer = new DispatcherTimer();
+            adapterTimer.Tick += AdapterTimer_Tick; ;
+            adapterTimer.Interval = new TimeSpan(0, 0, 0, 0, 500);
+            adapterTimer.Start();
         }
 
         private void L2DView_Loaded(object sender, RoutedEventArgs e)
         {
-            HRESULT.Check
-                (NativeMethods.SetSize(
+            HRESULT.Check(
+                NativeMethods.SetSize(
                     (uint)renderHolder.ActualWidth,
                     (uint)renderHolder.ActualHeight
-                    )
-                );
+                )
+            );
+        }
+        #endregion
+
+        #region 내부 함수
+        private bool IsPresented()
+        {
+            return PresentationSource.FromVisual(this) != null && ActualWidth > 0 && ActualHeight > 0;
         }
         #endregion
 
@@ -160,19 +160,16 @@ namespace L2DLib.Framework
             }
         }
 
-        private void L2DView_SizeChanged(object sender, System.Windows.SizeChangedEventArgs e)
+        private void L2DView_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (!IsPresented()) return;
-
-            if (Model != null && Model.IsLoaded)
+            if (Model != null && Model.IsLoaded && IsPresented())
             {
-                HRESULT.Check
-                    (NativeMethods.SetSize
-                        (
-                            (uint)renderHolder.ActualWidth,
-                            (uint)renderHolder.ActualHeight
-                        )
-                    );
+                HRESULT.Check(
+                    NativeMethods.SetSize(
+                        (uint)renderHolder.ActualWidth,
+                        (uint)renderHolder.ActualHeight
+                    )
+                );
             }
         }
         #endregion
@@ -180,19 +177,12 @@ namespace L2DLib.Framework
         #region 어댑터 설정 이벤트
         private void AdapterTimer_Tick(object sender, EventArgs e)
         {
-            if (!IsPresented()) return;
-
-            if (Model != null && Model.IsLoaded)
+            if (Model != null && Model.IsLoaded && IsPresented())
             {
                 NativeStructure.POINT point = new NativeStructure.POINT(renderHolder.PointToScreen(new Point(0, 0)));
                 HRESULT.Check(NativeMethods.SetAdapter(point));
             }
         }
         #endregion
-
-        private bool IsPresented()
-        {
-            return PresentationSource.FromVisual(this) != null && ActualWidth > 0 && ActualHeight > 0;
-        }
     }
 }
