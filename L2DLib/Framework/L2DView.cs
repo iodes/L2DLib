@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Interop;
@@ -71,7 +72,7 @@ namespace L2DLib.Framework
         #region 생성자
         public L2DView()
         {
-            if (!DesignerProperties.GetIsInDesignMode(this))
+            if (!DesignerProperties.GetIsInDesignMode(this) && File.Exists(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "L2DNative.dll")))
             {
                 Initialized += L2DView_Initialized;
             }
