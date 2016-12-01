@@ -7,9 +7,12 @@ Live2D 라이브러리를 .NET Framework 에서 사용할 수 있도록 개발�
 * [컴파일된 바이너리](https://bitbucket.org/iodesme/l2dlib/downloads/Stable%201.0.0.0.zip)
 * [Live2D DirectX SDK](https://bitbucket.org/iodesme/l2dlib/downloads/Live2D%20DirectX%20SDK.zip)
 
+###사용 설명서
+* [L2DLib Wiki](https://github.com/iodes/L2DLib/wiki)
+
 ###컴파일 요구 사항
 * [DirectX SDK](https://www.microsoft.com/en-us/download/details.aspx?id=6812)
-* Visual Studio 2013 C++
+* [Visual Studio 2013 C++](https://www.visualstudio.com/ko/vs/older-downloads/)
 
 ###관련된 문서 자료
 * [Live2D 라이브러리 해설](http://sites.cybernoids.jp/cubism2/sdk_tutorial/live2d_library)
