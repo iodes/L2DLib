@@ -12,6 +12,14 @@ namespace L2DLib.Core
         [DllImport("L2DNative.dll")]
         public static extern int LoadModel(IntPtr modelPath, out long ret);
 
+        /// <summary>
+        /// Map the MotionIsFinished method when in <see cref="Motioning.MotionPlayer"/> will be use.
+        /// </summary>
+        /// <param name="ret">Out the motion is it finished</param>
+        /// <returns></returns>
+        [DllImport("L2DNative.dll")]
+        public static extern int MotionIsFinished(out bool ret);
+
         [DllImport("L2DNative.dll")]
         public static extern int RemoveModel(IntPtr model);
 

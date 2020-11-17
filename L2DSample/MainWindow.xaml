@@ -42,7 +42,22 @@
                     <Border VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="10" Height="270" BorderBrush="#FFCCCEDB" BorderThickness="1">
                         <StackPanel Orientation="Vertical" Background="WhiteSmoke">
                             <Label Content="모션 탐색기" Foreground="#FF868999" Margin="5" FontWeight="Bold" FontSize="10.667" BorderBrush="#FFCCCEDB" BorderThickness="0,0,0,1"/>
-                            <ListBox x:Name="ListMotion" Height="220" Foreground="#FF868999" Background="{x:Null}" BorderBrush="{x:Null}" Margin="10,5,10,10" SelectionChanged="ListMotion_SelectionChanged"/>
+                            <ListBox x:Name="ListMotion" Height="220" Foreground="#FF868999" Background="{x:Null}" BorderBrush="{x:Null}" Margin="10,5,10,10" SelectionChanged="ListMotion_SelectionChanged">
+                                <ListBox.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="Looping">                                            
+                                            <MenuItem x:Name="LoopAllMotions" Header="LoopAllMotions" Click="OnLoopAllMotionsClick"/>
+                                            <MenuItem x:Name="LoopMotionGroup" Header="LoopMotionGroup"/>
+                                            <MenuItem x:Name="LoopThisMotion" Header="LoopThisMotions" Click="OnLoopThisMotionsClick"/>
+                                            <MenuItem x:Name="StopLoop" Header="StopLoop" Click="OnStopLoop"/>
+                                        </MenuItem>
+                                        <MenuItem Header="EyeBlink">
+                                            <MenuItem x:Name="EnableEyeBlink" Header="EnableEyeBlink" Click="OnEnableEyeBlink"/>
+                                            <MenuItem x:Name="CloseEyeBlink" Header="CloseEyeBlink" Click="OnCloseEyeBlink"/>
+                                        </MenuItem>
+                                    </ContextMenu>
+                                </ListBox.ContextMenu>
+                            </ListBox>
                         </StackPanel>
                     </Border>
                     <Border VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="10" Height="270" BorderBrush="#FFCCCEDB" BorderThickness="1">

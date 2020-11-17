@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using L2DLib.Utility;
 using L2DLib.Framework;
 using Microsoft.Win32;
+using L2DLib.Motioning;
 
 namespace L2DSample
 {
@@ -33,6 +34,8 @@ namespace L2DSample
             {
                 model.Dispose();
             }
+            //Ensure the loop stop
+            OnStopLoop(null, null);
         }
 
         private void UpdateConfig()
@@ -45,7 +48,20 @@ namespace L2DSample
 
             // 렌더러에 대상 모델 설정
             RenderView.Model = model;
+
+            //It can smooth transition and natual
+            model.SetFadeIn(1000);
+
+            //Update the motion groups
+            LoopMotionGroup.Items.Clear();
+            foreach (var item in model.Motion.Keys)
+            {
+                var menuItem = new MenuItem { Header = item };
+                menuItem.Click += OnGroupLoop;
+                LoopMotionGroup.Items.Add(menuItem);
+            }
         }
+
         #endregion
 
         private void LoadModel_Click(object sender, RoutedEventArgs e)
@@ -146,21 +162,28 @@ namespace L2DSample
 
         private void ListMotion_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            // 모션 선택 이벤트
-            if (model.Motion != null)
+            var motion = GetMotion(ListMotion.SelectedItem.ToString());
+            if (motion!=null)
             {
-                foreach (L2DMotion[] group in model.Motion.Values)
-                {
-                    foreach (L2DMotion motion in group)
-                    {
-                        if (Path.GetFileName(motion.Path) == ListMotion.SelectedItem.ToString())
-                        {
-                            motion.StartMotion();
-                            break;
-                        }
-                    }
-                }
+                motion.StartMotion();
             }
+        }
+        /// <summary>
+        /// Get the motion, if the file name equals to <paramref name="filename"/>
+        /// </summary>
+        /// <param name="filename">Target file name</param>
+        /// <returns></returns>
+        protected L2DMotion GetMotion(string filename)
+        {
+            // 모션 선택 이벤트
+            if (model?.Motion != null)//The model will be null
+            {
+                //Using linq to merge 3 row
+                return model.Motion.SelectMany(x => x.Value)
+                    .Where(x => Path.GetFileName(x.Path) == filename)
+                    .FirstOrDefault();
+            }
+            return null;
         }
 
         private void ListExpression_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -186,5 +209,76 @@ namespace L2DSample
         {
             MessageBox.Show("Live2D For WPF\nPowered By. Managed Live2D", "프로그램 정보", MessageBoxButton.OK, MessageBoxImage.Information);
         }
+
+        #region LoopSample
+
+        private MotionPlayer motionPlayer;
+
+        private void OnGroupLoop(object sender, RoutedEventArgs e)
+        {
+            if (model?.Motion != null && sender is MenuItem)
+            {
+                OnStopLoop(null, null);
+                var menuItem = (MenuItem)sender;
+                motionPlayer = model.CreatePlayer(RenderView, menuItem.Header.ToString());
+                motionPlayer.Loop = true;
+                motionPlayer.Begin();
+            }
+        }
+        private void OnLoopAllMotionsClick(object sender, RoutedEventArgs e)
+        {
+            if (model?.Motion!=null)
+            {
+                OnStopLoop(null, null);
+                var motions = model.Motion.Values.SelectMany(x => x).ToArray();
+                motionPlayer = new MotionPlayer(RenderView, motions);
+                motionPlayer.Loop = true;
+                motionPlayer.Begin();
+            }
+        }
+
+        private void OnLoopThisMotionsClick(object sender, RoutedEventArgs e)
+        {
+            if (model?.Motion!=null)
+            {
+                OnStopLoop(null, null);
+                var motion = GetMotion(ListMotion.SelectedItem.ToString());
+                if (motion != null)
+                {
+                    motionPlayer = new MotionPlayer(RenderView, new L2DMotion[] { motion });
+                    motionPlayer.Loop = true;
+                    motionPlayer.Begin();
+                }
+            }
+        }
+
+        private void OnStopLoop(object sender, RoutedEventArgs e)
+        {
+            if (motionPlayer != null)
+            {
+                //If no stop the player, it's going to be weird
+                motionPlayer.Stop();
+                motionPlayer = null;
+            }
+        }
+        #endregion
+        #region EyeBlink
+
+        private void OnCloseEyeBlink(object sender, RoutedEventArgs e)
+        {
+            if (model!=null)
+            {
+                model.UseEyeBlink = false;
+            }
+        }
+
+        private void OnEnableEyeBlink(object sender, RoutedEventArgs e)
+        {
+            if (model != null)
+            {
+                model.UseEyeBlink = true;
+            }
+        }
+        #endregion
     }
 }
