@@ -95,6 +95,17 @@ namespace L2DLib.Framework
             adapterTimer.Interval = new TimeSpan(0, 0, 0, 0, 500);
             adapterTimer.Start();
         }
+        /// <summary>
+        /// Set this render holder bitmap scling mode.
+        /// <para>
+        /// Because when the rendering hosts are different, the rendering quality may be different
+        /// </para>
+        /// </summary>
+        /// <param name="mode">The bitmap scaling mode</param>
+        public void SetBitmapScalingMode(BitmapScalingMode mode)
+        {
+            RenderOptions.SetBitmapScalingMode(renderHolder, mode);
+        }
 
         private void L2DView_Loaded(object sender, RoutedEventArgs e)
         {
@@ -119,6 +130,26 @@ namespace L2DLib.Framework
         {
 
         }
+
+        private bool isMotionFinished;
+
+        public bool IsMotionFinished 
+        {
+            get => isMotionFinished;
+            set
+            {
+                if (isMotionFinished!=value)
+                {
+                    isMotionFinished = value;
+                    IsMotionFinishedChanged?.Invoke(this,value);
+                }
+
+            }
+        }
+
+        public event Action<L2DView, bool> IsMotionFinishedChanged;
+
+        
 
         private void CompositionTarget_Rendering(object sender, EventArgs e)
         {
@@ -149,6 +180,11 @@ namespace L2DLib.Framework
 
                         render.UpdatePhysics();
                         render.UpdatePose();
+
+                        //Alway want the motion done and go to next motion.
+                        //But this operator will take a certain amount of time
+                        NativeMethods.MotionIsFinished(out var finished);
+                        IsMotionFinished = finished;
 
                         render.EndRender();
                     }
